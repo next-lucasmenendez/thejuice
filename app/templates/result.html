@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div id="result">
+	<h2>Result</h2>
+
+	<div>
+		<h4>Title</h4>
+		<p>{{ content['title'] }}</p>
+	</div>
+	<div>
+		<h4>Summary</h4>
+		<p>{{ content['summary'] }}</p>
+	</div>
+	<div>
+		<h4>Keywords</h4>
+		<p>{{ content['keywords'] }}</p>
+	</div>
+	<div>
+		<h4>Full content</h4>
+		<p>{{ content['content']}}</p>
+	</div>
+</div>
+
+{% endblock %}

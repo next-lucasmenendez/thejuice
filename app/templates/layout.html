@@ -1,0 +1,20 @@
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="viewport" content="width=device-width" />
+		<title>Botfessor</title>
+		<meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+	</head>
+	<body>
+		<header>
+		<h1>Welcome to Botfessor 🤖 📚</h1>
+		<form action="/" method="POST">
+			<input type="text" name="url" placeholder="Insert resource url here!">
+			<button type="submit">Get resource content</button>
+		</form>
+		</header>
+		<section id="content">
+			{% block content %}{% endblock %}
+		</section>
+	</body>
+</html>
