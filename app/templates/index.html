@@ -1,15 +1,14 @@
 {% extends "layout.html" %}
 
 {% block content %}
-<div id="instructions">
-	<h2>Instructions</h2>
-	<ol>
-		<li>Insert a valid url.</li>
-		<li>Click on 'Get resource content' button.</li>
-		<li>Choose avalible platform</li>
-		<li>Choose contacts to share</li>
-		<li>Share it!</li>
-	</ol>
+
+<a href="/logout">Logout</a>
+
+<div id="search-form">
+	<form action="/" method="POST">
+		<input type="text" name="url" placeholder="Insert resource url here!">
+		<button type="submit">Get resource content</button>
+	</form>
 </div>
 
 {% endblock %}

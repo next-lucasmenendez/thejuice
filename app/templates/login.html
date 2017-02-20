@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+	{% if error %}
+		<div class="error">
+			<p>{{ error }}</p>
+		</div>
+	{% endif %}
+
+	<div id="login-form">
+		<form method="POST" action="/login">
+			<input type="hidden" id="userid-input" name="userid">
+			<input type="hidden" id="accesstoken-input" name="accesstoken">
+			<button id="login-btn">Facebook Login</button>
+		</form>
+	</div>
+
+{% endblock %}
