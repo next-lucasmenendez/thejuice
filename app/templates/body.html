@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block body %}
+	<div class="container is-fluid columns">
+		<div class="column">
+			<a href="/">
+				<img src="static/assets/img/logo-h.svg" style="max-width: 250px">
+			</a>
+		</div>
+		<div class="column is-2">
+			<a class="button is-white" href="/logout">
+				<span class="icon is-small">
+					<i class="fa fa-sign-out"></i>
+				</span>
+				<span>Logout</span>
+			</a>
+		</div>
+	</div>
+	<div class="section columns">
+		<div class="container column is-10 is-offset-1">
+			<section id="content" class="columns is-mobile">
+				{% block content %}{% endblock %}
+			</section>
+		</div>
+	</div>
+	<script src="static/assets/js/app.js"></script>
+
+{% endblock %}

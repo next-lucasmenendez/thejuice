@@ -1,25 +1,70 @@
-{% extends "layout.html" %}
+{% extends "body.html" %}
 
 {% block content %}
-<div id="result">
-	<h2>Result</h2>
+	<form class="columns" action="/parse" method="POST">
+		<input type="hidden" name="title" value="{{ content['title'] }}">
+		<input type="hidden" name="summary" value="{{ content['summary'] }}">
+		{% for image in content['images'] %}
+			<input type="hidden" name="images[{{ loop.index0 }}]" value="{{ image }}">
+		{% endfor %}
 
-	<div>
-		<h4>Title</h4>
-		<p>{{ content['title'] }}</p>
-	</div>
-	<div>
-		<h4>Summary</h4>
-		<p>{{ content['summary'] }}</p>
-	</div>
-	<div>
-		<h4>Keywords</h4>
-		<p>{{ content['keywords'] }}</p>
-	</div>
-	<div>
-		<h4>Full content</h4>
-		<p>{{ content['content']}}</p>
-	</div>
-</div>
-
+		<div id="result" class="column is-7">
+			<h3 class="title is-3">{{ content['title'] }}</h3>
+			<div class="card">
+				<header class="card-header">
+					<p class="card-header-title">Keywords</p>
+				</header>
+				<div class="card-content">
+					<div class="content">
+					{% for keyword in content['keywords'] %}
+						<span class="tag is-primary">{{ keyword }}</span>
+					{% endfor %}
+					</div>
+				</div>
+			</div>
+			<hr>
+			<div class="notification">
+				<strong>Extract</strong>
+				<p>{{ content['summary'] }}</p>
+			</div>
+			<div class="card">
+				<header class="card-header">
+					<p class="card-header-title">Full content</p>
+					<a class="card-header-icon">
+						<span class="icon"><i class="fa fa-angle-down"></i></span>
+					</a>
+				</header>
+				<div class="card-content">
+					<div class="content">{{ content['content']}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="column is-offset-1">
+			<h3 class="title is-3">Choose platform</h3>
+			<a class="box">
+				<span class="icon is-medium"><i class="fa fa-facebook"></i></span>
+				<span>Facebook Messenger</span>
+			</a>
+			<a class="box">
+				<span class="icon is-medium"><i class="fa fa-twitter"></i></span>
+				<span>Twitter</span>
+			</a>
+			<a class="box">
+				<span class="icon is-medium"><i class="fa fa-instagram"></i></span>
+				<span>Instagram</span>
+			</a>
+			<a class="box">
+				<span class="icon is-medium"><i class="fa fa-telegram"></i></span>
+				<span>Telegram</span>
+			</a>
+			<a class="box">
+				<span class="icon is-medium"><i class="fa fa-snapchat-ghost"></i></span>
+				<span>Snapchat</span>
+			</a>
+			<button class="button is-large is-primary is-fullwidth">
+				<span class="icon is-medium"><i class="fa fa-check"></i></span>
+				<span>Prepare content</span>
+			</a>
+		</div>
+	</form>
 {% endblock %}

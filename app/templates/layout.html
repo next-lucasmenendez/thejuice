@@ -2,18 +2,26 @@
 	<head>
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width" />
-		<title>takethejuice.com</title>
 		<meta content="IE=edge, chrome=1" http-equiv="X-UA-Compatible" />
+
+		<title>takethejuice.com</title>
+
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.3.1/css/bulma.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 		<script src="static/vendor/js/jquery-3.1.1.min.js"></script>
+		<script>
+			window.fbAsyncInit = function() { FB.init({ appId: '197401140741778', xfbml: true, version: 'v2.8' }); };
+			(function(d, s, id){
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) {return;}
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
 	</head>
 	<body>
-		<header>
-		<h1>Welcome to takethejuice.com</h1>
-		</header>
-		<section id="content">
-			{% block content %}{% endblock %}
-		</section>
-
-		<script src="static/assets/js/app.js"></script>
+		{% block body %}{% endblock %}
 	</body>
 </html>

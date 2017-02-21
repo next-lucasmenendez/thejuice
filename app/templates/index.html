@@ -1,14 +1,12 @@
-{% extends "layout.html" %}
+{% extends "body.html" %}
 
 {% block content %}
 
-<a href="/logout">Logout</a>
-
-<div id="search-form">
-	<form action="/" method="POST">
-		<input type="text" name="url" placeholder="Insert resource url here!">
-		<button type="submit">Get resource content</button>
-	</form>
-</div>
+	<div id="search-form">
+		<form action="/" method="POST">
+			<input type="text" name="url" placeholder="Insert resource url here!">
+			<button type="submit">Get resource content</button>
+		</form>
+	</div>
 
 {% endblock %}

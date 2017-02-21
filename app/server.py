@@ -1,5 +1,4 @@
 import re
-import newspaper
 
 from functools import wraps
 
@@ -8,6 +7,8 @@ from flask import request
 from flask import redirect
 from flask import make_response
 from flask import render_template
+
+from newspaper import Article
 
 app = Flask(__name__)
 
@@ -26,7 +27,6 @@ def tokenrequired(func):
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
-	print(request.method)
 	if request.method == "POST":
 		try:
 			accesstoken = request.form['accesstoken']
@@ -63,30 +63,35 @@ def index():
 	    return render_template('index.html')
 	elif request.method == "POST":
 		if request.form["url"]:
-			url		= request.form["url"]
-			website	= newspaper.build(url, memoize_articles=False)
-		
-			if website.articles:
-				article = website.articles[0]
-				content = {}
-				try:
-					article.download()
-					article.parse()
+			article = Article(url=request.form["url"], language='es')
+			content = {}
 
-					content["title"]	= article.title
-					content["content"]	= article.text
+			try:
+				article.download()
+				article.parse()
 
-					article.nlp()
-					content["summary"]	= article.summary
-					content["keywords"]	= article.keywords
+				content["title"]	= article.title
+				content["content"]	= article.text.strip(article.title)
+				content["topimage"]	= article.top_image
+				content["images"]	= article.images
+				content["videos"]	= article.movies
 
-					return render_template('result.html', content=content)
-				except:
-					return render_template('error.html', error="Invalid content.")
+				article.nlp()
+				content["summary"]	= article.summary.strip(article.title)
+				content["keywords"]	= article.keywords
+
+				return render_template('result.html', content=content)
+			except:
+				return render_template('error.html', error="Invalid content.")
 
 			return render_template('index.html')
 		else:
 			return render_template('error.html', error="Introduce a valid url.")
+
+#@app.route("/parse", methods=["POST"])
+#@tokenrequired
+#def parse():
+	
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
