@@ -2,10 +2,21 @@
 
 {% block content %}
 
-	<div id="search-form">
+	<div id="search-form" class="column is-half is-offset-one-quarter">
 		<form action="/" method="POST">
-			<input type="text" name="url" placeholder="Insert resource url here!">
-			<button type="submit">Get resource content</button>
+			<div class="control is-grouped">
+				<p class="control is-expanded">
+					<input class="input" type="text" name="url" placeholder="Insert resource url here!">
+				</p>
+				<p class="control">
+					<button type="submit" class="button is-info">
+						<span class="icon is-small">
+							<i class="fa fa-magic"></i>
+						</span>
+						<span>Make the magic</span>
+					</button>
+				</p>
+			</div>
 		</form>
 	</div>
 
