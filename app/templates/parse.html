@@ -1,0 +1,29 @@
+{% extends "body.html" %}
+
+{% block content %}
+
+	<div class="column is-7">
+	{% for sentence in sentences %}
+		<div class="container" style="margin: .5em 0">
+			<span class="tag is-primary is-large" style="border-radius: 15px; padding: 0.5em 0.875em; height: auto; white-space: normal;">{{ sentence }}</span>
+		</div>
+	{% endfor %}
+	</div>
+
+	<div class="column is-offset-1">
+		<p class="control has-icon has-addons">
+			<input class="input" type="text" name="name" placeholder="Search target">
+			<span class="icon is-small">
+				<i class="fa fa-user-circle"></i>
+			</span>
+			<button id="friends" class="button">Search</button>
+		</p>
+
+		<div id="message" class="notification" style="display: none"></div>
+
+		<nav id="friend-list" class="panel" style="display: none"></nav>
+	</div>
+	<script src="static/assets/js/target.js"></script>
+
+{% endblock %}
+

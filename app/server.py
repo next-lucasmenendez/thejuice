@@ -77,8 +77,17 @@ def index():
 				content["videos"]	= article.movies
 
 				article.nlp()
-				content["summary"]	= article.summary.strip(article.title)
 				content["keywords"]	= article.keywords
+
+				valid_starters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "1","2","3","4","5","6","7","8","9","0", "¿", "¡"]
+				summary = article.summary.strip(article.title)
+				for char in summary:
+					if char in valid_starters:
+						break
+					else:
+						summary = summary[1:]
+
+				content["summary"] = summary
 
 				return render_template('result.html', content=content)
 			except:
@@ -88,10 +97,19 @@ def index():
 		else:
 			return render_template('error.html', error="Introduce a valid url.")
 
-#@app.route("/parse", methods=["POST"])
-#@tokenrequired
-#def parse():
+@app.route("/parse", methods=["POST"])
+@tokenrequired
+def parse():
+	title	= request.form["title"]
+	summary	= request.form["summary"]
+	method	= request.form["method"]
 
+	if request.form["title"] and request.form["summary"] and request.form["method"]:
+		sentences = re.split("\r\n", summary)
+
+		return render_template('parse.html', sentences=sentences)
+	
+	return render_template('error.html', error="Ops... We have a problem. Try again later!") 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=80, debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
