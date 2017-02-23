@@ -12,6 +12,7 @@ from flask import render_template
 
 from newspaper import Article
 
+ACCESS_TOKEN = "EAACziQjfRpIBAKKSUMKapzKzA0eLY6i0ALm3XRPKGMHLut54WX0Ng9J0eMDuZAZAVZBE980QDyvTQXplcXvfyODZCJBO75sLjp85TfhidfcZBeyWg1EZAPtYYtPWoIQlZBdoVaBJZBreLmCFAaQv1sWcMOtW7HgTYgQQoNAAwR5VnwZDZD"  
 app = Flask(__name__)
 
 def tokenrequired(func):
@@ -114,9 +115,14 @@ def parse():
 	
 	return render_template('error.html', error="Ops... We have a problem. Try again later!") 
 
-@app.route("/bot")
-def bot():
+@app.route("/bot", methods=["GET"])
+def bot_verification():
 	return request.args['hub.challenge']
+
+@app.route("/bot", methods=["POST"])
+def bot_handle_msg():
+	raise Exception(request.__dict__)
+	return "Ok"
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
