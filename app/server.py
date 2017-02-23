@@ -92,8 +92,9 @@ def index():
 				content["summary"] = summary
 
 				return render_template('result.html', content=content)
-			except:
-				return render_template('error.html', error="Invalid content.")
+			except Exception as e:
+				error = "Invalid content: %s" % str(e)
+				return render_template('error.html', error=error)
 
 			return render_template('index.html')
 		else:
