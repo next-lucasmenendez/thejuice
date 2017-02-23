@@ -114,5 +114,9 @@ def parse():
 	
 	return render_template('error.html', error="Ops... We have a problem. Try again later!") 
 
+@app.route("/bot")
+def bot():
+	return "Ok"
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
