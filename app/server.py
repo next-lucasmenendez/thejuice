@@ -121,8 +121,23 @@ def bot_verification():
 
 @app.route("/bot", methods=["POST"])
 def bot_handle_msg():
-	raise Exception(request.__dict__)
+	data	= request.json
+	user_id	= data['entry'][0]['messaging'][0]['sender']['id']
+	content	= data['entry'][0]['messaging'][0]['message']['text']
+
+	bot_send_message(user_id, content)
 	return "Ok"
+
+def bot_send_message(user_id, content):
+	data = {
+		"recipient":	{
+			"id": user_id
+		},
+		"message":		{
+			"text": content
+		}
+	}
+	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
