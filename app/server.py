@@ -26,7 +26,7 @@ def tokenrequired(func):
 		authtoken	= request.cookies.get('accesstoken')
 		userid		= request.cookies.get('userid')
 		if not authtoken or not userid:
-			return render_template('login.html', error="Login required")
+			return render_template('login.html')
 		
 		return func(*args, **kwargs)
 
