@@ -139,7 +139,7 @@ def parse():
 		middle_sentences	= []
 		with open(sentences_json, 'r') as raw_content: #as fd:
 #			raw_content			= fd.read()
-			middle_sentences	= json.load(raw_content)
+			middle_sentences        = json.load(raw_content)
 			final_sentences		= []
 			for sentence in sentences:
 				final_sentences.append(sentence)	
