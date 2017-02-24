@@ -111,6 +111,15 @@ def parse():
 
 	if request.form["title"] and request.form["summary"] and request.form["method"]:
 		sentences = re.split("\r\n", summary)
+		
+		current_path		= os.path.dirname(os.path.abspath(__file__))
+		sentences_json		= "%s/bot_sentences.json" % current
+		middle_sentences	= []
+		with open(sentences_json) as fd:
+			raw_content			= fd.read()
+			middle_sentences	= json.load(content)
+			final_sentences		= []
+
 
 		return render_template('parse.html', sentences=sentences)
 	
