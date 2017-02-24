@@ -1,6 +1,6 @@
 $(document).ready(function () {
 	targets		= [];
-	limit		= 10;
+	limit		= $(window).width() > 753 ? 10 : 5;
 	page		= 0;
 	has_next	= true;
 
@@ -12,8 +12,8 @@ $(document).ready(function () {
 			query	= input.val();
 	
 		if (query) {
-			var uri			= "/search?q="+ query +"&type=user&fields=id,name,picture&limit="+ limit,
-				token		= getCookie("accesstoken");
+			var uri		= "/search?q="+ query +"&type=user&fields=id,name,picture&limit="+ limit,
+				token	= getCookie("accesstoken");
 
 			searchCall(uri, token);
 		}
@@ -66,20 +66,21 @@ $(document).ready(function () {
 		var _this	= $(this),
 			id		= _this.attr('attr-id'),
 			name	= _this.attr('attr-name');
+		
+		if (targets.indexOf(id) == -1) {
+			targets.push(id);
 
-		targets.push(id);
+			var list	= $('#friends-list'),
+				content	= list.html();
+			content += '<span id="'+id+'" class="tag is-medium" style="margin: 5px">'+ 
+							name + 
+							'<span class="delete" attr-id="'+id+'"></a>' +
+						'</span>';
+			list.html(content);
 
-		var list	= $('#friends-list'),
-			content	= list.html();
-
-		content += '<span id="'+id+'" class="tag is-medium" style="margin: 5px">'+ 
-						name + 
-						'<span class="delete" attr-id="'+id+'"></a>' +
-					'</span>';
-		list.html(content);
-
-		if (targets.length > 0)
-			$('#send-button').removeClass('is-disabled').removeClass('is-light').addClass('is-primary');
+			if (targets.length > 0)
+				$('#send-button').removeClass('is-disabled').removeClass('is-light').addClass('is-primary');
+		}
 	});
 
 	$('#friends-list').on('click', 'span.tag span.delete', function () {

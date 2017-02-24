@@ -1,14 +1,22 @@
-.bot-says:before {
-  content: '';
-  position: absolute;
-  background: url("/static/assets/img/avatar.png");
-  background-size: cover;
-  bottom: 0;
-  left: -30px;
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  border: 1px solid #ddd; }
+.logo img {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  max-width: 350px; }
+
+.bot-says {
+  margin-left: 30px; }
+  .bot-says:before {
+    content: '';
+    position: absolute;
+    background: url("/static/assets/img/avatar.png");
+    background-size: cover;
+    bottom: 0;
+    left: 0;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    border: 1px solid #ddd; }
 
 /*! bulma.io v0.3.1 | MIT License | github.com/jgthms/bulma */
 @keyframes spinAround {

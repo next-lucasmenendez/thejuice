@@ -1,7 +1,13 @@
 {% extends "body.html" %}
 
 {% block content %}
-	<div class="column is-7">
+	<div class="column is-7-tablet is-12-mobile">
+		<a href="#search-section" class="button is-white is-hidden-tablet is-pulled-right">
+			<span class="icon is-small">
+				<i class="fa fa-long-arrow-down"></i>
+			</span>
+			<span>Go to search</span>
+		</a>
 		<h3 class="title is-3">Preview</h3>
 		<form id="send-form" action="/send" method="POST">
 		{% for sentence in sentences %}
@@ -22,15 +28,14 @@
 		</form>
 	</div>
 
-	<div class="column is-offset-1 is-4">
+	<div id="search-section" class="column is-4-desktop is-5-tablet is-12-mobile is-offset-1-desktop">
 		<h3 class="title is-3">Search contacts</h3>
 		<form id="friends">
-			<p class="control has-icon has-addons">
-				<input class="input" type="text" name="name" placeholder="Search target">
+			<p class="control has-icon">
 				<span class="icon is-small">
 					<i class="fa fa-user-circle"></i>
 				</span>
-				<button type="submit" class="button">Search</button>
+				<input class="input" type="text" name="name" placeholder="Search target">
 			</p>
 		</form>
 
@@ -43,9 +48,9 @@
 				<a id="next-results" class="pagination-next">Next</a>
 			</nav>
 		</nav>
-		
-		<div id="friends-list" class="columns is-multiline"></div>
 
+		<div id="friends-list" class="columns is-multiline"></div>
+		
 		<button id="send-button" type="submit" class="button is-large is-light is-disabled is-pulled-right">
 			<span>Send</span>
 			<span class="icon is-small">
@@ -54,5 +59,6 @@
 		</button>
 	</div>
 	<script src="static/assets/js/target.js"></script>
+	<script src="static/assets/js/smooth-scroll.js"></script>
 
 {% endblock %}

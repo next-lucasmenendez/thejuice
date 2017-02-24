@@ -1,19 +1,16 @@
 {% extends "layout.html" %}
 
 {% block body %}
-
-	<div class="container is-fluid columns">
-		<div class="column">
-			<a href="/">
-				<img src="static/assets/img/logo-h.svg" style="max-width: 250px">
-			</a>
-		</div>
-		<div class="column is-2 has-text-right">
-			<a class="button is-white" href="/logout">
+	<div class="section">
+		<div class="container is-fluid">
+			<a class="button is-white is-pulled-right" href="/logout">
 				<span class="icon is-small">
 					<i class="fa fa-sign-out"></i>
 				</span>
 				<span>Logout</span>
+			</a>
+			<a class="logo" href="/">
+				<img src="static/assets/img/logo-h.svg"/>
 			</a>
 		</div>
 	</div>
