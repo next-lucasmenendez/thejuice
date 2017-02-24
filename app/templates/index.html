@@ -2,13 +2,19 @@
 
 {% block content %}
 
-	<div id="search-form" class="column has-text-centered">
+	<div id="search-form" class="column is-8 is-offset-2">
+		<div class="content is-medium">
+			<ol>
+				<li>Introduce the article url and click <strong>Make the magic</strong>.</li>
+				<li>Select a social network.</li>
+				<li>Preview the content and send it to their profiles.</li>
+			</ol>
+		</div>
 		<form action="/" method="POST">
-			<div class="control is-grouped">
-				<p class="control is-expanded">
+				<p class="control">
 					<input class="input is-large" type="text" name="url" placeholder="Insert resource url here!">
 				</p>
-				<p class="control">
+				<p class="has-text-centered">
 					<button type="submit" class="button is-large is-primary">
 						<span class="icon is-small">
 							<i class="fa fa-magic"></i>
@@ -16,7 +22,6 @@
 						<span>Make the magic</span>
 					</button>
 				</p>
-			</div>
 		</form>
 	</div>
 

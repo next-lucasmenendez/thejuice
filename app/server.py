@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
+import os
 import re
+import json
 import requests
+
+from random import randint
 
 from functools import wraps
 
@@ -41,7 +45,7 @@ def login():
 			resp.set_cookie('userid', userid)
 			return resp
 		except:
-			return make_response("/login")
+			return make_response(redirect("/login", error="Session expired. Please relogin."))
 	else:
 		accesstoken = request.cookies.get('accesstoken')
 		userid		= request.cookies.get('userid')
@@ -60,6 +64,15 @@ def logout():
 	
 	return resp
 
+@app.route("/logout/expired", methods=["GET"])
+@tokenrequired
+def expired():
+	resp = make_response(redirect("/login"))
+	resp.set_cookie('accesstoken', '', expires=0)
+	resp.set_cookie('userid', '', expires=0)
+	
+	return resp
+
 @app.route("/", methods=["GET", "POST"])
 @tokenrequired
 def index():
@@ -67,7 +80,8 @@ def index():
 	    return render_template('index.html')
 	elif request.method == "POST":
 		if request.form["url"]:
-			article = Article(url=request.form["url"], language='es')
+			url		= request.form["url"]
+			article = Article(url=url, language='es')
 			content = {}
 
 			try:
@@ -75,6 +89,7 @@ def index():
 				article.parse()
 
 				content["title"]	= article.title
+				content["url"]		= url 
 				content["content"]	= article.text.strip(article.title)
 				content["topimage"]	= article.top_image
 				content["images"]	= article.images
@@ -95,35 +110,71 @@ def index():
 
 				return render_template('result.html', content=content)
 			except Exception as e:
-				error = "Invalid content: %s" % str(e)
-				return render_template('error.html', error=error)
+				return render_template('index.html', error="Invalid content.")
 
 			return render_template('index.html')
 		else:
-			return render_template('error.html', error="Introduce a valid url.")
+			return render_template('index.html', error="Introduce valid url.")
 
 @app.route("/parse", methods=["POST"])
 @tokenrequired
 def parse():
 	title	= request.form["title"]
 	summary	= request.form["summary"]
+	url		= request.form["url"]
 	method	= request.form["method"]
 
 	if request.form["title"] and request.form["summary"] and request.form["method"]:
-		sentences = re.split("\r\n", summary)
+		sentences		= []
+		raw_sentences	= re.split("\r\n", summary)
+		for sentence in raw_sentences:
+			sentences.append({
+				"submitable":	True,
+				"bot":			True,
+				"content":		sentence
+			})
 		
 		current_path		= os.path.dirname(os.path.abspath(__file__))
-		sentences_json		= "%s/bot_sentences.json" % current
+		sentences_json		= "%s/bot_sentences.json" % current_path
 		middle_sentences	= []
-		with open(sentences_json) as fd:
-			raw_content			= fd.read()
-			middle_sentences	= json.load(content)
+		with open(sentences_json, 'r') as raw_content: #as fd:
+#			raw_content			= fd.read()
+			middle_sentences	= json.load(raw_content)
 			final_sentences		= []
+			for sentence in sentences:
+				final_sentences.append(sentence)	
+				if len(middle_sentences):
+					sentence_index	= randint(0, len(middle_sentences) - 1)
+					middle_sentence	= middle_sentences.pop(sentence_index)
+					if middle_sentence["question"]:
+						final_sentences.append({
+							"submitable":	False,
+							"bot":			True,
+							"content":		middle_sentence["question"]
+						})
 
+					final_sentences.append({
+						"submitable":	False,
+						"bot":			False,
+						"content":		middle_sentence["answer"]
+					})
+				
 
+		if len(final_sentences):
+			sentences = final_sentences
+		
+		sentences.append({
+			"submitable":	True,
+			"bot":			True,
+			"content":		"Check out original content here: %s" % url
+		})
 		return render_template('parse.html', sentences=sentences)
 	
-	return render_template('error.html', error="Ops... We have a problem. Try again later!") 
+	return render_template('index.html', error="Ops... We have a problem. Try again later!") 
+
+@app.route("/send", methods=["POST"])
+def send():
+	return render_template('success.html')
 
 @app.route("/bot", methods=["GET"])
 def bot_verification():

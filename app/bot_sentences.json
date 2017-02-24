@@ -1,34 +1,34 @@
 [
 	{
-		"answer": "Cool, right?",
-		"sentence": "Yep 👊"
+		"question": "Cool, right?",
+		"answer": "Yep 👊"
 	},
 	{
-		"answer": "",
-		"sentence": "Tell me more 🤔"
+		"question": "",
+		"answer": "Tell me more 🤔"
 	},
 	{
-		"answer": "",
-		"sentence": "Next ▶"
+		"question": "",
+		"answer": "Next ▶"
 	},
 	{
-		"answer": "",
-		"sentence": "So what..."
+		"question": "",
+		"answer": "So what..."
 	},
 	{
-		"answer": "",
-		"sentence": "Give me more"
+		"question": "",
+		"answer": "Give me more"
 	},
 	{
-		"answer": "",
-		"sentence": "Keep going"
+		"question": "",
+		"answer": "Keep going"
 	},
 	{
-		"answer": "Do you want to know more?",
-		"sentence": "Sure"
+		"question": "Do you want to know more?",
+		"answer": "Sure"
 	},
 	{
-		"answer": "Did you get that?",
-		"sentence": "Yes"
+		"question": "Did you get that?",
+		"answer": "Yes"
 	}
 ]
