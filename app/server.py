@@ -203,8 +203,10 @@ def bot_send_message(user_id, content):
 			"text": content
 		}
 	}
-	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
+	resp_json = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
+	resp = json.load(resp_json)
 	print(resp["status_code"])
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
