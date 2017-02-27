@@ -197,7 +197,7 @@ def bot_handle_msg():
 def bot_send_message(user_id, content):
 	data = {
 		"recipient":	{
-			"id": "1393390887401263" #user_id
+			"id": user_id
 		},
 		"message":		{
 			"text": content
