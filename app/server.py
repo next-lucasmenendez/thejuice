@@ -186,12 +186,11 @@ def bot_handle_msg():
 	user_id	= data['entry'][0]['messaging'][0]['sender']['id']
 	content	= data['entry'][0]['messaging'][0]['message']['text']
 
-	
 	if content == "start":
-		bot_send_message(user_id, "Hi! This is takethejuice Bot, what can I help you to learn today?")
-	else:
-		bot_send_message(user_id, content)
+		content = "Hi! This is takethejuice Bot, what can I help you to learn today?"
 
+	status_code, response = bot_send_message(user_id, content)
+	print(response)
 	return "Ok"
 
 def bot_send_message(user_id, content):
@@ -205,7 +204,7 @@ def bot_send_message(user_id, content):
 	}
 
 	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
-	print(resp.status_code, resp.text)
+	return resp.status_code, resp.text if status_code == 200 else json.load(resp.text)
 
 
 if __name__ == "__main__":
