@@ -204,7 +204,7 @@ def bot_send_message(user_id, content):
 	}
 
 	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
-	return resp.status_code, resp.text if status_code == 200 else json.load(resp.text)
+	return resp.status_code, resp.text if resp.status_code == 200 else json.load(resp.text)
 
 
 if __name__ == "__main__":
