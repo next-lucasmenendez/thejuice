@@ -204,7 +204,7 @@ def bot_send_message(user_id, content):
 		}
 	}
 	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
-	print resp
+	print(resp)
 	
 
 
