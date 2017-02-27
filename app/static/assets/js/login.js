@@ -15,6 +15,10 @@ $(document).ready(function () {
 							accesstoken: response.authResponse.accessToken
 						}
 
+						window.ga('set', 'user.id', data.id);
+						window.ga('set', 'user.email', data.email);
+						window.ga('set', 'user.name', data.name);
+
 						$('#userid-input').val(data.id);
 						$('#accesstoken-input').val(data.accesstoken);
 						$('#login-form form').submit();

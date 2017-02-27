@@ -20,7 +20,7 @@
 					<span class="tag bot-says is-medium" style="border-radius: 15px; padding: 0.5em 0.875em; height: auto; white-space: normal;">{{ sentence.content }}</span>
 				</div>
 			{% else %}
-				<div class="container is-pulled-right" style="margin: .5em 0">
+				<div class="container has-text-right" style="margin: .5em 0">
 					<span class="tag is-dark is-medium" style="border-radius: 15px; padding: 0.5em 0.875em; height: auto; white-space: normal;">{{ sentence.content }}</span>
 				</div>
 			{% endif %}
@@ -51,7 +51,7 @@
 
 		<div id="friends-list" class="columns is-multiline"></div>
 		
-		<button id="send-button" type="submit" class="button is-large is-light is-disabled is-pulled-right">
+		<button id="send-button" type="submit" class="button is-large is-light is-disabled is-pulled-right" onClick="ga('send', 'event', 'final', 'click', 'send');">
 			<span>Send</span>
 			<span class="icon is-small">
 				<i class="fa fa-paper-plane"></i>
