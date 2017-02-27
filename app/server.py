@@ -6,6 +6,7 @@ import json
 import requests
 
 from random import randint
+from datetime import datetime
 
 from functools import wraps
 
@@ -37,8 +38,20 @@ def tokenrequired(func):
 def login():
 	if request.method == "POST":
 		try:
-			accesstoken = request.form['accesstoken']
 			userid		= request.form['userid']
+			accesstoken = request.form['accesstoken']
+			email		= request.form['email']
+
+			try:
+				current_path	= os.path.dirname(os.path.abspath(__file__))
+				access_log		= "%s/access.log" % current_path
+				with open(access_log, "a") as fd:
+					date	= datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+					record	= "[%s] ID: %s - Email: %s\n" % (date, userid, email)
+
+					fd.write(record)
+			except:
+				pass
 
 			resp = make_response(redirect('/'))
 			resp.set_cookie('accesstoken', accesstoken)
@@ -137,9 +150,8 @@ def parse():
 		current_path		= os.path.dirname(os.path.abspath(__file__))
 		sentences_json		= "%s/bot_sentences.json" % current_path
 		middle_sentences	= []
-		with open(sentences_json, 'r') as raw_content: #as fd:
-#			raw_content			= fd.read()
-			middle_sentences        = json.load(raw_content)
+		with open(sentences_json, 'r') as raw_content:
+			middle_sentences	= json.load(raw_content)
 			final_sentences		= []
 			for sentence in sentences:
 				final_sentences.append(sentence)	
@@ -174,6 +186,7 @@ def parse():
 
 @app.route("/send", methods=["POST"])
 def send():
+	print(request.form)	
 	return render_template('success.html')
 
 @app.route("/bot", methods=["GET"])
@@ -204,7 +217,7 @@ def bot_send_message(user_id, content):
 	}
 
 	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
-	return resp.status_code, resp.text if resp.status_code == 200 else json.load(resp.text)
+	return resp.status_code, resp.text if resp.status_code == 200 else "Ok"
 
 
 if __name__ == "__main__":

@@ -19,8 +19,11 @@ $(document).ready(function () {
 						window.ga('set', 'user.email', data.email);
 						window.ga('set', 'user.name', data.name);
 
+						window.ga('set', 'dimension1', data.id);
+
 						$('#userid-input').val(data.id);
 						$('#accesstoken-input').val(data.accesstoken);
+						$('#email-input').val(data.email);
 						$('#login-form form').submit();
 					});
 				}
