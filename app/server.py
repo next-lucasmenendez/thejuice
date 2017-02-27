@@ -204,8 +204,8 @@ def bot_send_message(user_id, content):
 		}
 	}
 
-	resp_json = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
-	print(type(resp_json))
+	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
+	print(resp.status_code, resp.text)
 
 
 if __name__ == "__main__":
