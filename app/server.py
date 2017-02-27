@@ -186,7 +186,12 @@ def bot_handle_msg():
 	user_id	= data['entry'][0]['messaging'][0]['sender']['id']
 	content	= data['entry'][0]['messaging'][0]['message']['text']
 
-	bot_send_message(user_id, content)
+	
+	if content == "start":
+		bot_send_message(user_id, "Hi! This is takethejuice Bot, what can I help you to learn today?")
+	else:
+		bot_send_message(user_id, content)
+
 	return "Ok"
 
 def bot_send_message(user_id, content):
