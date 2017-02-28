@@ -15,8 +15,8 @@ $(document).ready(function () {
 							accesstoken: response.authResponse.accessToken
 						}
 
-						window.ga('set', 'useId', data.id);
 						window.ga('set', 'email', data.email);
+						window.ga('set', 'userId', data.id);
 						window.ga('set', 'name', data.name);
 
 						window.ga('set', 'dimension1', data.id);
