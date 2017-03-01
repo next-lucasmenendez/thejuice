@@ -4,6 +4,22 @@ $(document).ready(function () {
 	page		= 0;
 	has_next	= true;
 
+	function getCookie(key) {
+		var cookies	= decodeURIComponent(document.cookie),
+			decoded	= cookies.split("; ");
+
+		var needle = key + "=";
+		for (var i = 0; i < cookies.length; i++) {
+			var cookie = decoded[i];
+
+			if (cookie && cookie.startsWith(needle)) {
+				return cookie.slice(needle.length);
+			}
+		}
+
+		return false;
+	}
+
 	var form = $('form#friends');
 	form.on('submit', function(e) {
 		e.preventDefault();
