@@ -138,18 +138,4 @@ $(document).ready(function () {
 			}
 		});
 	}
-
-	function getCookie(key) {
-		var cookies	= decodeURIComponent(document.cookie),
-			decoded	= cookies.split("; ");
-
-		var needle = key + "=";
-		for (var index in cookies) {
-			var cookie = decoded[index];
-
-			if (cookie.startsWith(needle)) {
-				return cookie.slice(needle.length);
-			}
-		}
-	}
 });
