@@ -18,6 +18,5 @@ $(document).ready(function() {
 	var userid = getCookie('userid');
 	if (userid) {
 		window.ga('set', 'userId', userid);
-		window.ga('set', 'dimension1', userid);
 	}
 });
