@@ -12,6 +12,7 @@ from functools import wraps
 
 from flask import Flask
 from flask import request
+from flask import url_for
 from flask import redirect
 from flask import make_response
 from flask import render_template
@@ -58,13 +59,13 @@ def login():
 			resp.set_cookie('userid', userid)
 			return resp
 		except:
-			return make_response(redirect("/login", error="Session expired. Please relogin."))
+			return make_response(redirect("/login"), error="Session expired. Please relogin.")
 	else:
 		accesstoken = request.cookies.get('accesstoken')
 		userid		= request.cookies.get('userid')
 		
 		if accesstoken and userid:
-			return make_response("/")
+			return make_response(redirect("/"))
 
 		return render_template("login.html")
 
@@ -86,52 +87,53 @@ def expired():
 	
 	return resp
 
-@app.route("/", methods=["GET", "POST"])
+@app.route("/", methods=["GET"])
 @tokenrequired
 def index():
-	if request.method == "GET":
-	    return render_template('index.html')
-	elif request.method == "POST":
-		if request.form["url"]:
-			url		= request.form["url"]
-			article = Article(url=url, language='es')
-			content = {}
+	return render_template('index.html')
 
-			try:
-				article.download()
-				article.parse()
-
-				content["title"]	= article.title
-				content["url"]		= url 
-				content["content"]	= article.text.strip(article.title)
-				content["topimage"]	= article.top_image
-				content["images"]	= article.images
-				content["videos"]	= article.movies
-
-				article.nlp()
-				content["keywords"]	= article.keywords
-
-				valid_starters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "1","2","3","4","5","6","7","8","9","0", "¿", "¡"]
-				summary = article.summary.strip(article.title)
-				for char in summary:
-					if char in valid_starters:
-						break
-					else:
-						summary = summary[1:]
-
-				content["summary"] = summary
-
-				return render_template('result.html', content=content)
-			except Exception as e:
-				return render_template('index.html', error="Invalid content.")
-
-			return render_template('index.html')
-		else:
-			return render_template('index.html', error="Introduce valid url.")
-
-@app.route("/parse", methods=["POST"])
+@app.route("/preview", methods=["POST"])
 @tokenrequired
-def parse():
+def preview():
+	if request.form["url"]:
+		url		= request.form["url"]
+		article = Article(url=url, language='es')
+		content = {}
+
+		try:
+			article.download()
+			article.parse()
+
+			content["title"]	= article.title
+			content["url"]		= url 
+			content["content"]	= article.text.strip(article.title)
+			content["topimage"]	= article.top_image
+			content["images"]	= article.images
+			content["videos"]	= article.movies
+
+			article.nlp()
+			content["keywords"]	= article.keywords
+
+			valid_starters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "1","2","3","4","5","6","7","8","9","0", "¿", "¡"]
+			summary = article.summary.strip(article.title)
+			for char in summary:
+				if char in valid_starters:
+					break
+				else:
+					summary = summary[1:]
+
+			content["summary"] = summary
+
+			return render_template('preview.html', content=content)
+		except Exception as e:
+			return redirect('/')
+		return redirect('/')
+	else:
+		return redirect('/')
+
+@app.route("/targets", methods=["POST"])
+@tokenrequired
+def targets():
 	title	= request.form["title"]
 	summary	= request.form["summary"]
 	url		= request.form["url"]
@@ -180,9 +182,9 @@ def parse():
 			"bot":			True,
 			"content":		"Check out original content here: %s" % url
 		})
-		return render_template('parse.html', sentences=sentences)
+		return render_template('targets.html', sentences=sentences)
 	
-	return render_template('index.html', error="Ops... We have a problem. Try again later!") 
+	return redirect('/') 
 
 @app.route("/send", methods=["POST"])
 def send():

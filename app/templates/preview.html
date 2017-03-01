@@ -1,7 +1,7 @@
 {% extends "body.html" %}
 
 {% block content %}
-	<form class="columns is-mobile is-multiline" action="/parse" method="POST">
+	<form class="columns is-mobile is-multiline" action="/targets" method="POST">
 		<input type="hidden" name="title" value="{{ content['title'] }}">
 		<input type="hidden" name="summary" value="{{ content['summary'] }}">
 		<input type="hidden" name="url" value="{{ content['url'] }}">
