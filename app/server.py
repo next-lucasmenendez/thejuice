@@ -41,7 +41,7 @@ def login():
 		try:
 			userid		= request.form['userid']
 			accesstoken = request.form['accesstoken']
-			name		= request.form['name']
+			name		= request.form['name'].encode('utf-8')
 			email		= request.form['email']
 
 			try:
@@ -178,7 +178,7 @@ def target_facebook(content):
 	
 	sentences_json		= "%s/bot_sentences.json" % current_path
 	middle_sentences	= []
-	with open(sentences_json, 'r') as raw_content:
+	with open(sentences_json, 'r', encoding='utf-8') as raw_content:
 		middle_sentences	= json.load(raw_content)
 		final_sentences		= []
 		for sentence in sentences:
@@ -240,7 +240,7 @@ def target_twitter(content):
 	})
 
 	contacts_json = "%s/my_contacts.json" % current_path
-	with open(contacts_json, 'r') as raw_contacts:
+	with open(contacts_json, 'r', encoding='utf-8') as raw_contacts:
 		contacts = json.load(raw_contacts)
 		return render_template('twitter.html', tweets=sentences, contacts=contacts)
 
