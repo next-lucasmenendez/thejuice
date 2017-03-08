@@ -240,8 +240,8 @@ def target_twitter(content):
 	})
 
 	contacts_json = "%s/my_contacts.json" % current_path
-	with open(contacts_json, 'r') as raw_content:
-		contacts = json.load(raw_content)
+	with open(contacts_json, 'r') as raw_contacts:
+		contacts = json.load(raw_contacts)
 		return render_template('twitter.html', tweets=sentences, contacts=contacts)
 
 	return redirect("/")
