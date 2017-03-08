@@ -7,6 +7,7 @@ import requests
 
 from random import randint
 from datetime import datetime
+from unidecode import unidecode
 
 from functools import wraps
 
@@ -41,7 +42,7 @@ def login():
 		try:
 			userid		= request.form['userid']
 			accesstoken = request.form['accesstoken']
-			name		= request.form['name'].encode('utf-8')
+			name		= unidecode(request.form["name"]).split(" ")[0]
 			email		= request.form['email']
 
 			try:

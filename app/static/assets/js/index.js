@@ -19,6 +19,7 @@ $(document).ready(function () {
 		container	= $('span#username');
 
 	if (username && container) {
-		container.text(username.replace(/"/g, ''));
+		name = username.replace(/"/g, '')
+		container.text(name);
 	}
 });
