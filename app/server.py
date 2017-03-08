@@ -41,6 +41,7 @@ def login():
 		try:
 			userid		= request.form['userid']
 			accesstoken = request.form['accesstoken']
+			name		= request.form['name']
 			email		= request.form['email']
 
 			try:
@@ -55,11 +56,12 @@ def login():
 				pass
 
 			resp = make_response(redirect('/'))
+			resp.set_cookie('name', name)
 			resp.set_cookie('accesstoken', accesstoken)
 			resp.set_cookie('userid', userid)
 			return resp
 		except:
-			return make_response(redirect("/login"), error="Session expired. Please relogin.")
+			return make_response(redirect("/login"))
 	else:
 		accesstoken = request.cookies.get('accesstoken')
 		userid		= request.cookies.get('userid')
@@ -112,7 +114,8 @@ def preview():
 			content["videos"]	= article.movies
 
 			article.nlp()
-			content["keywords"]	= article.keywords
+			content["keywords"]		= article.keywords
+			content["raw_keywords"]	= ",".join(article.keywords)
 
 			valid_starters = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z", "1","2","3","4","5","6","7","8","9","0", "¿", "¡"]
 			summary = article.summary.strip(article.title)
@@ -126,6 +129,7 @@ def preview():
 
 			return render_template('preview.html', content=content)
 		except Exception as e:
+			print(e)
 			return redirect('/')
 		return redirect('/')
 	else:
@@ -134,61 +138,117 @@ def preview():
 @app.route("/targets", methods=["POST"])
 @tokenrequired
 def targets():
-	title	= request.form["title"]
-	summary	= request.form["summary"]
-	url		= request.form["url"]
-	method	= request.form["method"]
+	title		= request.form["title"]
+	summary		= request.form["summary"]
+	url			= request.form["url"]
+	keywords	= request.form["raw_keywords"].split(",")
+	method		= request.form["method"]
 
-	if request.form["title"] and request.form["summary"] and request.form["method"]:
-		sentences		= []
-		raw_sentences	= re.split("\r\n", summary)
-		for sentence in raw_sentences:
-			sentences.append({
-				"submitable":	True,
-				"bot":			True,
-				"content":		sentence
-			})
-		
-		current_path		= os.path.dirname(os.path.abspath(__file__))
-		sentences_json		= "%s/bot_sentences.json" % current_path
-		middle_sentences	= []
-		with open(sentences_json, 'r') as raw_content:
-			middle_sentences	= json.load(raw_content)
-			final_sentences		= []
-			for sentence in sentences:
-				final_sentences.append(sentence)	
-				if len(middle_sentences):
-					sentence_index	= randint(0, len(middle_sentences) - 1)
-					middle_sentence	= middle_sentences.pop(sentence_index)
-					if middle_sentence["question"]:
-						final_sentences.append({
-							"submitable":	False,
-							"bot":			True,
-							"content":		middle_sentence["question"]
-						})
 
-					final_sentences.append({
-						"submitable":	False,
-						"bot":			False,
-						"content":		middle_sentence["answer"]
-					})
-				
+	current_path	= os.path.dirname(os.path.abspath(__file__))
+	template_file	= "{}.html".format(method)
+	template_path	= "{}/templates/{}".format(current_path, template_file)
+	if method and os.path.exists(template_path) and title and summary:
+		raw_sentences = re.split("\r\n", summary)
 
-		if len(final_sentences):
-			sentences = final_sentences
-		
-		sentences.append({
-			"submitable":	True,
-			"bot":			True,
-			"content":		"Check out original content here: %s" % url
-		})
-		return render_template('targets.html', sentences=sentences)
+		content = {
+			"title":			title,
+			"raw_sentences":	raw_sentences,
+			"keywords":			keywords,
+			"url":				url
+		}
+
+		if method == "facebook":
+			return target_facebook(content)
+		elif method == "twitter":
+			return target_twitter(content)
 	
 	return redirect('/') 
 
+def target_facebook(content):
+	current_path	= os.path.dirname(os.path.abspath(__file__))
+	raw_sentences	= content["raw_sentences"]
+	sentences		= []
+	for sentence in raw_sentences:
+		sentences.append({
+			"submitable":	True,
+			"bot":			True,
+			"content":		sentence
+		})
+	
+	sentences_json		= "%s/bot_sentences.json" % current_path
+	middle_sentences	= []
+	with open(sentences_json, 'r') as raw_content:
+		middle_sentences	= json.load(raw_content)
+		final_sentences		= []
+		for sentence in sentences:
+			final_sentences.append(sentence)	
+			if len(middle_sentences):
+				sentence_index	= randint(0, len(middle_sentences) - 1)
+				middle_sentence	= middle_sentences.pop(sentence_index)
+				if middle_sentence["question"]:
+					final_sentences.append({
+						"submitable":	False,
+						"bot":			True,
+						"content":		middle_sentence["question"]
+					})
+
+				final_sentences.append({
+					"submitable":	False,
+					"bot":			False,
+					"content":		middle_sentence["answer"]
+				})
+			
+	if len(final_sentences):
+		sentences = final_sentences
+	
+	sentences.append({
+		"submitable":	True,
+		"bot":			True,
+		"content":		"Check out original content here: %s" % content["url"]
+	})
+	return render_template('facebook.html', sentences=sentences)
+
+def target_twitter(content):
+	current_path	= os.path.dirname(os.path.abspath(__file__))
+	raw_sentences	= content["raw_sentences"]
+	keywords		= content["keywords"]
+	sentences		= []
+	hour			= 2
+	for sentence in raw_sentences:
+		words	= sentence.split(" ")
+		tags	= []
+		for word in words:
+			if word in keywords:
+				tags.append(word)
+
+		sentences.append({
+			"image":	False,
+			"content":	sentence.lstrip(),
+			"tags":		tags,
+			"link":		False,
+			"hour":		hour		
+		})
+		hour = hour + 6
+
+	sentences.append({
+		"image":	False,
+		"content":	"Check out original content here",
+		"tags":		[],
+		"link":		content["url"],	
+		"hour":		hour - 6	
+	})
+
+	contacts_json = "%s/my_contacts.json" % current_path
+	with open(contacts_json, 'r') as raw_content:
+		contacts = json.load(raw_content)
+		return render_template('twitter.html', tweets=sentences, contacts=contacts)
+
+	return redirect("/")
+
+
 @app.route("/send", methods=["POST"])
 def send():
-	print(request.form)	
 	return render_template('success.html')
 
 @app.route("/bot", methods=["GET"])

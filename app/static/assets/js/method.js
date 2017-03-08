@@ -9,7 +9,7 @@ $(document).ready(function() {
 				if (_this.hasClass('selected')) {
 					_this.removeClass('selected');
 				} else {
-					_this.css("border", "1px solid #0085AC").addClass('selected');
+					_this.css("border", "3px solid #0085AC").addClass('selected');
 				}
 			}, 100);
 		}

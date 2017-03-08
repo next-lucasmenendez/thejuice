@@ -20,6 +20,7 @@ $(document).ready(function () {
 
 						$('#userid-input').val(data.id);
 						$('#accesstoken-input').val(data.accesstoken);
+						$('#name-input').val(data.name);
 						$('#email-input').val(data.email);
 						$('#login-form form').submit();
 					});

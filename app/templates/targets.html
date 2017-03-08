@@ -1,58 +1,38 @@
 {% extends "body.html" %}
 
 {% block content %}
-	<div class="column is-7-tablet is-12-mobile">
-		<a href="#search-section" class="button is-white is-hidden-tablet is-pulled-right">
-			<span class="icon is-small">
-				<i class="fa fa-long-arrow-down"></i>
-			</span>
-			<span>Go to search</span>
-		</a>
+	<div class="column is-12-tablet is-12-mobile">
 		<h3 class="title is-3">Preview</h3>
 		<form id="send-form" action="/send" method="POST">
-		{% for sentence in sentences %}
-			{% if sentence.submitable %}
-				<input type="hidden" name="sentences[{{loop.index0}}]" value="{{sentence.content}}">
-			{% endif %}
-			
-			{% if sentence.bot %}
-				<div class="container" style="margin: .5em 0">
-					<span class="tag bot-says is-medium" style="border-radius: 15px; padding: 0.5em 0.875em; height: auto; white-space: normal;">{{ sentence.content }}</span>
-				</div>
-			{% else %}
-				<div class="container has-text-right" style="margin: .5em 0">
-					<span class="tag is-dark is-medium" style="border-radius: 15px; padding: 0.5em 0.875em; height: auto; white-space: normal;">{{ sentence.content }}</span>
-				</div>
-			{% endif %}
+		{% for tweet in tweets %}
+			<input type="hidden" name="sentences[{{loop.index0}}]" value="{{tweet.content}}">
+			<div class="box">
+				<article class="media">
+					<div class="media-left">
+						<figure class="image is-64x64">
+							<img src="http://bulma.io/images/placeholders/128x128.png" alt="Image">
+						</figure>
+					</div>
+					<div class="media-content">
+						<div class="content">
+							<p><strong>takethejuice</strong> <small>@take_thejuice</small></p>
+							<p>{{tweet.content}}</p>
+						</div>
+						<nav class="level">
+							<div class="level-left">
+								<a class="level-item"><span class="icon is-small"><i class="fa fa-reply"></i></span></a>
+								<a class="level-item"><span class="icon is-small"><i class="fa fa-retweet"></i></span></a>
+								<a class="level-item"><span class="icon is-small"><i class="fa fa-heart"></i></span></a>
+							</div>
+						</nav>
+					</div>
+				</article>
+			</div>
 		{% endfor %}
 		</form>
-	</div>
-
-	<div id="search-section" class="column is-4-desktop is-5-tablet is-12-mobile is-offset-1-desktop">
-		<h3 class="title is-3">Search contacts</h3>
-		<form id="friends">
-			<p class="control has-icon">
-				<span class="icon is-small">
-					<i class="fa fa-user-circle"></i>
-				</span>
-				<input class="input" type="text" name="name" placeholder="Search target">
-			</p>
-		</form>
-
-		<div id="message" class="notification" style="display: none"></div>
-
-		<nav id="search-list" style="display: none; margin-bottom: 20px;">
-			<div class="panel"></div>
-			<nav class="pagination">
-				<a id="prev-results" class="pagination-previous is-disabled">Previous</a>
-				<a id="next-results" class="pagination-next">Next</a>
-			</nav>
-		</nav>
-
-		<div id="friends-list" class="columns is-multiline"></div>
 		
 		<button id="send-button" type="submit" class="button is-large is-light is-disabled is-pulled-right" onClick="ga('send', 'event', 'final', 'click', 'send');">
-			<span>Send</span>
+			<span>Publish</span>
 			<span class="icon is-small">
 				<i class="fa fa-paper-plane"></i>
 			</span>
