@@ -145,7 +145,6 @@ def targets():
 	keywords	= request.form["raw_keywords"].split(",")
 	method		= request.form["method"]
 
-
 	current_path	= os.path.dirname(os.path.abspath(__file__))
 	template_file	= "{}.html".format(method)
 	template_path	= "{}/templates/{}".format(current_path, template_file)
@@ -165,6 +164,14 @@ def targets():
 			return target_twitter(content)
 	
 	return redirect('/') 
+
+def target_contacts():
+	current_path	= os.path.dirname(os.path.abspath(__file__))
+	contacts_json	= "%s/my_contacts.json" % current_path
+	with open(contacts_json, 'r', encoding='utf-8') as raw_contacts:
+		return json.load(raw_contacts)
+
+	return False
 
 def target_facebook(content):
 	current_path	= os.path.dirname(os.path.abspath(__file__))
@@ -208,10 +215,14 @@ def target_facebook(content):
 		"bot":			True,
 		"content":		"Check out original content here: %s" % content["url"]
 	})
-	return render_template('facebook.html', sentences=sentences)
+
+	contacts = target_contacts()
+	if contacts:
+		return render_template('facebook.html', sentences=sentences, contacts=contacts)
+
+	return redirect("/")
 
 def target_twitter(content):
-	current_path	= os.path.dirname(os.path.abspath(__file__))
 	raw_sentences	= content["raw_sentences"]
 	keywords		= content["keywords"]
 	sentences		= []
@@ -240,9 +251,8 @@ def target_twitter(content):
 		"hour":		hour - 6	
 	})
 
-	contacts_json = "%s/my_contacts.json" % current_path
-	with open(contacts_json, 'r', encoding='utf-8') as raw_contacts:
-		contacts = json.load(raw_contacts)
+	contacts = target_contacts()
+	if contacts:
 		return render_template('twitter.html', tweets=sentences, contacts=contacts)
 
 	return redirect("/")
