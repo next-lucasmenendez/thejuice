@@ -18,10 +18,24 @@ from flask import redirect
 from flask import make_response
 from flask import render_template
 
+import twitter
 from newspaper import Article
 
-ACCESS_TOKEN = "EAACziQjfRpIBAKKSUMKapzKzA0eLY6i0ALm3XRPKGMHLut54WX0Ng9J0eMDuZAZAVZBE980QDyvTQXplcXvfyODZCJBO75sLjp85TfhidfcZBeyWg1EZAPtYYtPWoIQlZBdoVaBJZBreLmCFAaQv1sWcMOtW7HgTYgQQoNAAwR5VnwZDZD"  
-app = Flask(__name__)
+TW_CONSUMER_KEY			= "r5SBP7Q05lDbGSzKQl4TYdtso"
+TW_CONSUMER_SECRET		= "z2jbLfmRRgdO6TjdJQAktYJ9p5tmu9nxBPRilUvEGaAZ6QfJuX"
+TW_ACCESS_TOKEN_KEY		= "838718301782044672-siqwtCUpTdf20ZP4tAecZC1fraCEiYa"
+TW_ACCESS_TOKEN_SECRET	= "BVGCpaWDQEvFjx1INe3wpxlSqAREgFHc1l2lOei0Banhl"
+
+FB_ACCESSTOKEN = "EAACziQjfRpIBAKKSUMKapzKzA0eLY6i0ALm3XRPKGMHLut54WX0Ng9J0eMDuZAZAVZBE980QDyvTQXplcXvfyODZCJBO75sLjp85TfhidfcZBeyWg1EZAPtYYtPWoIQlZBdoVaBJZBreLmCFAaQv1sWcMOtW7HgTYgQQoNAAwR5VnwZDZD"  
+
+app		= Flask(__name__)
+tw_api	= twitter.Api(
+	consumer_key=TW_CONSUMER_KEY,
+	consumer_secret=TW_CONSUMER_SECRET,
+	access_token_key=TW_ACCESS_TOKEN_KEY,
+	access_token_secret=TW_ACCESS_TOKEN_SECRET
+)
+
 
 def tokenrequired(func):
 	@wraps(func)
@@ -234,12 +248,17 @@ def target_twitter(content):
 			if word in keywords:
 				tags.append(word)
 
+		tweet	= sentence.lstrip()
+		tagsraw	= "#{}".format(" #".join(tags)) if tags else ""
+		full	= "{} {}".format(tweet, tagsraw)
+
 		sentences.append({
 			"image":	False,
-			"content":	sentence.lstrip(),
+			"content":	tweet,
 			"tags":		tags,
 			"link":		False,
-			"hour":		hour		
+			"hour":		hour,
+			"full":		full
 		})
 		hour = hour + 6
 
@@ -248,7 +267,8 @@ def target_twitter(content):
 		"content":	"Check out original content here",
 		"tags":		[],
 		"link":		content["url"],	
-		"hour":		hour - 6	
+		"hour":		hour - 6,
+		"full":		"Check out original content here {}".format(content['url'])
 	})
 
 	contacts = target_contacts()
@@ -260,8 +280,38 @@ def target_twitter(content):
 
 @app.route("/send", methods=["POST"])
 def send():
-	return render_template('success.html')
+	platform = request.form.get('platform')
+	if platform == "twitter":
+		errors = send_twitter()
 
+	if errors:
+		return render_template('errors.html', errors=errors)
+	else:
+		return render_template('success.html')
+
+def send_twitter():
+	contacts	= request.form.getlist('contacts')
+	tweets		= request.form.getlist('tweets')
+
+	errors = []
+	for content in tweets:
+		for contact in contacts:
+			try:
+				tw_api.PostDirectMessage(text=content, screen_name=contact)
+			except twitter.error.TwitterError as err:
+				message = err.message[0]['message']
+				error = {
+					"user":			contact,
+					"exception":	message
+				}
+
+				if error not in errors:
+					errors.append(error)
+
+	return errors
+
+
+'''
 @app.route("/bot", methods=["GET"])
 def bot_verification():
 	return request.args['hub.challenge']
@@ -289,9 +339,9 @@ def bot_send_message(user_id, content):
 		}
 	}
 
-	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + ACCESS_TOKEN, json=data)
+	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + FB_ACCESSTOKEN, json=data)
 	return resp.status_code, resp.text if resp.status_code == 200 else "Ok"
-
+'''
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

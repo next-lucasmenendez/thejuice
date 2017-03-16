@@ -8,7 +8,7 @@
 					<span class="icon is-small">
 						<i class="fa fa-long-arrow-down"></i>
 					</span>
-					<span>Select contacts</span>
+					<span>Select demo contacts</span>
 				</a>
 				<h3 class="title is-3">Preview</h3>
 				{% block target %}{% endblock %}
@@ -18,7 +18,7 @@
 				<div class="contacts columns is-mobile is-multiline">
 					{% for contact in contacts %}
 					<div class="contact column is-4">
-						<input type="checkbox" id="contact{{loop.index0}}" value="{{contact.name}}">
+						<input type="checkbox" id="contact{{loop.index0}}" name="contacts" value="{{contact.twitter}}">
 						<label for="contact{{loop.index0}}">
 							<div class="picture">
 								<i class="icon fa fa-circle-o"></i>

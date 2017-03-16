@@ -1,9 +1,10 @@
 {% extends "targets.html" %}
 
 {% block target %}
+	<input type="hidden" name="platform" value="twitter">
 
 	{% for tweet in tweets %}
-		<input type="hidden" name="sentences" value="{{tweet.content}}">
+		<input type="hidden" name="tweets" value="{{tweet.full}}">
 		<small>Will be sent in {{tweet.hour}} hours </small>
 		<div class="box">
 			<article class="media">
