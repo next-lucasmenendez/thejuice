@@ -3,114 +3,45 @@
 import os
 import re
 import json
-import requests
-
-from random import randint
-from datetime import datetime
-from unidecode import unidecode
-
-from functools import wraps
 
 from flask import Flask
 from flask import request
-from flask import url_for
 from flask import redirect
-from flask import make_response
 from flask import render_template
 
-import twitter
 from newspaper import Article
 
-TW_CONSUMER_KEY			= "r5SBP7Q05lDbGSzKQl4TYdtso"
-TW_CONSUMER_SECRET		= "z2jbLfmRRgdO6TjdJQAktYJ9p5tmu9nxBPRilUvEGaAZ6QfJuX"
-TW_ACCESS_TOKEN_KEY		= "838718301782044672-siqwtCUpTdf20ZP4tAecZC1fraCEiYa"
-TW_ACCESS_TOKEN_SECRET	= "BVGCpaWDQEvFjx1INe3wpxlSqAREgFHc1l2lOei0Banhl"
+from clients.twitter import Twitter
+from clients.facebook import Facebook
+from auth.login import Login
 
-FB_ACCESSTOKEN = "EAACziQjfRpIBAKKSUMKapzKzA0eLY6i0ALm3XRPKGMHLut54WX0Ng9J0eMDuZAZAVZBE980QDyvTQXplcXvfyODZCJBO75sLjp85TfhidfcZBeyWg1EZAPtYYtPWoIQlZBdoVaBJZBreLmCFAaQv1sWcMOtW7HgTYgQQoNAAwR5VnwZDZD"  
+app			= Flask(__name__)
 
-app		= Flask(__name__)
-tw_api	= twitter.Api(
-	consumer_key=TW_CONSUMER_KEY,
-	consumer_secret=TW_CONSUMER_SECRET,
-	access_token_key=TW_ACCESS_TOKEN_KEY,
-	access_token_secret=TW_ACCESS_TOKEN_SECRET
-)
-
-
-def tokenrequired(func):
-	@wraps(func)
-	def core(*args, **kwargs):
-		authtoken	= request.cookies.get('accesstoken')
-		userid		= request.cookies.get('userid')
-		if not authtoken or not userid:
-			return render_template('login.html')
-		
-		return func(*args, **kwargs)
-
-	return core
-
+login		= Login()
+twitter		= Twitter()
+facebook	= Facebook()
 
 @app.route("/login", methods=["GET", "POST"])
-def login():
-	if request.method == "POST":
-		try:
-			userid		= request.form['userid']
-			accesstoken = request.form['accesstoken']
-			name		= unidecode(request.form["name"]).split(" ")[0]
-			email		= request.form['email']
-
-			try:
-				current_path	= os.path.dirname(os.path.abspath(__file__))
-				access_log		= "%s/access.log" % current_path
-				with open(access_log, "a") as fd:
-					date	= datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-					record	= "[%s] ID: %s - Email: %s\n" % (date, userid, email)
-
-					fd.write(record)
-			except:
-				pass
-
-			resp = make_response(redirect('/'))
-			resp.set_cookie('name', name)
-			resp.set_cookie('accesstoken', accesstoken)
-			resp.set_cookie('userid', userid)
-			return resp
-		except:
-			return make_response(redirect("/login"))
-	else:
-		accesstoken = request.cookies.get('accesstoken')
-		userid		= request.cookies.get('userid')
-		
-		if accesstoken and userid:
-			return make_response(redirect("/"))
-
-		return render_template("login.html")
+def route_for_login(): 
+	return login.login()
 
 @app.route("/logout", methods=["GET"])
-@tokenrequired
-def logout():
-	resp = make_response(redirect("/login"))
-	resp.set_cookie('accesstoken', '', expires=0)
-	resp.set_cookie('userid', '', expires=0)
-	
-	return resp
+@login.tokenrequired
+def route_for_logout():
+	return login.logout()
 
 @app.route("/logout/expired", methods=["GET"])
-@tokenrequired
-def expired():
-	resp = make_response(redirect("/login"))
-	resp.set_cookie('accesstoken', '', expires=0)
-	resp.set_cookie('userid', '', expires=0)
-	
-	return resp
+@login.tokenrequired
+def route_for_expired():
+	return login.expired()
 
 @app.route("/", methods=["GET"])
-@tokenrequired
+@login.tokenrequired
 def index():
 	return render_template('index.html')
 
 @app.route("/preview", methods=["POST"])
-@tokenrequired
+@login.tokenrequired
 def preview():
 	if request.form["url"]:
 		url		= request.form["url"]
@@ -151,7 +82,7 @@ def preview():
 		return redirect('/')
 
 @app.route("/targets", methods=["POST"])
-@tokenrequired
+@login.tokenrequired
 def targets():
 	title		= request.form["title"]
 	summary		= request.form["summary"]
@@ -173,175 +104,23 @@ def targets():
 		}
 
 		if method == "facebook":
-			return target_facebook(content)
+			return facebook.target(content)
 		elif method == "twitter":
-			return target_twitter(content)
+			return twitter.target(content)
 	
 	return redirect('/') 
 
-def target_contacts():
-	current_path	= os.path.dirname(os.path.abspath(__file__))
-	contacts_json	= "%s/my_contacts.json" % current_path
-	with open(contacts_json, 'r', encoding='utf-8') as raw_contacts:
-		return json.load(raw_contacts)
-
-	return False
-
-def target_facebook(content):
-	current_path	= os.path.dirname(os.path.abspath(__file__))
-	raw_sentences	= content["raw_sentences"]
-	sentences		= []
-	for sentence in raw_sentences:
-		sentences.append({
-			"submitable":	True,
-			"bot":			True,
-			"content":		sentence
-		})
-	
-	sentences_json		= "%s/bot_sentences.json" % current_path
-	middle_sentences	= []
-	with open(sentences_json, 'r', encoding='utf-8') as raw_content:
-		middle_sentences	= json.load(raw_content)
-		final_sentences		= []
-		for sentence in sentences:
-			final_sentences.append(sentence)	
-			if len(middle_sentences):
-				sentence_index	= randint(0, len(middle_sentences) - 1)
-				middle_sentence	= middle_sentences.pop(sentence_index)
-				if middle_sentence["question"]:
-					final_sentences.append({
-						"submitable":	False,
-						"bot":			True,
-						"content":		middle_sentence["question"]
-					})
-
-				final_sentences.append({
-					"submitable":	False,
-					"bot":			False,
-					"content":		middle_sentence["answer"]
-				})
-			
-	if len(final_sentences):
-		sentences = final_sentences
-	
-	sentences.append({
-		"submitable":	True,
-		"bot":			True,
-		"content":		"Check out original content here: %s" % content["url"]
-	})
-
-	contacts = target_contacts()
-	if contacts:
-		return render_template('facebook.html', sentences=sentences, contacts=contacts)
-
-	return redirect("/")
-
-def target_twitter(content):
-	raw_sentences	= content["raw_sentences"]
-	keywords		= content["keywords"]
-	sentences		= []
-	hour			= 2
-	for sentence in raw_sentences:
-		words	= sentence.split(" ")
-		tags	= []
-		for word in words:
-			if word in keywords:
-				tags.append(word)
-
-		tweet	= sentence.lstrip()
-		tagsraw	= "#{}".format(" #".join(tags)) if tags else ""
-		full	= "{} {}".format(tweet, tagsraw)
-
-		sentences.append({
-			"image":	False,
-			"content":	tweet,
-			"tags":		tags,
-			"link":		False,
-			"hour":		hour,
-			"full":		full
-		})
-		hour = hour + 6
-
-	sentences.append({
-		"image":	False,
-		"content":	"Check out original content here",
-		"tags":		[],
-		"link":		content["url"],	
-		"hour":		hour - 6,
-		"full":		"Check out original content here {}".format(content['url'])
-	})
-
-	contacts = target_contacts()
-	if contacts:
-		return render_template('twitter.html', tweets=sentences, contacts=contacts)
-
-	return redirect("/")
-
-
 @app.route("/send", methods=["POST"])
 def send():
+	errors = False
 	platform = request.form.get('platform')
 	if platform == "twitter":
-		errors = send_twitter()
+		errors = twitter.send()
 
 	if errors:
 		return render_template('errors.html', errors=errors)
 	else:
 		return render_template('success.html')
-
-def send_twitter():
-	contacts	= request.form.getlist('contacts')
-	tweets		= request.form.getlist('tweets')
-
-	errors = []
-	for content in tweets:
-		for contact in contacts:
-			try:
-				tw_api.PostDirectMessage(text=content, screen_name=contact)
-			except twitter.error.TwitterError as err:
-				message = err.message[0]['message']
-				error = {
-					"user":			contact,
-					"exception":	message
-				}
-
-				if error not in errors:
-					errors.append(error)
-
-	return errors
-
-
-'''
-@app.route("/bot", methods=["GET"])
-def bot_verification():
-	return request.args['hub.challenge']
-
-@app.route("/bot", methods=["POST"])
-def bot_handle_msg():
-	data	= request.json
-	user_id	= data['entry'][0]['messaging'][0]['sender']['id']
-	content	= data['entry'][0]['messaging'][0]['message']['text']
-
-	if content == "start":
-		content = "Hi! This is takethejuice Bot, what can I help you to learn today?"
-
-	status_code, response = bot_send_message(user_id, content)
-	print(response)
-	return "Ok"
-
-def bot_send_message(user_id, content):
-	data = {
-		"recipient":	{
-			"id": user_id
-		},
-		"message":		{
-			"text": content
-		}
-	}
-
-	resp = requests.post("https://graph.facebook.com/v2.8/me/messages?access_token=" + FB_ACCESSTOKEN, json=data)
-	return resp.status_code, resp.text if resp.status_code == 200 else "Ok"
-'''
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
