@@ -5,3 +5,4 @@ venv
 *.map
 app/access.log
 .idea
+.DS_Store
