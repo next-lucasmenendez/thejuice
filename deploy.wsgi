@@ -15,4 +15,4 @@ site.addsitedir(packages64)
 exec(open(venv_start).read(), dict(__file__=venv_start))
 
 # import app as application
-from run import app as application
+from .run import app as application
