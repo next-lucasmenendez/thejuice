@@ -3,7 +3,7 @@ from flask import request
 from flask import redirect
 from flask import render_template
 
-from clients.client import Client
+from app.clients.client import Client
 
 TW_CONSUMER_KEY			= "r5SBP7Q05lDbGSzKQl4TYdtso"
 TW_CONSUMER_SECRET		= "z2jbLfmRRgdO6TjdJQAktYJ9p5tmu9nxBPRilUvEGaAZ6QfJuX"

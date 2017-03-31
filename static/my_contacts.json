@@ -1,0 +1,22 @@
+[
+	{
+		"name": "Sara",
+		"picture": "https://scontent.cdninstagram.com/hphotos-xat1/t51.2885-15/e15/10986144_847929191911614_395110176_n.jpg",
+		"twitter": "@chus9000"
+	},
+	{
+		"name": "Jon",
+		"picture": "https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s640x640/e35/sh0.08/11419076_873108996104987_1048428431_n.jpg",
+		"twitter": "@lucasmenendev"
+	},
+	{
+		"name": "James",
+		"picture": "https://s-media-cache-ak0.pinimg.com/736x/70/73/be/7073be6aa0f75fc8f4ce34c5812edc2e.jpg",
+		"twitter": "@marianmoldovan"
+	},
+	{
+		"name":	"Carol",
+		"picture": "http://2.bp.blogspot.com/-4ZEshML0tvY/UlR0t5fM0FI/AAAAAAAAAfg/3Vow0_tRLcE/s1600/headshot.jpg",
+		"twitter": "@carlosgonza88"
+	}
+]

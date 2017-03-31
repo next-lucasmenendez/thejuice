@@ -4,3 +4,4 @@ venv
 .sass-cache
 *.map
 app/access.log
+.idea

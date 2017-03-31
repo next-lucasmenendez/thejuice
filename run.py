@@ -2,7 +2,6 @@
 
 import os
 import re
-import json
 
 from flask import Flask
 from flask import request
@@ -11,9 +10,9 @@ from flask import render_template
 
 from newspaper import Article
 
-from clients.twitter import Twitter
-from clients.facebook import Facebook
-from auth.login import Login
+from app.clients.twitter import Twitter
+from app.clients.facebook import Facebook
+from app.auth.login import Login
 
 app			= Flask(__name__)
 
@@ -123,4 +122,4 @@ def send():
 		return render_template('success.html')
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
+	app.run(host="0.0.0.0", port=5000, debug=True)
