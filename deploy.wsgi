@@ -2,7 +2,7 @@ import os
 import sys
 import site
 
-base_path	= '/var/www/takethejuice'
+base_path	= '/var/www/takethejucie'
 packages	= '%s/venv/lib/python3.5/dist-packages' % base_path
 packages64	= '%s/venv/lib64/python3.5/dist-packages' % base_path
 venv_start	= '%s/venv/bin/activate_this.py' % base_path
@@ -15,4 +15,5 @@ site.addsitedir(packages64)
 exec(open(venv_start).read(), dict(__file__=venv_start))
 
 # import app as application
-from .run import app as application
+sys.path.append(base_path)
+from run import app as application
