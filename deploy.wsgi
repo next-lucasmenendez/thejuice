@@ -2,7 +2,7 @@ import os
 import sys
 import site
 
-base_path	= '/var/www/juice-mvp'
+base_path	= '/var/www/takethejuice'
 packages	= '%s/venv/lib/python3.5/dist-packages' % base_path
 packages64	= '%s/venv/lib64/python3.5/dist-packages' % base_path
 venv_start	= '%s/venv/bin/activate_this.py' % base_path
