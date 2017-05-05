@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block body %}
+	<div class="search-form">
+		<form method="GET" action="/pills">
+			<input type="text" name="query" placeholder="{{ query or 'Type a historical character...'}}" autocomplete="off"/>
+			<button class="button" type="submit">
+				<span class="icon">
+					<i class="fa fa-search"></i>
+				</span>
+				Search
+			</button>
+		</form>
+		{% if results %}
+		<div class="results">
+			<p class="results-message">Results including the term "<i>{{query}}</i>":</p>
+			<ul class="results-list">
+				{% for result in results %}
+					<li class="item">
+						<a href="/pills?query={{result}}&force=True">
+							<b>{{result}}</b>
+						</a>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+		{% endif %}
+	</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "pills.html" %}
+
+{% block timeline %}
+	<div class="header">
+		{% if picture %}
+			<div class="img" style="background-image: url('{{ picture }}')"></div>
+		{% endif %}
+		<div class="info">
+			<h1>{{ title }}</h1>
+		</div>
+	</div>
+
+	<div class="timeline wrapper">
+
+		<span class="line"></span>
+
+		{% for hit in hits %}
+		<div class="hit">
+			<div class="date">
+				{{ hit.date }}
+			</div>
+			<span class="dot"></span>
+			<div class="content">
+				{{ hit.content }}
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+	<div class="footer">
+		<img class="logo" src="/static/img/logo.png"/>
+	</div>
+{% endblock %}

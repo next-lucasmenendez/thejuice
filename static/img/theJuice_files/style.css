@@ -1,0 +1,558 @@
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	background: #fff;
+	color: #111;
+	font-size: 16px;
+	font-family: 'Raleway', sans-serif;
+
+	width: 90%;
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 100px 50px;
+}
+
+.main-logo {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	text-align: center;
+	padding: 30px 0;
+}
+
+.main-logo img {
+	display: inline-block;
+	vertical-align: top;
+	width: 70%;
+    max-width: 300px;
+    text-align: center;
+}
+
+.button {
+	display: inline-block;
+    vertical-align: top;
+	width: auto;
+    height: auto;
+    text-align: center;
+	background: #0085AC;
+    font-size: 16px;
+    color: #ffffff;
+	text-decoration: none;
+	text-transform: none;
+    border: 0;
+    border-radius: 3px;
+    cursor: pointer;
+	padding: 10px 20px;
+	box-sizing: border-box;
+	border: 1px solid #0085AC;
+	font-family: 'Raleway', sans-serif;
+	transition: all .2s ease-in-out;
+}
+
+.button.outline {
+	background: #ffffff;
+	color: #0085AC;
+}
+
+.button:hover,
+.button:active,
+.button.outline:hover,
+.button.outline:active {
+	background: #007b9f;
+	border-color: #007b9f;
+	color: #ffffff;
+}
+
+.button .icon {
+	margin: 0 5px;
+	font-size: inherit;
+}
+
+.search-form, .search-form form {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+}
+
+.search-form form {
+	margin: 30px 0;
+	font-size: 0;
+}
+
+.search-form form input {
+	display: inline-block;
+	vertical-align: top;
+	width: 65%;
+	height: auto;
+	margin: 0 5% 0 0;
+	padding: 10px 20px;
+	border: 1px solid #dddddd;
+	color: #007b9f;
+	font-size: 16px;
+	font-weight: bold;
+	font-family: 'Raleway', sans-serif;
+	outline: none;
+	box-sizing: border-box;
+}
+
+.search-form form .button {width: 30%;}
+
+.search-form .results {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	margin: 20px 0;
+}
+
+.search-form .results .results-list {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	list-style: none;
+	margin: 30px 0;
+}
+
+.search-form .results .results-message {
+	font-size: 20px;
+}
+
+.search-form .results .results-list {
+	font-size: 0;
+	margin: 20px 0;
+}
+
+.search-form .results .results-list .item {
+	display: inline-block;
+	vertical-align: top;
+	width: 33.333%;
+	padding: 10px 5px;
+	height: auto;
+}
+
+.search-form .results .results-list .item a {
+	display: inline-block;
+	vertical-align: top;
+	height: auto;
+	position: relative;
+	width: 100%;
+	padding: 10px 10% 30px;
+	color: #111;
+	text-decoration: none;
+	font-size: 16px;
+	transition: all .2s ease-in-out;
+}
+
+.search-form .results .results-list .item a:hover,
+.search-form .results .results-list .item a:active {
+	background: #007b9f;
+	color: #ffffff;
+}
+
+.search-form .results .results-list .item a b {
+	display: block;
+	margin-bottom: 10px;
+	font-size: 20px;
+}
+
+.search-form .results .results-list .item a::after {
+	content: 'Get timeline →';
+	position: absolute;
+	bottom: 0; right: 0;
+	width: auto;
+	height: auto;
+	font-size: 14px;
+	padding: 5px 10px;
+	color: transparent;
+	transition: all .2s ease-in-out;
+}
+
+.search-form .results .results-list .item a:hover::after,
+.search-form .results .results-list .item a:active::after {color: #ccc;}
+
+.steps {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	margin: 30px 0;
+}
+
+.steps .buttons {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	font-size: 0;
+}
+.steps .buttons .side {
+	display: inline-block;
+	vertical-align: top;
+	width: 50%;
+	height: auto;
+	font-size: 16px;
+}
+.steps .buttons .side.left {text-align: left;}
+.steps .buttons .side.right {text-align: right;}
+
+.header {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	font-size: 0;
+}
+
+.header .img {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	width: 150px;
+	height: 150px;
+	margin-right: 5%;
+	border-radius: 75px;
+	border: 3px solid #007b9f;
+	overflow: hidden;
+
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+.header .img img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	width: 100%;
+	height: auto;
+	transform: translate(-50%, -50%);
+}
+
+.header .info {
+	display: inline-block;
+	vertical-align: top;
+	width: calc(95% - 150px);
+	height: 80px;
+	padding: 35px 0;
+	line-height: 40px;
+	font-size: 16px;
+}
+
+.wrapper {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	width: 100%;
+	margin: 50px 0 0;
+}
+
+.columns {
+    font-size: 0;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+}
+
+.columns .left-col {
+    width: 68%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.columns .right-col {
+    width: 27%;
+    display: inline-block;
+    vertical-align: top;
+	margin-left: 5%;
+}
+
+.timeline .line {
+	position: absolute;
+	left: 35%;
+	width: 5px;
+	height: 100%;
+	background: #eee;
+}
+
+.timeline .hit {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	width: 100%;
+	height: auto;
+	padding: 20px 0;
+	font-size: 0;
+}
+
+.timeline .hit .dot {
+	position: absolute;
+	top: 30px; left: 35%;
+	margin-left: -6px;
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+	background: #007b9f;
+}
+
+.timeline .hit .date {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	width: 30%;
+	height: 36px;
+	line-height: 36px;
+	margin: 0 5% 0 0;
+	font-size: 16px;
+	background: #eee;
+	text-align: center;
+	border-radius: 3px;
+}
+
+.timeline .hit .date::before {
+	content: '';
+	position: absolute;
+	top: 2px; right: -14px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 16px 0 16px 15px;
+	border-color: transparent transparent transparent #eeeeee;
+}
+
+.timeline .hit .content {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	width: 60%;
+	height: auto;
+	margin-left: 5%;
+	padding: 10px 20px;
+	font-size: 16px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+}
+
+.timeline .hit .content::after {
+	content: '';
+	position: absolute;
+	top: 2px; left: -16px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 16px 15px 16px 0;
+	border-color: transparent #efefef transparent transparent;
+}
+
+.formats .formats-list {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	list-style: none;
+	font-size: 0;
+}
+
+.formats .formats-list .format {
+	display: block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	margin: 15px 0;
+	font-size: initial;
+}
+
+.formats .formats-list .format label {
+	display: block;
+	vertical-align: top;
+	position: relative;
+	width: 100%;
+	height: auto;
+	border-radius: 4px;
+	padding: 10px 15px;
+	transition: all .2s ease-in-out;
+	cursor: pointer;
+}
+
+.formats .formats-list .format label:hover {
+	background: #0085AC;
+	color: white;
+}
+
+.formats .formats-list .format label input {
+	position: absolute;
+	opacity: 0;
+	visibility: hidden;
+}
+
+.formats .formats-list .format label input:checked + span.indicator:after {
+	background: black;
+}
+
+.formats .formats-list .format label:hover input:checked + span.indicator:after {
+	background: white;
+}
+
+.formats .formats-list .format label span.indicator {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border: 2px solid black;
+    top: 50%; right: 10px;
+	transform: translateY(-50%);
+    border-radius: 10px;
+}
+
+.formats .formats-list .format label:hover > span.indicator {
+	border-color: white;
+}
+
+.formats .formats-list .format label span.indicator:after {
+	content: "";
+	position: absolute;
+	width: 10px;
+	height: 10px;
+	top: 3px; left: 3px;
+	border-radius: 50%;
+	transition: all .2s ease-in-out;
+	background: transparent;
+}
+
+.formats .formats-list .format label span.icon {
+	display: inline-block;
+	vertical-align: top;
+	text-align: center;
+	font-size: 30px;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	margin-right: 10px;
+}
+
+.formats .formats-list .format label p {
+	display: inline-block;
+	vertical-align: top;
+	line-height: 40px;
+	font-size: 20px;
+}
+
+.targets .contacts .contact-list {
+    display: inline-block;
+    vertical-align: top;
+    list-style: none;
+    width: 100%;
+    height: auto;
+    font-size: 0;
+    text-align: center;
+}
+
+.targets .contacts .contact-list .contact {
+	display: inline-block;
+    vertical-align: top;
+	position: relative;
+    width: 31%;
+    margin: 10px 1%;
+    height: auto;
+    font-size: initial;
+}
+
+.targets .contacts .contact-list .contact label {
+	display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+	cursor: pointer;
+}
+
+.targets .contacts .contact-list .contact label input {
+	position: absolute;
+	visibility: hidden;
+	opacity: 0;
+}
+
+.targets .contacts .contact-list .contact label .indicator {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border: 2px solid #0085AC;
+    top: 10px; left: 0;
+	background: #ffffff;
+    border-radius: 50%;
+	z-index: 2;
+}
+
+.targets .contacts .contact-list .contact label .indicator:after {
+	content: "";
+	position: absolute;
+	width: 7px;
+	height: 7px;
+	top: 2px; left: 2px;
+	border-radius: 50%;
+	transition: all .2s ease-in-out;
+	background: transparent;
+}
+
+.targets .contacts .contact-list .contact  label input:checked + .indicator:after {
+	background: #0085AC;
+}
+
+.targets .contacts .contact-list .contact label .picture {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	width: 100%;
+	margin: 10px 0;
+	border-radius: 50%;
+
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.targets .contacts .contact-list .contact label .picture:after {
+    content: '';
+	display: block;
+    padding-bottom: 100%;
+}
+
+.footer	{
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	width: 100%;
+	height: 70px;
+}
+
+.footer .logo {
+	position: absolute;
+	left: 35%;
+	transform: translateX(-50%);
+	width: auto;
+	height: 50px;
+}
+
+.download {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	text-align: center;
+}
+
+.download .icon {font-size: 70px;}
+
+.download .title {
+	display: block;
+	margin: 30px 0;
+	font-size: 30px;
+	font-weight: normal;
+}
