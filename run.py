@@ -60,9 +60,10 @@ def formats():
 				render = Render(
 					title=juicer.title,
 					images=juicer.images,
-					hits=hits
+					hits=hits,
+					format=format
 				)
-				render.fill()
+				render.save()
 				return render_template('download.html', query=query)
 			else:
 				return render_template('error.html', query=query)
