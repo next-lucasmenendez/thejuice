@@ -43,5 +43,4 @@ class Render():
 			print(e)
 			return False
 
-		print(name)
 		return URL.format(name=name)
