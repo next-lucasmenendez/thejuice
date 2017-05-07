@@ -3,36 +3,22 @@
 {% block body %}
 	<form action="/download" method="GET">
 		<input type="hidden" name="query" value="{{title}}">
-		<div class="steps">
-			<div class="buttons">
-				<div class="side left">
-					<a class="button outline go-back" href="/">
-						<span class="icon">
-							<i class="fa fa-arrow-left"></i>
-						</span>
-						Return to search
-						<span class="icon">
-							<i class="fa fa-search"></i>
-						</span>
-					</a>
-				</div>
-				<div class="side right">
-					<button type="submit" class="button">
-						<span class="icon">
-							<i class="fa fa-download"></i>
-						</span>
-						Download
-					</button>
-				</div>
-			</div>
-		</div>
 
 		<div class="wrapper columns">
 			<div id="downloadable" class="timeline left-col">
 				{% block timeline %}{% endblock %}
 			</div>
 			<div class="formats right-col">
+				<span class="text">Convertir datos en:</span>
+
 				{% include "formats.html" %}
+
+				<button type="submit" class="button">
+					<span class="icon">
+						<i class="fa fa-download"></i>
+					</span>
+					Convertir
+				</button>
 			</div>
 		</div>
 	</form>

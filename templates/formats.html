@@ -1,17 +1,7 @@
 <ul class="formats-list">
 	<li class="format">
 		<label>
-			<input type="radio" name="format" value="video"/>
-			<span class="indicator"></span>
-			<span class="icon">
-				<i class="fa fa-film"></i>
-			</span>
-			<p>Video</p>
-		</label>
-	</li>
-	<li class="format">
-		<label>
-			<input type="radio" name="format" value="infographic"/>
+			<input type="radio" name="format" value="infographic" checked/>
 			<span class="indicator"></span>
 			<span class="icon">
 				<i class="fa fa-code-fork"></i>
@@ -19,9 +9,19 @@
 			<p>Infographic</p>
 		</label>
 	</li>
-	<li class="format">
+	<li class="format disabled">
 		<label>
-			<input type="radio" name="format" value="audio"/>
+			<input type="radio" name="format" value="video" disabled/>
+			<span class="indicator"></span>
+			<span class="icon">
+				<i class="fa fa-film"></i>
+			</span>
+			<p>Video</p>
+		</label>
+	</li>
+	<li class="format disabled">
+		<label>
+			<input type="radio" name="format" value="audio" disabled/>
 			<span class="indicator"></span>
 			<span class="icon">
 				<i class="fa fa-volume-up"></i>
@@ -29,9 +29,9 @@
 			<p>Audio</p>
 		</label>
 	</li>
-	<li class="format">
+	<li class="format disabled">
 		<label>
-			<input type="radio" name="format" value="slides"/>
+			<input type="radio" name="format" value="slides" disabled/>
 			<span class="indicator"></span>
 			<span class="icon">
 				<i class="fa fa-clone"></i>

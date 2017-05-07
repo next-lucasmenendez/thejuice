@@ -15,7 +15,7 @@ body {
 	width: 90%;
 	max-width: 1200px;
 	margin: 0 auto;
-	padding: 100px 50px;
+	padding: 50px;
 }
 
 .main-logo {
@@ -31,7 +31,7 @@ body {
 	display: inline-block;
 	vertical-align: top;
 	width: 70%;
-    max-width: 300px;
+    max-width: 400px;
     text-align: center;
 }
 
@@ -49,6 +49,7 @@ body {
     border: 0;
     border-radius: 3px;
     cursor: pointer;
+	outline: none;
 	padding: 10px 20px;
 	box-sizing: border-box;
 	border: 1px solid #0085AC;
@@ -360,6 +361,23 @@ body {
 	border-color: transparent #efefef transparent transparent;
 }
 
+.formats {
+	margin-top: 80px;
+	border-left: 1px solid #aaa;
+	text-align: right;
+	padding-left: 10px;
+}
+
+.formats .text {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	height: auto;
+	padding: 10px 0;
+	font-size: initial;
+	text-align: left;
+}
+
 .formats .formats-list {
 	display: inline-block;
 	vertical-align: top;
@@ -367,6 +385,7 @@ body {
 	height: auto;
 	list-style: none;
 	font-size: 0;
+	text-align: left;
 }
 
 .formats .formats-list .format {
@@ -378,6 +397,8 @@ body {
 	font-size: initial;
 }
 
+.formats .formats-list .format.disabled {color: #999;}
+
 .formats .formats-list .format label {
 	display: block;
 	vertical-align: top;
@@ -385,7 +406,7 @@ body {
 	width: 100%;
 	height: auto;
 	border-radius: 4px;
-	padding: 10px 15px;
+	padding: 5px 10px;
 	transition: all .2s ease-in-out;
 	cursor: pointer;
 }
@@ -419,6 +440,8 @@ body {
     border-radius: 10px;
 }
 
+.formats .formats-list .format.disabled label span.indicator {border-color: #999;}
+
 .formats .formats-list .format label:hover > span.indicator {
 	border-color: white;
 }
@@ -438,18 +461,18 @@ body {
 	display: inline-block;
 	vertical-align: top;
 	text-align: center;
-	font-size: 30px;
-	width: 40px;
-	height: 40px;
-	line-height: 40px;
+	font-size: 20px;
+	width: 30px;
+	height: 30px;
+	line-height: 30px;
 	margin-right: 10px;
 }
 
 .formats .formats-list .format label p {
 	display: inline-block;
 	vertical-align: top;
-	line-height: 40px;
-	font-size: 20px;
+	line-height: 30px;
+	font-size: 16px;
 }
 
 .targets .contacts .contact-list {
@@ -555,11 +578,30 @@ body {
 	text-align: center;
 }
 
-.download .icon {font-size: 70px;}
+.download .icon {
+	display: block;
+	font-size: 70px;
+	color: #0085AC;
+	margin: 30px 0;
+}
 
 .download .title {
 	display: block;
 	margin: 30px 0;
 	font-size: 30px;
 	font-weight: normal;
+}
+
+.download .content {
+	display: block;
+	font-size: 20px;
+	margin: 10px 0;
+}
+
+.download .url {
+	display: block;
+	font-size: 20px;
+	margin: 10px 0;
+	padding: 7px 15px;
+	color: #0085AC;
 }

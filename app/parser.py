@@ -107,4 +107,5 @@ class Parser:
 				'content': HITS_TEXT[self.juicer.lang]["end"].format(name=self.juicer.title, date=date)
 			})
 
-		return sorted(hits, key=lambda hit: hit["datetime"])
+		self.juicer.hits = sorted(hits, key=lambda hit: hit["datetime"])
+		return True

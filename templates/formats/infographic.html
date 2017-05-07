@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/static/style/infographic.css"/>
+		<title>{{ title }} - theJuice</title>
+	</head>
+	<body>
+		<div class="wrapper">
+			<div class="header">
+				{% if picture %}
+					<div class="image" style="background-image: url('{{ picture }}')"></div>
+					<div class="text with-picture">
+				{% else %}
+					<div class="text">
+				{% endif %}
+						{% set name = title.split(" ") %}
+						<h1 class="name">{{ name[0] }}</h1>
+						<h1 class="surname">{{ " ".join(name[1:]) }}</h1>
+						<span class="date">{{ limits.start }} - {{ limits.end }}</span>
+					</div>
+			</div>
+
+			{% for item in items %}
+				{% if item.icon %}
+					<div class="item with-icon">
+						<span class="date">{{ item.date }}</span>
+						<img class="icon" src="{{ item.icon }}"/>
+				{% elif item.image %}
+					<div class="item with-image">
+						<span class="date">{{ item.date }}</span>
+						<img class="image" src="{{ item.image }}"/>
+				{% else %}
+					<div class="item">
+						<span class="date">{{ item.date }}</span>
+				{% endif %}
+				{% if item.content %}
+						<div class="content">
+							{{ item.content }}
+						</div>
+				{% endif %}
+					</div>
+			{% endfor %}
+
+			<div class="logo">
+				<img src="/static/img/logo.svg"/>
+			</div>
+		</div>
+	</body>
+</html>

@@ -4,5 +4,4 @@ packaging
 appdirs
 requests==2.13.0
 six==1.10.0
-xhtml2pdf==0.2b1
-xmltodict
+xmltodict==0.11.0

@@ -4,8 +4,12 @@ import wikipedia
 import xmltodict
 
 from random import randint
+from datetime import datetime
 
 DBPEDIA="http://lookup.dbpedia.org/api/search.asmx/PrefixSearch?QueryClass=&MaxHits=5&QueryString={query}"
+IMAGES="https://en.wikipedia.org/w/api.php?action=query&prop=images&format=json&titles={query}"
+IMAGEINFO="https://en.wikipedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&titles={query}"
+ICONS="/static/icons/{name}.svg"
 
 
 class Juicer:
@@ -18,7 +22,9 @@ class Juicer:
 		self.title 	= ""
 		self.text 	= ""
 		self.images = []
-		self.image	= None
+		self.pic	= None
+		self.hits	= None
+		self.limits = None
 
 		if not query:
 			return
@@ -26,21 +32,6 @@ class Juicer:
 		""" Set lang of searchs """
 		if self.lang in wikipedia.languages():
 			wikipedia.set_lang(self.lang)
-
-	def check(self):
-		if self.images:
-			images = []
-			needle = self.title.replace(" ", "_")
-
-			for img in self.images:
-				if re.search(needle, img, re.IGNORECASE):
-					images.append(img)
-
-			lenimages = len(images)
-			if lenimages:
-				picture = randint(0, lenimages - 1)
-				self.images	= images
-				self.image 	= images[picture]
 
 	def find(self):
 		suggested = []
@@ -81,7 +72,7 @@ class Juicer:
 			first on wikipedia and them clean results checking if each
 			one is person with dbpedia.
 			"""
-			self.opts = wikipedia.search(self.query)
+			self.opts = wikipedia.search(self.query, results=6)
 		else:
 			w = wikipedia.page(self.query, auto_suggest=True)
 
@@ -91,3 +82,106 @@ class Juicer:
 			return True
 
 		return False
+
+	def clean(self):
+		hits = sorted(self.hits, key=lambda hit: hit["datetime"])
+		normalized = []
+
+		for hit in hits:
+			item = hit.copy()
+			del (item["datetime"])
+			normalized.append(item)
+
+		self.hits 	= normalized
+
+	def fill(self):
+		images = self.getimages()
+		self.images = images
+		self.pic	= self.getpicture()
+		self.limits = self.getlimits()
+
+		for hit in self.hits:
+			year = datetime.strftime(hit["datetime"], "%Y")
+			for image in images:
+				if year in image:
+					hit["image"] = image
+					images.remove(image)
+
+		start, end = 0, len(self.hits) - 1
+		self.hits[start]["icon"] 	= ICONS.format(name="born")
+		self.hits[end]["icon"] 		= ICONS.format(name="dead")
+
+		for img in images:
+			res	= re.search("([12]\d{3})", img, re.IGNORECASE)
+			if res and "svg" not in img:
+				date		= res.group(0)
+				if self.limits["start"] < date < self.limits["end"]:
+					self.hits.append({
+						'date': date,
+						'datetime': datetime.strptime(date, "%Y"),
+						'content': '',
+						'image': img
+					})
+
+
+	def getpicture(self):
+		if self.images:
+			needle = self.title.replace(" ", "_")
+			images = []
+			for img in self.images:
+				if re.search(needle, img, re.IGNORECASE) and "svg" not in img:
+					images.append(img)
+
+			if len(images):
+				picture = randint(0, len(images) - 1)
+				return images[picture]
+
+		return None
+
+	def getimages(self):
+		query = self.title.replace(" ", "+")
+		endpoint = IMAGES.format(query=query)
+
+		try:
+			req = requests.get(endpoint)
+			if req.status_code is 200:
+				res = req.json()
+				pages = res["query"]["pages"]
+				page = pages[list(pages.keys())[0]]
+
+				images_titles = [image["title"] for image in page["images"]]
+				for image in images_titles:
+					endpoint = IMAGEINFO.format(query=image)
+					try:
+						req = requests.get(endpoint)
+						if req.status_code is 200:
+							res = req.json()
+
+							image = res["query"]["pages"]["-1"]["imageinfo"][0]["url"]
+							self.images.append(image)
+					except:
+						pass
+		except:
+			pass
+
+		return self.images
+
+	def getlimits(self):
+		limits = {
+			"start": self.hits[0]["date"],
+			"end": self.hits[len(self.hits) - 1]["date"]
+		}
+
+		return limits
+
+	def torender(self):
+		self.fill()
+		self.clean()
+
+		return {
+			"title": self.title,
+			"images": self.images,
+			"hits": self.hits,
+			"pic": self.pic,
+			"limits": self.limits
+		}
