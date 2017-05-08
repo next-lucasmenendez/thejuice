@@ -48,12 +48,15 @@ class Juicer:
 
 					if results:
 						for result in results:
-							title = result["Label"]
-							if result["Classes"]:
-								classes = result["Classes"]["Class"]
-								for c in classes:
-									if c["Label"] == "person" and title not in suggested:
-										suggested.append(title)
+							try:
+								title = result["Label"]
+								if result["Classes"]:
+									classes = result["Classes"]["Class"]
+									for c in classes:
+										if c["Label"] == "person" and title not in suggested:
+											suggested.append(title)
+							except:
+								pass
 					if suggested:
 						for suggestion in suggested:
 							try:
