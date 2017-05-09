@@ -9,5 +9,7 @@ COPY requirements.txt ./
 
 RUN pip3 install -r requirements.txt
 
+ENV LANG=ascii LANGUAGE=ascii
+
 WORKDIR /workdir
 ENTRYPOINT python3 run.py

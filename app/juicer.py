@@ -9,7 +9,7 @@ from datetime import datetime
 DBPEDIA="http://lookup.dbpedia.org/api/search.asmx/PrefixSearch?QueryClass=&MaxHits=5&QueryString={query}"
 IMAGES="https://en.wikipedia.org/w/api.php?action=query&prop=images&format=json&titles={query}"
 IMAGEINFO="https://en.wikipedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&titles={query}"
-ICONS="/static/icons/{name}.svg"
+ICONS="/static/icons/{name}.png"
 
 
 class Juicer:
