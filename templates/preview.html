@@ -1,0 +1,16 @@
+
+
+<ul class="preview-table">
+	<li class="tr thead">
+		<div class="tc col1">Fecha</div>
+		<div class="tc col2">Hito</div>
+	</li>
+	{% for hit in hits %}
+	<li class="tr">
+		<div class="tc col1">{{ hit.date }}</div>
+		<div class="tc col2">
+			<div class="textarea" disabled-class="editable" disabled-attr="contentEditable">{{ hit.content }}</div>
+		</div>
+	</li>
+	{% endfor %}
+</ul>

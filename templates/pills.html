@@ -1,24 +1,41 @@
 {% extends "base.html" %}
 
 {% block body %}
-	<form action="/download" method="GET">
+	<form class="pills" action="/download" method="GET">
 		<input type="hidden" name="query" value="{{title}}">
 
-		<div class="wrapper columns">
-			<div id="downloadable" class="timeline left-col">
-				{% block timeline %}{% endblock %}
+		<div class="wrapper-with-padding columns">
+			<div class="preview left-col">
+				<div class="preview-header">
+					{% if picture %}
+					<div class="img" style="background-image: url('{{ picture }}')"></div>
+					<div class="info with-image">
+						<h1>{{ title }}</h1>
+						<p>Estos son los datos encontrados:</p>
+					</div>
+					{% else %}
+					<div class="info">
+						<h1>{{ title }}</h1>
+						<p>Estos son los datos encontrados:</p>
+					</div>
+					{% endif %}
+				</div>
+
+				{% include "preview.html" %}
 			</div>
 			<div class="formats right-col">
-				<span class="text">Convertir datos en:</span>
+				<div class="formats-inner">
+					<span class="text">Convertir datos en:</span>
 
-				{% include "formats.html" %}
+					{% include "formats.html" %}
 
-				<button type="submit" class="button">
-					<span class="icon">
-						<i class="fa fa-download"></i>
-					</span>
-					Convertir
-				</button>
+					<button type="submit" class="button">
+						<span class="icon">
+							<i class="fa fa-download"></i>
+						</span>
+						Convertir
+					</button>
+				</div>
 			</div>
 		</div>
 	</form>

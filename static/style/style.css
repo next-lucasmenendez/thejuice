@@ -1,82 +1,391 @@
-@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
-
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css?family=Raleway:400,700");
 * {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
 
 body {
-	background: #fff;
-	color: #111;
-	font-size: 16px;
-	font-family: 'Raleway', sans-serif;
+  background: #fff;
+  color: #111;
+  font-size: 16px;
+  font-family: 'Raleway', sans-serif;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 2% 100px; }
 
-	width: 90%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 50px;
-}
+.wrapper,
+.wrapper-with-padding {
+  display: inline-block;
+  vertical-align: top;
+  position: relative;
+  width: 100%; }
 
-.main-logo {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	height: auto;
-	text-align: center;
-	padding: 30px 0;
-}
+.wrapper-with-padding {
+  margin: 5vh 0; }
 
-.main-logo img {
-	display: inline-block;
-	vertical-align: top;
-	width: 70%;
-    max-width: 400px;
-    text-align: center;
-}
+.columns {
+  font-size: 0;
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  height: auto; }
+
+.columns .left-col {
+  width: 68%;
+  display: inline-block;
+  vertical-align: top; }
+
+.columns .right-col {
+  width: 27%;
+  display: inline-block;
+  vertical-align: top;
+  margin-left: 5%; }
 
 .button {
-	display: inline-block;
-    vertical-align: top;
-	width: auto;
-    height: auto;
-    text-align: center;
-	background: #0085AC;
-    font-size: 16px;
-    color: #ffffff;
-	text-decoration: none;
-	text-transform: none;
-    border: 0;
-    border-radius: 3px;
-    cursor: pointer;
-	outline: none;
-	padding: 10px 20px;
-	box-sizing: border-box;
-	border: 1px solid #0085AC;
-	font-family: 'Raleway', sans-serif;
-	transition: all .2s ease-in-out;
-}
+  display: inline-block;
+  vertical-align: top;
+  width: auto;
+  height: auto;
+  text-align: center;
+  background: #0085AC;
+  font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  text-transform: none;
+  border: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  outline: none;
+  padding: 10px 20px;
+  box-sizing: border-box;
+  border: 1px solid #0085AC;
+  font-family: 'Raleway', sans-serif;
+  transition: all .2s ease-in-out; }
 
 .button.outline {
-	background: #ffffff;
-	color: #0085AC;
-}
+  background: #ffffff;
+  color: #0085AC; }
 
 .button:hover,
 .button:active,
 .button.outline:hover,
 .button.outline:active {
-	background: #007b9f;
-	border-color: #007b9f;
-	color: #ffffff;
-}
+  background: #007b9f;
+  border-color: #007b9f;
+  color: #ffffff; }
 
 .button .icon {
-	margin: 0 5px;
-	font-size: inherit;
-}
+  margin: 0 5px;
+  font-size: inherit; }
 
-.search-form, .search-form form {
+/**
+	General
+ */
+.header {
+  display: inline-block;
+  vertical-align: top;
+  width: 100%;
+  height: auto;
+  text-align: center;
+  padding: 2vh 0; }
+  .header .main-logo {
+    display: inline-block;
+    vertical-align: top;
+    width: 70%;
+    height: auto;
+    text-align: center; }
+    .header .main-logo img {
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      max-width: 400px; }
+
+/**
+	Home
+ */
+.index {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 5% 100px;
+  text-align: center; }
+  .index .search-form {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+    text-align: center;
+    max-width: 640px;
+    margin: 2vh 0;
+    font-size: 0; }
+    .index .search-form input {
+      display: inline-block;
+      vertical-align: top;
+      width: 67%;
+      height: 50px;
+      margin: 0 3% 0 0;
+      padding: 10px 20px;
+      border: 1px solid #dddddd;
+      color: #333333;
+      font-size: 16px;
+      font-weight: bold;
+      font-family: 'Raleway', sans-serif;
+      outline: none;
+      box-sizing: border-box;
+      box-shadow: 0px 5px 3px #f2f2f2; }
+    .index .search-form .button {
+      width: 30%;
+      height: 50px;
+      box-shadow: 0px 5px 3px #f2f2f2; }
+  .index .results {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+    margin: 20px 0; }
+    .index .results .results-message {
+      font-size: 20px;
+      text-align: left; }
+    .index .results .results-list {
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      height: auto;
+      margin: 20px 0;
+      list-style: none;
+      font-size: 0;
+      text-align: left;
+      border: 1px solid #eee; }
+      .index .results .results-list .item {
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        height: auto; }
+        .index .results .results-list .item a {
+          display: inline-block;
+          vertical-align: top;
+          height: auto;
+          position: relative;
+          width: 100%;
+          padding: 10px 5%;
+          color: #111;
+          text-decoration: none;
+          font-size: 16px;
+          transition: all .2s ease-in-out; }
+          .index .results .results-list .item a:hover, .index .results .results-list .item a:active {
+            background: rgba(0, 123, 160, 0.8);
+            color: #ffffff; }
+            .index .results .results-list .item a:hover::after, .index .results .results-list .item a:hover::after, .index .results .results-list .item a:active::after, .index .results .results-list .item a:active::after {
+              color: #ccc; }
+          .index .results .results-list .item a::after {
+            content: 'Get timeline →';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: auto;
+            height: auto;
+            font-size: initial;
+            padding: 5px 10px;
+            color: transparent;
+            transition: all .2s ease-in-out; }
+          .index .results .results-list .item a b {
+            display: block; }
+
+/**
+	Pills
+ */
+.pills {
+  /* Preview */
+  /* Formats */ }
+  .pills .preview .preview-header {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+    font-size: 0; }
+    .pills .preview .preview-header .info {
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      height: auto;
+      padding: 2vh 0;
+      line-height: 40px;
+      font-size: 16px; }
+  .pills .preview .preview-table {
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+    font-size: initial; }
+    .pills .preview .preview-table .tr {
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      height: auto;
+      font-size: 0;
+      border-bottom: 1px solid #eee; }
+      .pills .preview .preview-table .tr.thead {
+        border-bottom: 2px solid #eee;
+        text-align: center; }
+        .pills .preview .preview-table .tr.thead .tc {
+          font-size: 18px;
+          font-weight: bold; }
+      .pills .preview .preview-table .tr .tc {
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        height: auto;
+        font-size: initial;
+        padding: 10px 2%; }
+        .pills .preview .preview-table .tr .tc.col1 {
+          width: 25%;
+          padding: 16px 4%; }
+        .pills .preview .preview-table .tr .tc.col2 {
+          width: 75%; }
+        .pills .preview .preview-table .tr .tc .textarea {
+          display: inline-block;
+          vertical-align: top;
+          width: 100%;
+          height: auto;
+          padding: 8px 2%; }
+          .pills .preview .preview-table .tr .tc .textarea.editable {
+            border: 1px solid transparent;
+            border-radius: 3px;
+            transition: all .25s ease-in-out;
+            outline: none; }
+            .pills .preview .preview-table .tr .tc .textarea.editable:hover {
+              border: 1px solid #eeeeee; }
+              .pills .preview .preview-table .tr .tc .textarea.editable:hover::after {
+                content: '';
+                position: absolute;
+                width: 1px;
+                height: 1.2em;
+                animation-name: cursor;
+                animation-delay: 0.25s;
+                animation-duration: 1s;
+                animation-timing-function: linear;
+                animation-iteration-count: infinite; }
+            .pills .preview .preview-table .tr .tc .textarea.editable:focus {
+              border: 1px solid rgba(0, 124, 160, 0.6); }
+              .pills .preview .preview-table .tr .tc .textarea.editable:focus::after {
+                display: none; }
+  .pills .formats {
+    position: sticky;
+    position: -webkit-sticky;
+    text-align: right;
+    top: 0; }
+    .pills .formats .formats-inner {
+      border-left: 1px solid #111;
+      padding: 2vh 1vw 1vh; }
+      .pills .formats .formats-inner .text {
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        height: auto;
+        padding: 1vh 0;
+        font-size: initial;
+        text-align: left; }
+      .pills .formats .formats-inner .formats-list {
+        display: inline-block;
+        vertical-align: top;
+        width: 100%;
+        height: auto;
+        list-style: none;
+        font-size: 0;
+        text-align: left; }
+        .pills .formats .formats-inner .formats-list .format {
+          display: block;
+          vertical-align: top;
+          width: 100%;
+          height: auto;
+          margin: 15px 0;
+          font-size: initial; }
+          .pills .formats .formats-inner .formats-list .format.disabled {
+            color: #999; }
+            .pills .formats .formats-inner .formats-list .format.disabled label {
+              cursor: not-allowed; }
+              .pills .formats .formats-inner .formats-list .format.disabled label:hover {
+                background: #999; }
+              .pills .formats .formats-inner .formats-list .format.disabled label span.indicator {
+                border-color: #999; }
+          .pills .formats .formats-inner .formats-list .format label {
+            display: block;
+            vertical-align: top;
+            position: relative;
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            padding: 5px 10px;
+            transition: all .2s ease-in-out;
+            cursor: pointer; }
+            .pills .formats .formats-inner .formats-list .format label:hover {
+              background: #0085AC;
+              color: white; }
+              .pills .formats .formats-inner .formats-list .format label:hover > span.indicator {
+                border-color: white; }
+              .pills .formats .formats-inner .formats-list .format label:hover input:checked + span.indicator:after {
+                background: white; }
+            .pills .formats .formats-inner .formats-list .format label input {
+              position: absolute;
+              opacity: 0;
+              visibility: hidden; }
+              .pills .formats .formats-inner .formats-list .format label input:checked + span.indicator:after {
+                background: black; }
+            .pills .formats .formats-inner .formats-list .format label span.indicator {
+              position: absolute;
+              width: 20px;
+              height: 20px;
+              border: 2px solid black;
+              top: 50%;
+              right: 10px;
+              transform: translateY(-50%);
+              border-radius: 10px; }
+              .pills .formats .formats-inner .formats-list .format label span.indicator:after {
+                content: "";
+                position: absolute;
+                width: 10px;
+                height: 10px;
+                top: 3px;
+                left: 3px;
+                border-radius: 50%;
+                transition: all .2s ease-in-out;
+                background: transparent; }
+            .pills .formats .formats-inner .formats-list .format label span.icon {
+              display: inline-block;
+              vertical-align: top;
+              text-align: center;
+              font-size: 20px;
+              width: 30px;
+              height: 30px;
+              line-height: 30px;
+              margin-right: 10px; }
+            .pills .formats .formats-inner .formats-list .format label p {
+              display: inline-block;
+              vertical-align: top;
+              line-height: 30px;
+              font-size: 16px; }
+
+@keyframes cursor {
+  25% {
+    background: #111111; }
+  75% {
+    background: transparent; } }
+@media screen and (max-width: 600px) {
+  .index .search-form input {
+    width: 100%;
+    margin: 0 0 30px; }
+  .index .search-form .button {
+    width: 50%; } }
+/**
+	Old Download
+
+.download {
 	display: inline-block;
 	vertical-align: top;
 	width: 100%;
@@ -84,136 +393,38 @@ body {
 	text-align: center;
 }
 
-.search-form form {
-	max-width: 640px;
-	margin: 30px 0;
-	font-size: 0;
-}
-
-.search-form form input {
-	display: inline-block;
-	vertical-align: top;
-	width: 65%;
-	height: 50px;
-	margin: 0 5% 0 0;
-	padding: 10px 20px;
-	border: 1px solid #dddddd;
-	color: #333333;
-	font-size: 16px;
-	font-weight: bold;
-	font-family: 'Raleway', sans-serif;
-	outline: none;
-	box-sizing: border-box;
-	box-shadow: 0px 5px 3px #f2f2f2 ;
-}
-
-.search-form form .button {
-	width: 30%;
-	height: 50px;
-	box-shadow: 0px 5px 3px #f2f2f2;
-}
-
-.search-form .results {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	height: auto;
-	margin: 20px 0;
-}
-
-.search-form .results .results-list {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	height: auto;
-	list-style: none;
+.download .icon {
+	display: block;
+	font-size: 70px;
+	color: #0085AC;
 	margin: 30px 0;
 }
 
-.search-form .results .results-message {
-	font-size: 20px;
-	text-align: left;
+.download .title {
+	display: block;
+	margin: 30px 0;
+	font-size: 30px;
+	font-weight: normal;
 }
 
-.search-form .results .results-list {
-	font-size: 0;
-	margin: 20px 0;
-	text-align: left;
-}
-
-.search-form .results .results-list .item {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	margin: 10px 0;
-	height: auto;
-}
-
-.search-form .results .results-list .item a {
-	display: inline-block;
-	vertical-align: top;
-	height: auto;
-	position: relative;
-	width: 100%;
-	padding: 10px 5%;
-	color: #111;
-	text-decoration: none;
-	font-size: 16px;
-	transition: all .2s ease-in-out;
-}
-
-.search-form .results .results-list .item a:hover,
-.search-form .results .results-list .item a:active {
-	background: #007b9f;
-	color: #ffffff;
-}
-
-.search-form .results .results-list .item a b {
+.download .content {
 	display: block;
 	font-size: 20px;
+	margin: 10px 0;
 }
 
-.search-form .results .results-list .item a::after {
-	content: 'Get timeline →';
-	position: absolute;
-	bottom: 0; right: 0;
-	width: auto;
-	height: auto;
-	font-size: 14px;
-	padding: 5px 10px;
-	color: transparent;
-	transition: all .2s ease-in-out;
+.download .url {
+	display: block;
+	font-size: 20px;
+	margin: 10px 0;
+	padding: 7px 15px;
+	color: #0085AC;
 }
+ */
+/**
+	Old timeline preview
 
-.search-form .results .results-list .item a:hover::after,
-.search-form .results .results-list .item a:active::after {color: #ccc;}
-
-.steps {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	height: auto;
-	margin: 30px 0;
-}
-
-.steps .buttons {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	height: auto;
-	font-size: 0;
-}
-.steps .buttons .side {
-	display: inline-block;
-	vertical-align: top;
-	width: 50%;
-	height: auto;
-	font-size: 16px;
-}
-.steps .buttons .side.left {text-align: left;}
-.steps .buttons .side.right {text-align: right;}
-
-.header {
+.timeline-header {
 	display: inline-block;
 	vertical-align: top;
 	width: 100%;
@@ -221,7 +432,7 @@ body {
 	font-size: 0;
 }
 
-.header .img {
+.timeline-header .img {
 	display: inline-block;
 	vertical-align: top;
 	position: relative;
@@ -237,7 +448,7 @@ body {
 	background-repeat: no-repeat;
 }
 
-.header .img img {
+.timeline-header .img img {
 	position: absolute;
 	top: 50%;
 	left: 50%;
@@ -246,7 +457,7 @@ body {
 	transform: translate(-50%, -50%);
 }
 
-.header .info {
+.timeline-header .info {
 	display: inline-block;
 	vertical-align: top;
 	width: calc(95% - 150px);
@@ -254,35 +465,6 @@ body {
 	padding: 35px 0;
 	line-height: 40px;
 	font-size: 16px;
-}
-
-.wrapper {
-	display: inline-block;
-	vertical-align: top;
-	position: relative;
-	width: 100%;
-	margin: 50px 0 0;
-}
-
-.columns {
-    font-size: 0;
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
-    height: auto;
-}
-
-.columns .left-col {
-    width: 68%;
-    display: inline-block;
-    vertical-align: top;
-}
-
-.columns .right-col {
-    width: 27%;
-    display: inline-block;
-    vertical-align: top;
-	margin-left: 5%;
 }
 
 .timeline .line {
@@ -362,200 +544,7 @@ body {
 	border-color: transparent #efefef transparent transparent;
 }
 
-.formats {
-	margin-top: 80px;
-	border-left: 1px solid #aaa;
-	text-align: right;
-	padding-left: 10px;
-}
-
-.formats .text {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	height: auto;
-	padding: 10px 0;
-	font-size: initial;
-	text-align: left;
-}
-
-.formats .formats-list {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	height: auto;
-	list-style: none;
-	font-size: 0;
-	text-align: left;
-}
-
-.formats .formats-list .format {
-	display: block;
-	vertical-align: top;
-	width: 100%;
-	height: auto;
-	margin: 15px 0;
-	font-size: initial;
-}
-
-.formats .formats-list .format.disabled {color: #999;}
-
-.formats .formats-list .format label {
-	display: block;
-	vertical-align: top;
-	position: relative;
-	width: 100%;
-	height: auto;
-	border-radius: 4px;
-	padding: 5px 10px;
-	transition: all .2s ease-in-out;
-	cursor: pointer;
-}
-
-.formats .formats-list .format label:hover {
-	background: #0085AC;
-	color: white;
-}
-
-.formats .formats-list .format label input {
-	position: absolute;
-	opacity: 0;
-	visibility: hidden;
-}
-
-.formats .formats-list .format label input:checked + span.indicator:after {
-	background: black;
-}
-
-.formats .formats-list .format label:hover input:checked + span.indicator:after {
-	background: white;
-}
-
-.formats .formats-list .format label span.indicator {
-    position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid black;
-    top: 50%; right: 10px;
-	transform: translateY(-50%);
-    border-radius: 10px;
-}
-
-.formats .formats-list .format.disabled label span.indicator {border-color: #999;}
-
-.formats .formats-list .format label:hover > span.indicator {
-	border-color: white;
-}
-
-.formats .formats-list .format label span.indicator:after {
-	content: "";
-	position: absolute;
-	width: 10px;
-	height: 10px;
-	top: 3px; left: 3px;
-	border-radius: 50%;
-	transition: all .2s ease-in-out;
-	background: transparent;
-}
-
-.formats .formats-list .format label span.icon {
-	display: inline-block;
-	vertical-align: top;
-	text-align: center;
-	font-size: 20px;
-	width: 30px;
-	height: 30px;
-	line-height: 30px;
-	margin-right: 10px;
-}
-
-.formats .formats-list .format label p {
-	display: inline-block;
-	vertical-align: top;
-	line-height: 30px;
-	font-size: 16px;
-}
-
-.targets .contacts .contact-list {
-    display: inline-block;
-    vertical-align: top;
-    list-style: none;
-    width: 100%;
-    height: auto;
-    font-size: 0;
-    text-align: center;
-}
-
-.targets .contacts .contact-list .contact {
-	display: inline-block;
-    vertical-align: top;
-	position: relative;
-    width: 31%;
-    margin: 10px 1%;
-    height: auto;
-    font-size: initial;
-}
-
-.targets .contacts .contact-list .contact label {
-	display: inline-block;
-    vertical-align: top;
-    width: 100%;
-    height: auto;
-	cursor: pointer;
-}
-
-.targets .contacts .contact-list .contact label input {
-	position: absolute;
-	visibility: hidden;
-	opacity: 0;
-}
-
-.targets .contacts .contact-list .contact label .indicator {
-    position: absolute;
-    width: 15px;
-    height: 15px;
-    border: 2px solid #0085AC;
-    top: 10px; left: 0;
-	background: #ffffff;
-    border-radius: 50%;
-	z-index: 2;
-}
-
-.targets .contacts .contact-list .contact label .indicator:after {
-	content: "";
-	position: absolute;
-	width: 7px;
-	height: 7px;
-	top: 2px; left: 2px;
-	border-radius: 50%;
-	transition: all .2s ease-in-out;
-	background: transparent;
-}
-
-.targets .contacts .contact-list .contact  label input:checked + .indicator:after {
-	background: #0085AC;
-}
-
-.targets .contacts .contact-list .contact label .picture {
-	display: inline-block;
-	vertical-align: top;
-	position: relative;
-	width: 100%;
-	margin: 10px 0;
-	border-radius: 50%;
-
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-}
-
-.targets .contacts .contact-list .contact label .picture:after {
-    content: '';
-	display: block;
-    padding-bottom: 100%;
-}
-
-.footer	{
+.preview-footer	{
 	display: inline-block;
 	vertical-align: top;
 	position: relative;
@@ -563,46 +552,13 @@ body {
 	height: 70px;
 }
 
-.footer .logo {
+.preview-footer .logo {
 	position: absolute;
 	left: 35%;
 	transform: translateX(-50%);
 	width: auto;
 	height: 50px;
 }
+ */
 
-.download {
-	display: inline-block;
-	vertical-align: top;
-	width: 100%;
-	height: auto;
-	text-align: center;
-}
-
-.download .icon {
-	display: block;
-	font-size: 70px;
-	color: #0085AC;
-	margin: 30px 0;
-}
-
-.download .title {
-	display: block;
-	margin: 30px 0;
-	font-size: 30px;
-	font-weight: normal;
-}
-
-.download .content {
-	display: block;
-	font-size: 20px;
-	margin: 10px 0;
-}
-
-.download .url {
-	display: block;
-	font-size: 20px;
-	margin: 10px 0;
-	padding: 7px 15px;
-	color: #0085AC;
-}
+/*# sourceMappingURL=style.css.map */

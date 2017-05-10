@@ -1,7 +1,7 @@
 {% extends "pills.html" %}
 
 {% block timeline %}
-	<div class="header">
+	<div class="timeline-header">
 		{% if picture %}
 			<div class="img" style="background-image: url('{{ picture }}')"></div>
 		{% endif %}
@@ -12,9 +12,7 @@
 	</div>
 
 	<div class="timeline wrapper">
-
 		<span class="line"></span>
-
 		{% for hit in hits %}
 		<div class="hit">
 			<div class="date">
