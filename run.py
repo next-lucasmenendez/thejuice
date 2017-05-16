@@ -44,13 +44,8 @@ def route_for_expired():
 '''
 
 @app.route("/", methods=["GET"])
-<<<<<<< HEAD
 def index():
 	return render_template('index.html')
-=======
-def search():
-	return render_template('base.html')
->>>>>>> 77eaa8fa3298fdf63f76fdc16ac3eaa1722d4ae0
 
 @app.route("/search", methods=["POST"])
 @as_json
