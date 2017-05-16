@@ -3,14 +3,30 @@ from flask import request
 from flask import redirect
 from flask import render_template
 
+from app.login import Login
 from app.juicer import Juicer
 from app.parser import Parser
 from app.render import Render
 
-app = Flask(__name__)
+app		= Flask(__name__)
+login	= Login()
 
+@app.route("/login", methods=["GET", "POST"])
+def route_for_login():
+	return login.login()
+
+@app.route("/logout", methods=["GET"])
+@login.tokenrequired
+def route_for_logout():
+	return login.logout()
+
+@app.route("/logout/expired", methods=["GET"])
+@login.tokenrequired
+def route_for_expired():
+	return login.expired()
 
 @app.route("/", methods=["GET"])
+@login.tokenrequired
 def search():
 	return render_template('index.html')
 

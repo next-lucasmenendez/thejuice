@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+	<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="/static/style/style.css"/>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<title>TheJuice</title>
+        <meta name="description" content="The juice helps teachers translate their knowledge into a language students understand">
+
+		<link rel="apple-touch-icon" sizes="180x180" href="/static/img/ico/apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="/static/img/ico/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/static/img/ico/favicon-16x16.png">
+        <link rel="manifest" href="/static/img/ico/manifest.json">
+        <link rel="mask-icon" href="/static/img/ico/safari-pinned-tab.svg" color="#5bbad5">
+        <link rel="shortcut icon" href="/static/img/ico/favicon.ico">
+		<PageMap>
+			<DataObject type="thumbnail">
+				<Attribute name="src" value="/static/img/ico/android-icon-192x192.png"/>
+				<Attribute name="width" value="100"/>
+				<Attribute name="height" value="130"/>
+			</DataObject>
+		</PageMap>
+
+        <meta name="thumbnail" content="/static/img/ico/android-icon-192x192.png" />
+
+        <!--facebook-->
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="TheJuice">
+        <meta property="og:description" content="Translating teachers knowledge to fit into pupils social media">
+        <meta property="og:image" content="http://takethejuice.com/assets/images/thumbnail.png">
+        <meta property="og:url" content="http://takethejuice.com/">
+
+        <!--twitter-->
+        <meta name="twitter:title" content="TheJuice">
+        <meta name="twitter:description" content="Translating teachers knowledge to fit into pupils social media">
+        <meta name="twitter:image" content="http://takethejuice.com/assets/images/thumbnail.png">
+        <meta name="twitter:card" content="summary_large_image">
+
+		<!-- GA -->
+		<script>
+			(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+			ga('create', 'UA-92654268-2', 'auto');
+			ga('send', 'pageview');
+		</script>
+
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+
+		<!-- Facebook -->
+		<script>
+			window.fbAsyncInit = function() { FB.init({ appId: '197401140741778', xfbml: true, version: 'v2.8' }); };
+			(function(d, s, id){
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id)) {return;}
+				js = d.createElement(s); js.id = id;
+				js.src = "//connect.facebook.net/en_US/sdk.js";
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+	</head>
+	<body>
+		<div class="index">
+			<div class="header">
+				<a class="main-logo" href="/">
+					<img src="/static/img/logo.svg"/>
+				</a>
+			</div>
+
+			<form class="search-form" id="login-form" method="POST" action="/login">
+				<input type="hidden" id="userid-input" name="userid">
+				<input type="hidden" id="accesstoken-input" name="accesstoken">
+				<input type="hidden" id="name-input" name="name">
+				<input type="hidden" id="email-input" name="email">
+				<button id="login-btn" class="button">
+					<i class="fa fa-facebook"></i>
+					Facebook Login
+				</button>
+			</form>
+		</div>
+		<script src="/static/js/login.js"></script>
+	</body>
+</html>
