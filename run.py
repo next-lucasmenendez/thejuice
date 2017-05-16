@@ -44,8 +44,13 @@ def route_for_expired():
 '''
 
 @app.route("/", methods=["GET"])
+<<<<<<< HEAD
 def index():
 	return render_template('index.html')
+=======
+def search():
+	return render_template('base.html')
+>>>>>>> 77eaa8fa3298fdf63f76fdc16ac3eaa1722d4ae0
 
 @app.route("/search", methods=["POST"])
 @as_json
@@ -66,7 +71,10 @@ def search():
 			return {"success": False, "options": juicer.opts}, 200
 	return {"success": False, "message": "No query provided"}, 400
 
+<<<<<<< HEAD
 '''
+=======
+>>>>>>> 77eaa8fa3298fdf63f76fdc16ac3eaa1722d4ae0
 @app.route("/api/pills", methods=["GET"])
 def timeline():
 	query	= request.args.get('query')
