@@ -253,9 +253,9 @@ body {
           vertical-align: top;
           width: 100%;
           height: auto;
-          padding: 8px 2%; }
+          padding: 8px 2%;
+          border: 1px solid transparent; }
           .pills .preview .preview-table .tr .tc .textarea.editable {
-            border: 1px solid transparent;
             border-radius: 3px;
             transition: all .25s ease-in-out;
             outline: none; }
@@ -282,7 +282,7 @@ body {
     top: 0; }
     .pills .formats .formats-inner {
       border-left: 1px solid #111;
-      padding: 2vh 1vw 1vh; }
+      padding: 2vh 1vw 1vh 0; }
       .pills .formats .formats-inner .text {
         display: inline-block;
         vertical-align: top;

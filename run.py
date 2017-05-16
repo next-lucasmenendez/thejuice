@@ -12,10 +12,10 @@ app = Flask(__name__)
 
 @app.route("/", methods=["GET"])
 def search():
-	return render_template('index.html')
+	return render_template('base.html')
 
 
-@app.route("/pills", methods=["GET"])
+@app.route("/api/pills", methods=["GET"])
 def timeline():
 	query	= request.args.get('query')
 	force	= bool(request.args.get('force'))
@@ -26,16 +26,17 @@ def timeline():
 			parser	= Parser(juicer)
 			success	= parser.generate()
 			if success:
-				return render_template('pills.html', title=juicer.title, picture=juicer.pic, hits=juicer.hits)
+				#return render_template('preview.html', title=juicer.title, picture=juicer.pic, hits=juicer.hits)
+				return juicer.torender()
 			return render_template('error.html', query=query)
 		else:
 			opts = juicer.opts
-			return render_template('index.html', query=query, results=opts or None)
+			return render_template('search.html', query=query, results=opts or None)
 
 	return redirect('/')
 
 
-@app.route("/download", methods=["GET"])
+@app.route("/api/output", methods=["GET"])
 def formats():
 	fmts = ["infographic"]
 
