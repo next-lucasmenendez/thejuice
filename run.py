@@ -1,7 +1,11 @@
+import json
+
 from flask import Flask
 from flask import request
 from flask import redirect
+from flask import make_response
 from flask import render_template
+from functools import wraps
 
 from app.login import Login
 from app.juicer import Juicer
@@ -11,6 +15,19 @@ from app.render import Render
 app		= Flask(__name__)
 login	= Login()
 
+def as_json(func):
+	@wraps(func)
+	def core(*args, **kwargs):
+		content, status = func(*args, **kwargs)
+		json_encoded	= json.dumps(content)
+		headers			= {"Content-Type": "application/json"}
+		response		= make_response(json_encoded, status, headers)
+
+		return response
+	return core
+
+
+'''
 @app.route("/login", methods=["GET", "POST"])
 def route_for_login():
 	return login.login()
@@ -24,13 +41,32 @@ def route_for_logout():
 @login.tokenrequired
 def route_for_expired():
 	return login.expired()
+'''
 
 @app.route("/", methods=["GET"])
-@login.tokenrequired
+def index():
+	return render_template('index.html')
+
+@app.route("/search", methods=["POST"])
+@as_json
 def search():
-	return render_template('base.html')
+	query = request.form.get("query") or False
+	force = request.form.get("force") or False
+	if query:
+		juicer 	= Juicer(query=query, lang="es", force=force)
+		success = juicer.find()
+		if success:
+			parser	= Parser(juicer)
+			success	= parser.generate()
+			if success:
+				return {"success": True, "result": juicer.torender()}, 200
+			else:
+				return {"success": False, "message": "Not found"}, 404
+		else:
+			return {"success": False, "options": juicer.opts}, 200
+	return {"success": False, "message": "No query provided"}, 400
 
-
+'''
 @app.route("/api/pills", methods=["GET"])
 def timeline():
 	query	= request.args.get('query')
@@ -90,7 +126,7 @@ def output(query):
 		template = "output/{}.html".format(query)
 		return render_template(template)
 	return render_template('error.html')
-
+'''
 
 if __name__ == "__main__":
 	app.run(host="0.0.0.0", debug=True)

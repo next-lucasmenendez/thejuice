@@ -4,18 +4,22 @@
 var app = angular.module("app", ['ui.router']);
 
 app.config(function($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/');
 	$stateProvider
+		.state('search', {
+			url: '/search',
+			templateUrl: '/templates/search.html',
+			controller: function() {
+				console.log("SEARCH");
+			}
+		})
 		.state('base', {
-			url: '',
+			url: '/',
 			templateUrl: '/templates/base.html'
 		})
-		.state('search', {
-			url: '/',
-			templateUrl: '/templates/search.html'
-		})
 		.state('base.preview', {
-			url: '/preview',
+			url: '/app/preview',
 			templateUrl: '/templates/preview.html'
-		})
+		});
+
+	$urlRouterProvider.otherwise('/');
 });
