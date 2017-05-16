@@ -1,42 +1,32 @@
 /**
  * Created by lucas.menendez on 16/5/17.
  */
-var app = angular.module("app", ['ui.router']);
+
+var api = {
+
+}
+
+var app = angular.module('app', ['ui.router']);
+
+app.run(function($rootScope, $location, $window) {
+	$window.ga('create', 'UA-92654268-2', 'auto');
+});
 
 app.config(function($stateProvider, $urlRouterProvider) {
-<<<<<<< HEAD
 	$stateProvider
 		.state('search', {
 			url: '/search',
-			templateUrl: '/templates/search.html',
-			controller: function() {
-				console.log("SEARCH");
-			}
+			templateUrl: '/static/templates/search.html',
+			controller: 'searchCtrl'
 		})
 		.state('base', {
 			url: '/',
-			templateUrl: '/templates/base.html'
+			templateUrl: '/static/templates/base.html'
 		})
 		.state('base.preview', {
-			url: '/app/preview',
-			templateUrl: '/templates/preview.html'
+			url: 'preview/:query',
+			templateUrl: '/static/templates/preview.html',
+			controller: 'previewCtrl'
 		});
-
-	$urlRouterProvider.otherwise('/');
-=======
-	$urlRouterProvider.otherwise('/');
-	$stateProvider
-		.state('base', {
-			url: '',
-			templateUrl: '/templates/base.html'
-		})
-		.state('search', {
-			url: '/',
-			templateUrl: '/templates/search.html'
-		})
-		.state('base.preview', {
-			url: '/preview',
-			templateUrl: '/templates/preview.html'
-		})
->>>>>>> 77eaa8fa3298fdf63f76fdc16ac3eaa1722d4ae0
+	$urlRouterProvider.otherwise('/search');
 });

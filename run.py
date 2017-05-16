@@ -50,7 +50,7 @@ def index():
 @app.route("/search", methods=["POST"])
 @as_json
 def search():
-	query = request.form.get("query") or False
+	query = request.form.get("query")
 	force = request.form.get("force") or False
 	if query:
 		juicer 	= Juicer(query=query, lang="es", force=force)
@@ -66,10 +66,7 @@ def search():
 			return {"success": False, "options": juicer.opts}, 200
 	return {"success": False, "message": "No query provided"}, 400
 
-<<<<<<< HEAD
 '''
-=======
->>>>>>> 77eaa8fa3298fdf63f76fdc16ac3eaa1722d4ae0
 @app.route("/api/pills", methods=["GET"])
 def timeline():
 	query	= request.args.get('query')

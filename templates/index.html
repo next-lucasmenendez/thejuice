@@ -14,28 +14,29 @@
         <link rel="manifest" href="/static/img/ico/manifest.json">
         <link rel="mask-icon" href="/static/img/ico/safari-pinned-tab.svg" color="#5bbad5">
         <link rel="shortcut icon" href="/static/img/ico/favicon.ico">
-		<PageMap>
-			<DataObject type="thumbnail">
-				<Attribute name="src" value="/static/img/ico/android-icon-192x192.png"/>
-				<Attribute name="width" value="100"/>
-				<Attribute name="height" value="130"/>
-			</DataObject>
-		</PageMap>
 
-        <meta name="thumbnail" content="/static/img/ico/android-icon-192x192.png" />
-
-        <!--facebook-->
+		<!--facebook-->
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="TheJuice">
-        <meta property="og:description" content="Translating teachers knowledge to fit into pupils social media">
-        <meta property="og:image" content="http://takethejuice.com/assets/images/thumbnail.png">
-        <meta property="og:url" content="http://takethejuice.com/">
+        <meta property="og:title" content="Thejuice">
+        <meta property="og:description" content="TheJuice History. Crea infografías de cualquier personaje histórico en menos de un minuto">
+        <meta property="og:image" content="http://takethejuice.com/assets/images/thumbnail-history.png">
+        <meta property="og:url" content="http://takethejuice.com/es/">
 
         <!--twitter-->
         <meta name="twitter:title" content="TheJuice">
-        <meta name="twitter:description" content="Translating teachers knowledge to fit into pupils social media">
-        <meta name="twitter:image" content="http://takethejuice.com/assets/images/thumbnail.png">
+        <meta name="twitter:description" content="TheJuice History. Crea infografías de cualquier personaje histórico en menos de un minuto">
+        <meta name="twitter:image" content="http://takethejuice.com/assets/images/thumbnail-history.png">
         <meta name="twitter:card" content="summary_large_image">
+
+        <PageMap>
+             <DataObject type="thumbnail">
+               <Attribute name="src" value="assets/images/ico/android-icon-192x192.png"/>
+               <Attribute name="width" value="100"/>
+               <Attribute name="height" value="130"/>
+             </DataObject>
+           </PageMap>
+
+        <meta name="thumbnail" content="assets/images/ico/android-icon-192x192.png" />
 
 		<!-- GA -->
 		<script>
@@ -43,9 +44,6 @@
 			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
 			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
 			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-			ga('create', 'UA-92654268-2', 'auto');
-			ga('send', 'pageview');
 		</script>
 
 		<!-- Facebook -->
@@ -65,10 +63,18 @@
 
 		<!-- Angular -->
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.4.2/angular-ui-router.min.js"></script>
+		<script src="/static/js/vendor/angular-ui-router.min.js"></script>
 		<script src="/static/js/app/app.js"></script>
 	</head>
-	<body>
+	<body ng-app="app">
 		<div ui-view></div>
+
+		<!-- Service -->
+		<script src="/static/js/app/service.js"></script>
+		<!-- Factory -->
+		<script src="/static/js/app/factory.js"></script>
+		<!-- Controllers -->
+		<script src="/static/js/app/controllers/search.js"></script>
+		<script src="/static/js/app/controllers/preview.js"></script>
 	</body>
 </html>
