@@ -2,10 +2,6 @@
  * Created by lucas.menendez on 16/5/17.
  */
 
-var api = {
-
-}
-
 var app = angular.module('app', ['ui.router']);
 
 app.run(function($rootScope, $location, $window) {

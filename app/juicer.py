@@ -77,7 +77,12 @@ class Juicer:
 			"""
 			self.opts = wikipedia.search(self.query, results=6)
 		else:
-			w = wikipedia.page(self.query, auto_suggest=True)
+			try:
+				w = wikipedia.page(self.query, auto_suggest=True)
+			except Exception as e:
+				if hasattr(e, 'options') and e.options:
+					self.opts = e.options
+				return False
 
 			self.title	= w.title
 			self.text	= w.content

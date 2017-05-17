@@ -67,12 +67,24 @@
 		<script src="/static/js/app/app.js"></script>
 	</head>
 	<body ng-app="app">
+		<div class="spinner" ng-class="{'show': spinner.show}" ng-controller="spinnerCtrl">
+			<div class="spinner-inner">
+				<img src="/static/img/spinner.svg"/>
+				<p>{% raw %}{{ spinner.msg }}{% endraw %}</p>
+			</div>
+		</div>
+
+		<div class="notification" ng-class="{'show': notification.show}" ng-controller="notificationCtrl">
+			<p>{% raw %}{{ notification.msg }}{% endraw %}</p>
+		</div>
 		<div ui-view></div>
 
 		<!-- Service -->
 		<script src="/static/js/app/service.js"></script>
 		<!-- Factory -->
 		<script src="/static/js/app/factory.js"></script>
+		<!-- UI Elements -->
+		<script src="/static/js/app/controllers/ui-utils.js"></script>
 		<!-- Controllers -->
 		<script src="/static/js/app/controllers/search.js"></script>
 		<script src="/static/js/app/controllers/preview.js"></script>

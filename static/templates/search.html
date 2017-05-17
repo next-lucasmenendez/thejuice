@@ -6,19 +6,19 @@
 	</div>
 
 	<form class="search-form" ng-submit="submitSearchForm()">
-		<input type="text" ng-model="query" placeholder="Busca algún personaje famoso..." autocomplete="off"/>
+		<input type="text" ng-model="query" placeholder="Search a historical character..." autocomplete="off"/>
 		<button class="button" type="submit">
 			<span class="icon">
 				<i class="fa fa-search"></i>
 			</span>
-			Buscar
+			Search
 		</button>
 	</form>
 
 	<div class="results ng-hide" ng-show="results">
-		<p class="results-message">¡Genial! Tengo varios resultados para <i>{{query}}</i>. Elige el que quieras:</p>
+		<p class="results-message">¡Nice! We found some results for <i>{{query}}</i>. Choose one:</p>
 		<ul class="results-list">
-			<li class="item" ng-repeat="result in results">
+			<li class="item" ng-repeat="result in results track by $index">
 				<a href ng-click="submitSearchForm(true)">
 					<b>{{result}}</b>
 				</a>
