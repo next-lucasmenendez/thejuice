@@ -36,7 +36,7 @@ def timeline():
 	query	= request.args.get('query')
 	force	= bool(request.args.get('force'))
 	if query:
-		juicer = Juicer(query=query, lang="es", force=force)
+		juicer = Juicer(query=query, lang="en", force=force)
 		success = juicer.find()
 		if success:
 			parser	= Parser(juicer)
@@ -59,7 +59,7 @@ def formats():
 	fmt		= request.args.get('format')
 	if query and format:
 		if fmt in fmts:
-			juicer	= Juicer(query=query, lang="es", force=True)
+			juicer	= Juicer(query=query, lang="en", force=True)
 			success	= juicer.find()
 
 			if success:
