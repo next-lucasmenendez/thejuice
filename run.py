@@ -1,18 +1,19 @@
 import json
+import os
+
+from functools import wraps
+from datetime import datetime
 
 from flask import Flask
 from flask import request
 from flask import make_response
 from flask import render_template
-from functools import wraps
 
-from app.login import Login
 from app.juicer import Juicer
 from app.parser import Parser
 from app.render import Render
 
-app		= Flask(__name__)
-login	= Login()
+app	= Flask(__name__)
 
 
 def as_json(func):
@@ -27,26 +28,30 @@ def as_json(func):
 	return core
 
 
-@app.route("/login", methods=["GET", "POST"])
-def route_for_login():
-	return login.login()
-
-
-@app.route("/logout", methods=["GET"])
-@login.tokenrequired
-def route_for_logout():
-	return login.logout()
-
-
-@app.route("/logout/expired", methods=["GET"])
-@login.tokenrequired
-def route_for_expired():
-	return login.expired()
-
-
 @app.route("/", methods=["GET"])
 def index():
 	return render_template('index.html')
+
+
+@app.route("/login", methods=["GET", "POST"])
+@as_json
+def login():
+	data 	= request.get_json()
+	name 	= data.get('name')
+	email	= data.get('email')
+	if name and email:
+		try:
+			current_path = os.path.dirname(os.path.abspath(__file__))
+			access_log = "%s/access.log" % current_path
+			with open(access_log, "a") as fd:
+				date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+				record = "[{date}] Name: {name} - Email: {email}\n".format(date=date, name=name, email=email)
+
+				fd.write(record)
+		except:
+			pass
+		return {"success": True, "result": "Welcome {name}!".format(name=name)}, 200
+	return {"success": False, "result": "No name and/or email provided."}, 400
 
 
 @app.route("/search", methods=["POST"])
