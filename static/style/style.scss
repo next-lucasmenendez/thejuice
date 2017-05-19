@@ -243,6 +243,8 @@ body {
 			font-size: 0;
 			text-align: left;
 			border: 1px solid #eee;
+			overflow-y: auto;
+    		max-height: 295px;
 			.item {
 				display: inline-block;
 				vertical-align: top;

@@ -32,4 +32,8 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 		}
 	}
 
+	$scope.forceSearchForm = function(query) {
+		$scope.query = query;
+		$scope.submitSearchForm(true);
+	}
 });

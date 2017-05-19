@@ -216,7 +216,9 @@ body {
       list-style: none;
       font-size: 0;
       text-align: left;
-      border: 1px solid #eee; }
+      border: 1px solid #eee;
+      overflow-y: auto;
+      max-height: 295px; }
       .index .results .results-list .item {
         display: inline-block;
         vertical-align: top;

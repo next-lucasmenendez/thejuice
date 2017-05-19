@@ -59,6 +59,7 @@ def login():
 def search():
 	query = request.form.get("query")
 	force = request.form.get("force") or False
+
 	if query:
 		juicer 	= Juicer(query=query, force=force)
 		success = juicer.find()

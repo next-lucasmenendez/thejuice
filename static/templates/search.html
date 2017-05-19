@@ -19,7 +19,7 @@
 		<p class="results-message">¡Nice! We found some results for <i>{{query}}</i>. Choose one:</p>
 		<ul class="results-list">
 			<li class="item" ng-repeat="result in results track by $index">
-				<a href ng-click="submitSearchForm(true)">
+				<a href ng-click="forceSearchForm(result)">
 					<b>{{result}}</b>
 				</a>
 			</li>
