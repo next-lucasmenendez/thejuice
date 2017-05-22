@@ -62,15 +62,18 @@ def search():
 
 	if query:
 		juicer 	= Juicer(query=query, force=force)
-		success = juicer.find()
-		if success:
+		try:
+			success = juicer.find()
+			if not success:
+				raise
+
 			parser	= Parser(juicer)
 			success	= parser.generate()
 			if success:
 				return {"success": True, "result": juicer.torender()}, 200
 			else:
 				return {"success": False, "message": "Sorry... We could not find your request."}, 404
-		else:
+		except:
 			if juicer.opts:
 				return {"success": False, "options": juicer.opts}, 200
 			else:

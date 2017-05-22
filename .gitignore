@@ -3,8 +3,8 @@ venv
 *.pyc
 .sass-cache
 *.map
-app/access.log
-app/templates/output/*
+access.log
 .idea
 .DS_Store
 __pycache__
+templates/output/
