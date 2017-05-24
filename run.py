@@ -57,13 +57,31 @@ def login():
 @app.route("/search", methods=["POST"])
 @as_json
 def search():
+	query	= request.form.get('query')
+	lang	= request.form.get('lang') or "en"
+
+	try:
+		juicer 	= Juicer(query=query, lang=lang)
+		results	= juicer.find()
+		status 	= 200 if results else 404
+
+		return {"success": True, "results": results}, status
+	except:
+		pass
+
+	return {"success": False, "message": "Something was wrong..."}, 500
+
+
+@app.route("/preview", methods=["POST"])
+@as_json
+def preview():
 	query = request.form.get("query")
-	force = request.form.get("force") or False
+	lang = request.form.get("lang") or "en"
 
 	if query:
-		juicer 	= Juicer(query=query, force=force)
+		juicer = Juicer(query=query, lang=lang, force=True)
 		try:
-			success = juicer.find()
+			success = juicer.get()
 			if not success:
 				raise
 
@@ -73,7 +91,7 @@ def search():
 				return {"success": True, "result": juicer.torender()}, 200
 			else:
 				return {"success": False, "message": "Sorry... We could not find your request."}, 404
-		except:
+		except Exception as e:
 			if juicer.opts:
 				return {"success": False, "options": juicer.opts}, 200
 			else:

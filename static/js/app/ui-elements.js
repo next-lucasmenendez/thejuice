@@ -62,3 +62,91 @@ app.directive("contenteditable", function() {
 		}
 	};
 });
+
+app.directive("autosuggestions", function($rootScope, $compile, $timeout, service) {
+	return {
+		restrict: "E",
+		replace: true,
+		scope: {
+            query: '=',
+			lang: '=',
+			callback: '&'
+        },
+		templateUrl: "/static/templates/autosuggestions.html",
+		link: function (scope, elem) {
+			scope.$watch('query', function (newValue, oldValue) {
+				if (newValue != oldValue) {
+					if (newValue.length > 2) {
+						service.request('POST', '/search', {query: newValue, lang: scope.lang}).then(
+							function (result) {
+								$timeout(function () {
+									scope.current = false;
+									scope.results = result.results;
+									scope.$apply();
+								});
+							},
+							function (error) {
+								$timeout(function () {
+									scope.current = false;
+									scope.results = false;
+									scope.$apply();
+								});
+							}
+						)
+					} else {
+						$timeout(function () {
+							scope.current = false;
+							scope.results = false;
+							scope.$apply();
+						});
+					}
+				}
+			});
+
+			var current = false;
+			elem.parent().on("keydown", function (e) {
+				var key = e.keyCode || e.which,
+					up = 38,
+					down = 40,
+					enter = 13;
+
+				if (scope.results) {
+					var old 	= current,
+						first	= 0,
+						last	= scope.results.length - 1;
+
+					if (current === false) { // Activate key selection
+						if (key == up) {
+							current = last;
+						} else if (key == down) {
+							current = first;
+						}
+					} else { // Regular behaviour
+						if (key == up) {
+							current = (current > first) ? current - 1 : last;
+						} else if (key == down) {
+							current = (current < last) ? current + 1 : first;
+						} else if (key == enter) {
+							scope.chooseItem(current);
+						}
+					}
+					if (current !== false) scope.changeItem(old, current);
+				}
+			});
+
+			scope.changeItem = function (old, index) {
+				if (old !== false) scope.results[old].active = false;
+				scope.results[index].active = true;
+
+				var current_elem = document.getElementById("result" + scope.results[index].id);
+				elem.scrollTop(current_elem.offsetTop);
+				scope.$apply();
+			}
+
+			scope.chooseItem = function(index) {
+				var q = scope.results[index].name;
+				scope.callback({name: q});
+			}
+		}
+	}
+})

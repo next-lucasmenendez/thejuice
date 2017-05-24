@@ -6,13 +6,14 @@ var app = angular.module("app");
 
 app.service('service', function ($rootScope, $q, $http) {
 	this.request = function (method, url, data, as_json) {
-		as_json = Boolean(as_json);
+		as_json	= Boolean(as_json);
+		data 	= (data) ? ((as_json) ? angular.toJson(data) : $.param(data)) : null;
 
 		var result = $q.defer();
 		$http({
 			method: method,
 			url: url,
-			data: (as_json) ? angular.toJson(data) : $.param(data),
+			data: data,
 			headers : {
 				'Content-Type': (as_json) ? 'application/json' : 'application/x-www-form-urlencoded'
 			}

@@ -169,17 +169,84 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 50px 5% 100px;
-  text-align: center; }
+  text-align: center;
+  	/**
+  	.results {
+  		display: inline-block;
+  		vertical-align: top;
+  		width: 100%;
+  		height: auto;
+  		margin: 20px 0;
+  		.results-message {
+  			font-size: 20px;
+  			text-align: left;
+  		}
+  
+  		.results-list {
+  			display: inline-block;
+  			vertical-align: top;
+  			width: 100%;
+  			height: auto;
+  			margin: 20px 0;
+  			list-style: none;
+  			font-size: 0;
+  			text-align: left;
+  			border: 1px solid #eee;
+  			overflow-y: auto;
+      		max-height: 295px;
+  			.item {
+  				display: inline-block;
+  				vertical-align: top;
+  				width: 100%;
+  				height: auto;
+  				a {
+  					display: inline-block;
+  					vertical-align: top;
+  					height: auto;
+  					position: relative;
+  					width: 100%;
+  					padding: 10px 5%;
+  					color: #111;
+  					text-decoration: none;
+  					font-size: 16px;
+  					transition: all .2s ease-in-out;
+  					&:hover, &:active {
+  						background: rgba(0, 123, 160, 0.8);
+  						color: #ffffff;
+  						&::after, &::after {color: #ccc;}
+  					}
+  
+  					&::after {
+  						content: 'Get timeline →';
+  						position: absolute;
+  						bottom: 0; right: 0;
+  						width: auto;
+  						height: auto;
+  						font-size: initial;
+  						padding: 5px 10px;
+  						color: transparent;
+  						transition: all .2s ease-in-out;
+  					}
+  
+  					b {
+  						display: block;
+  					}
+  				}
+  			}
+  		}
+  	}
+  	*/ }
   .index .search-form, .index .login-form {
     display: inline-block;
     vertical-align: top;
+    position: relative;
     width: 100%;
     height: auto;
     text-align: center;
     max-width: 640px;
     margin: 2vh 0;
     font-size: 0; }
-    .index .search-form input, .index .login-form input {
+    .index .search-form input.query, .index .login-form input.query {
       display: inline-block;
       vertical-align: top;
       width: 67%;
@@ -198,61 +265,64 @@ body {
       width: 30%;
       height: 50px;
       box-shadow: 0px 5px 3px #f2f2f2; }
-  .index .results {
-    display: inline-block;
-    vertical-align: top;
-    width: 100%;
-    height: auto;
-    margin: 20px 0; }
-    .index .results .results-message {
-      font-size: 20px;
-      text-align: left; }
-    .index .results .results-list {
+    .index .search-form .languages, .index .login-form .languages {
+      display: inline-block;
+      width: 100%;
+      margin: 10px 0;
+      height: 30px;
+      text-align: center; }
+      .index .search-form .languages input, .index .login-form .languages input {
+        position: absolute;
+        opacity: 0;
+        visibility: hidden; }
+        .index .search-form .languages input:checked + label, .index .login-form .languages input:checked + label {
+          background: #eee; }
+      .index .search-form .languages label, .index .login-form .languages label {
+        display: inline-block;
+        vertical-align: top;
+        text-transform: uppercase;
+        color: #007b9f;
+        background: transparent;
+        width: auto;
+        height: 30px;
+        padding: 3px 5px;
+        margin: 0 5px;
+        font-size: initial;
+        text-align: center;
+        cursor: pointer;
+        line-height: 24px;
+        border-radius: 3px; }
+        .index .search-form .languages label img, .index .login-form .languages label img {
+          display: inline-block;
+          vertical-align: top;
+          height: 24px; }
+    .index .search-form .results, .index .login-form .results {
+      position: absolute;
+      top: 100px;
+      left: 0;
       display: inline-block;
       vertical-align: top;
-      width: 100%;
+      width: 67%;
       height: auto;
-      margin: 20px 0;
-      list-style: none;
-      font-size: 0;
-      text-align: left;
-      border: 1px solid #eee;
+      max-height: 150px;
       overflow-y: auto;
-      max-height: 295px; }
-      .index .results .results-list .item {
+      border: 1px solid #ccc;
+      border-top: none;
+      z-index: 1; }
+      .index .search-form .results .item, .index .login-form .results .item {
         display: inline-block;
         vertical-align: top;
         width: 100%;
-        height: auto; }
-        .index .results .results-list .item a {
-          display: inline-block;
-          vertical-align: top;
-          height: auto;
-          position: relative;
-          width: 100%;
-          padding: 10px 5%;
-          color: #111;
-          text-decoration: none;
-          font-size: 16px;
-          transition: all .2s ease-in-out; }
-          .index .results .results-list .item a:hover, .index .results .results-list .item a:active {
-            background: rgba(0, 123, 160, 0.8);
-            color: #ffffff; }
-            .index .results .results-list .item a:hover::after, .index .results .results-list .item a:hover::after, .index .results .results-list .item a:active::after, .index .results .results-list .item a:active::after {
-              color: #ccc; }
-          .index .results .results-list .item a::after {
-            content: 'Get timeline →';
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            width: auto;
-            height: auto;
-            font-size: initial;
-            padding: 5px 10px;
-            color: transparent;
-            transition: all .2s ease-in-out; }
-          .index .results .results-list .item a b {
-            display: block; }
+        height: auto;
+        padding: 10px 20px;
+        font-size: initial;
+        text-align: left;
+        background: white;
+        cursor: pointer;
+        transition: all .2s ease-in-out; }
+        .index .search-form .results .item:hover, .index .search-form .results .item:active, .index .search-form .results .item.current, .index .login-form .results .item:hover, .index .login-form .results .item:active, .index .login-form .results .item.current {
+          background: #007b9f;
+          color: white; }
 
 /**
 	Pills

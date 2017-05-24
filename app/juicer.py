@@ -1,12 +1,11 @@
 import re
 import requests
 import wikipedia
-import xmltodict
 
 from random import randint
 from datetime import datetime
+from app.database import DB
 
-DBPEDIA="http://lookup.dbpedia.org/api/search.asmx/PrefixSearch?QueryClass=&MaxHits=5&QueryString={query}"
 IMAGES="https://en.wikipedia.org/w/api.php?action=query&prop=images&format=json&titles={query}"
 IMAGEINFO="https://en.wikipedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&titles={query}"
 ICONS="/static/icons/{name}.png"
@@ -34,62 +33,23 @@ class Juicer:
 			wikipedia.set_lang(self.lang)
 
 	def find(self):
-		suggested = []
+		base_table = "figures_{lang}"
+		table = base_table.format(lang=self.lang)
 
-		if not self.force:
-			query = self.query.replace(" ", "+")
-			endpoint = DBPEDIA.format(query=query)
-			res = requests.get(endpoint)
-			if res.status_code is 200:
-				content = xmltodict.parse(res.text.encode('utf-8'))
+		db = DB()
+		return db.search(table, "name", self.query)
 
-				if "Result" in content["ArrayOfResult"].keys():
-					results = content["ArrayOfResult"]["Result"]
-
-					if results:
-						for result in results:
-							try:
-								title = result["Label"]
-								if result["Classes"]:
-									classes = result["Classes"]["Class"]
-									for c in classes:
-										if c["Label"] == "person" and title not in suggested:
-											suggested.append(title)
-							except:
-								pass
-					if suggested:
-						for suggestion in suggested:
-							try:
-								w = wikipedia.page(suggestion, auto_suggest=True)
-
-								self.title 	= suggestion
-								self.text 	= w.content
-								self.images	= w.images
-								return True
-							except Exception as e:
-								suggested.remove(suggestion)
-								continue
-
-			"""
-			TODO: if suggested options is empty, try to search 
-			first on wikipedia and them clean results checking if each
-			one is person with dbpedia.
-			"""
-			self.opts = wikipedia.search(self.query, results=6)
-		else:
-			try:
-				w = wikipedia.page(self.query, auto_suggest=True)
-			except Exception as e:
-				if hasattr(e, 'options') and e.options:
-					self.opts = e.options
-				return False
-
-			self.title	= w.title
-			self.text	= w.content
-			self.images	= w.images
+	def get(self):
+		try:
+			w = wikipedia.page(self.query, auto_suggest=True)
+			self.title = w.title
+			self.text = w.content
+			self.images = w.images
 			return True
-
+		except Exception as e:
+			print(e)
 		return False
+
 
 	def clean(self):
 		hits = sorted(self.hits, key=lambda hit: hit["datetime"])
@@ -131,7 +91,6 @@ class Juicer:
 						'image': img
 					})
 
-
 	def getpicture(self):
 		if self.images:
 			needle = self.title.replace(" ", "_")
@@ -167,9 +126,11 @@ class Juicer:
 
 							image = res["query"]["pages"]["-1"]["imageinfo"][0]["url"]
 							self.images.append(image)
-					except:
+					except Exception as e:
+						print(e)
 						pass
-		except:
+		except Exception as e:
+			print(e)
 			pass
 
 		return self.images

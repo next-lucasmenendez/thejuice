@@ -5,18 +5,18 @@
 var app = angular.module('app');
 
 app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, service, DataStorage) {
-	$scope.submitSearchForm = function(forceSearch) {
-		var query = $scope.query,
-			force = Boolean(forceSearch);
+	$scope.lang = "en";
 
+	$scope.submitSearchForm = function(query) {
 		if (query) {
 			$rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
 			$window.ga('send', 'event', 'index', 'search', query);
 
-			service.request('POST', '/search', {query: query, force: force}).then(
+			service.request('POST', '/search', {query: query, lang: $scope.lang}).then(
 				function (response) {
 					if (response.success) {
 						DataStorage.set("results", response.result);
+						DataStorage.set("lang", $scope.lang);
 						$state.go('base.preview', {query: query});
 					} else {
 						$scope.results = response.options;
@@ -24,7 +24,6 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 					$rootScope.$broadcast('hideSpinner');
 				},
 				function (error) {
-					console.log(error);
 					$rootScope.$broadcast('hideSpinner');
 					$rootScope.$broadcast('showNotification', error.data.message);
 				}

@@ -192,13 +192,14 @@ body {
 	.search-form, .login-form {
 		display: inline-block;
 		vertical-align: top;
+		position: relative;
 		width: 100%;
 		height: auto;
 		text-align: center;
 		max-width: 640px;
 		margin: 2vh 0;
 		font-size: 0;
-		input {
+		input.query {
 			display: inline-block;
 			vertical-align: top;
 			width: 67%;
@@ -220,8 +221,77 @@ body {
 			height: 50px;
 			box-shadow: 0px 5px 3px #f2f2f2;
 		}
+
+		.languages {
+			display: inline-block;
+			width: 100%;
+			margin: 10px 0;
+			height: 30px;
+			text-align: center;
+			input {
+				position: absolute;
+				opacity: 0;
+				visibility: hidden;
+				&:checked + label {background: #eee;}
+			}
+
+			label {
+				display: inline-block;
+				vertical-align: top;
+				text-transform: uppercase;
+				color: #007b9f;
+				background: transparent;
+				width: auto;
+				height: 30px;
+				padding: 3px 5px;
+				margin: 0 5px;
+				font-size: initial;
+				text-align: center;
+				cursor: pointer;
+				line-height: 24px;
+				border-radius: 3px;
+
+				img {
+					display: inline-block;
+					vertical-align: top;
+					height: 24px;
+				}
+			}
+		}
+
+		.results {
+			position: absolute;
+			top: 100px; left: 0;
+			display: inline-block;
+			vertical-align: top;
+			width: 67%;
+			height: auto;
+			max-height: 150px;
+			overflow-y: auto;
+			border: 1px solid #ccc;
+			border-top: none;
+			z-index: 1;
+
+			.item {
+				display: inline-block;
+				vertical-align: top;
+				width: 100%;
+				height: auto;
+				padding: 10px 20px;
+				font-size: initial;
+				text-align: left;
+				background: white;
+				cursor: pointer;
+				transition: all .2s ease-in-out;
+				&:hover, &:active, &.current {
+					background: #007b9f;
+					color: white;
+				}
+			}
+		}
 	}
 
+	/**
 	.results {
 		display: inline-block;
 		vertical-align: top;
@@ -286,6 +356,7 @@ body {
 			}
 		}
 	}
+	*/
 }
 
 

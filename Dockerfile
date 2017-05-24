@@ -2,7 +2,7 @@ FROM debian:latest
 MAINTAINER Lucas Menendez "epucas@gmail.com"
 
 RUN apt-get update
-RUN apt-get install -y python3 python3-dev python3-pip python-setuptools
+RUN apt-get install -y python3 python3-dev python3-pip python-setuptools sqlite3 libsqlite3-dev
 
 COPY requirements.txt ./
 

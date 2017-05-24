@@ -7,6 +7,7 @@ var app = angular.module("app");
 app.controller('previewCtrl', function ($window, $rootScope, $scope, $state, $stateParams, service, DataStorage) {
 	$scope.results 	= DataStorage.get("results");
 	$scope.format	= 'infographic';
+	$scope.lang		= DataStorage.get("lang") || 'en';
 
 	if (!Boolean($scope.results)) {
 		var query = $stateParams.query;
@@ -15,7 +16,7 @@ app.controller('previewCtrl', function ($window, $rootScope, $scope, $state, $st
 			$rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
 			$window.ga('send', 'event', 'index', 'search', query);
 
-			service.request('POST', '/search', {query: query, force: true}).then(
+			service.request('POST', '/preview', {query: query, force: true, lang: $scope.lang}).then(
 				function (response) {
 					if (response.success) {
 						$scope.results = response.result;

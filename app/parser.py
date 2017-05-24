@@ -84,18 +84,24 @@ class Parser:
 						'date': datetime.strftime(date, format),
 						'content': hit
 					})
+
 		if results:
 			hits = sorted(results, key=lambda date: date["datetime"])
 
 			if hits[0]["datetime"] > dates[0]["datetime"]:
-				fulldate	= dates[0]["datetime"]
-				format 		= dates[0]["format"]
-				date		= datetime.strftime(fulldate, format)
-				hits.append({
-					'datetime': fulldate,
-					'date': date,
-					'content': HITS_TEXT[self.juicer.lang]["start"].format(name=self.juicer.title, date=date)
-				})
+				try:
+					fulldate	= dates[0]["datetime"]
+					format 		= dates[0]["format"]
+					date		= datetime.strftime(fulldate, format)
+					first		= {
+						'datetime': fulldate,
+						'date': date,
+						'content': HITS_TEXT[self.juicer.lang]["start"].format(name=self.juicer.title, date=date)
+					}
+					hits.append(first)
+				except Exception as e:
+					print(e)
+					pass
 
 			if hits[len(hits) - 1]["datetime"] < dates[1]["datetime"]:
 				fulldate	= dates[1]["datetime"]
