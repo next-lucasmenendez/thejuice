@@ -79,17 +79,22 @@ class Juicer:
 		self.hits[start]["icon"] 	= ICONS.format(name="born")
 		self.hits[end]["icon"] 		= ICONS.format(name="dead")
 
+		currentdates = [hit["date"] for hit in self.hits]
+		print(currentdates)
 		for img in images:
 			res	= re.search("([12]\d{3})", img, re.IGNORECASE)
 			if res and "svg" not in img:
-				date		= res.group(0)
-				if self.limits["start"] < date < self.limits["end"]:
+				date = res.group(0)
+				if date not in currentdates and self.limits["start"] < date < self.limits["end"]:
+					currentdates.append(date)
 					self.hits.append({
 						'date': date,
 						'datetime': datetime.strptime(date, "%Y"),
 						'content': '',
 						'image': img
 					})
+
+		print(currentdates)
 
 	def getpicture(self):
 		if self.images:

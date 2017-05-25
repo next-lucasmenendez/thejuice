@@ -11,7 +11,6 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 		if (query) {
 			$rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
 			$window.ga('send', 'event', 'index', 'search', query);
-
 			service.request('POST', '/search', {query: query, lang: $scope.lang}).then(
 				function (response) {
 					if (response.success) {
@@ -28,6 +27,11 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 					$rootScope.$broadcast('showNotification', error.data.message);
 				}
 			);
+
+		} else if ($scope.query) {
+			$window.ga('send', 'event', 'index', 'search', $scope.query);
+			DataStorage.set("lang", $scope.lang);
+			$state.go('base.preview', {query: $scope.query, lang: $scope.lang});
 		}
 	}
 
