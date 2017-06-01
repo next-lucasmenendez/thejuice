@@ -104,7 +104,7 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 	$scope.design = function() {
 		var query = $stateParams.query || $scope.query;
 		if ($scope.results && query) {
-			DataStorage.set("results", $scope.results);
+			DataStorage.set(query, $scope.results);
 			DataStorage.set("lang", $scope.lang);
 			$state.go('base.design', {query: query});
 		}
