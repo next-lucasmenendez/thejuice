@@ -68,8 +68,6 @@ class Juicer:
 
 	def fill(self):
 		images 		= self.getimages()
-		from pprint import pprint
-		pprint(images)
 		self.pic	= self.getpicture()
 		self.limits = self.getlimits()
 

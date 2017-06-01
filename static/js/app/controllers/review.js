@@ -93,6 +93,9 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 
 		if (!$scope.current.hasOwnProperty('$$hashKey')) {
 			$scope.results.hits.push(angular.copy($scope.current));
+			$window.ga('send', 'event', 'review', 'event created');
+		} else {
+			$window.ga('send', 'event', 'review', 'event edited');
 		}
 		$scope.showEdit	= false;
 	}
@@ -103,6 +106,7 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 
 	$scope.design = function() {
 		var query = $stateParams.query || $scope.query;
+		$window.ga('send', 'event', 'review', 'submited', query);
 		if ($scope.results && query) {
 			DataStorage.set(query, $scope.results);
 			DataStorage.set("lang", $scope.lang);

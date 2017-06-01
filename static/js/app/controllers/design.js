@@ -45,6 +45,9 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 
 	$scope.download = function() {
 		if ($scope.design && $scope.results) {
+			$window.ga('send', 'event', 'design', 'template', $scope.design);
+			$window.ga('send', 'event', 'design', 'query', $scope.results.title);
+
 			var results = angular.copy($scope.results);
 			results.hits.sort(function(a, b){
 				return  new Date(a.date) - new Date(b.date);
