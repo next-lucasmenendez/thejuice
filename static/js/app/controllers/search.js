@@ -12,6 +12,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 		route.clear();
 		route.setCurrent(current);
 		route.apply();
+		DataStorage.clear()
 	});
 
 	$scope.lang = "en";
@@ -22,7 +23,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 			service.request('POST', '/review', {query: query, lang: $scope.lang}).then(
 				function (response) {
 					if (response.success) {
-						DataStorage.set("results", response.result);
+						DataStorage.set(query, response.result);
 						DataStorage.set("lang", $scope.lang);
 						$state.go('base.review', {query: query});
 					} else {

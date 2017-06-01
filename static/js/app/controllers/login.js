@@ -12,7 +12,6 @@ app.controller('loginCtrl', function ($window, $rootScope, $scope, $state, servi
 		FB.login(function (response) {
 			if (response.authResponse !== null) {
 				FB.api('/me', attrs, function(profile) {
-					console.log(profile);
 					var data = {
 						id: profile.id,
 						email: profile.email,
@@ -25,11 +24,11 @@ app.controller('loginCtrl', function ($window, $rootScope, $scope, $state, servi
 						function () {
 							$window.ga('send', 'event', 'auth', 'login', data.email);
 
-							localStorage.setItem('id', data.id);
-							localStorage.setItem('name', data.name);
-							localStorage.setItem('email', data.email);
-							localStorage.setItem('accesstoken', data.accesstoken);
-							localStorage.setItem('picture', data.picture);
+							sessionStorage.setItem('id', data.id);
+							sessionStorage.setItem('name', data.name);
+							sessionStorage.setItem('email', data.email);
+							sessionStorage.setItem('accesstoken', data.accesstoken);
+							sessionStorage.setItem('picture', data.picture);
 
 							$state.go('base.search');
 						},

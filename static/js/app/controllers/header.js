@@ -4,7 +4,12 @@
 
 var app = angular.module('app');
 
-app.controller('headerCtrl', function($scope) {
-	$scope.name = localStorage.getItem('name');
-	$scope.picture = localStorage.getItem('picture');
+app.controller('headerCtrl', function($scope, $state) {
+	$scope.name = sessionStorage.getItem('name');
+	$scope.picture = sessionStorage.getItem('picture');
+
+	$scope.logout = function () {
+		sessionStorage.clear();
+		$state.go('login');
+	}
 });

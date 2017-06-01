@@ -19,6 +19,9 @@ app.factory('DataStorage', function() {
         		var mem = JSON.parse(local);
             	return mem[key] || false;
 			}
-        }
+        },
+		clear: function () {
+        	localStorage.clear();
+		}
     };
 });

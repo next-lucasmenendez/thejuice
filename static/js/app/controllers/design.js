@@ -17,8 +17,15 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 		route.apply();
 	});
 
+	var query = $stateParams.query;
+	if (query) {
+		$scope.results = DataStorage.get(query);
+		$scope.lang = DataStorage.get("lang") || 'en';
+	} else {
+		$state.go('base.search');
+	}
+
 	$scope.design		= "default";
-	$scope.results 		= DataStorage.get("results");
 	$scope.templates	= [
 		{
 			thumbnail: '/static/style/templates/default.jpg',

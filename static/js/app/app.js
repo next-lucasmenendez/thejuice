@@ -8,10 +8,10 @@ var checkAccessToken = function ($q, $state, $timeout) {
 	var result = $q.defer();
 
 	$timeout(function () {
-		var accesstoken = localStorage.getItem('accesstoken');
+		var accesstoken = sessionStorage.getItem('accesstoken');
 
 		if (!Boolean(accesstoken)) {
-			localStorage.clear();
+			sessionStorage.clear();
 			$state.go('login');
 		}
 		result.resolve();
@@ -35,7 +35,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 					var result = $q.defer();
 
 					$timeout(function () {
-						var accesstoken = localStorage.getItem('accesstoken');
+						var accesstoken = sessionStorage.getItem('accesstoken');
 
 						if (Boolean(accesstoken)) {
 							$state.go('base.search');

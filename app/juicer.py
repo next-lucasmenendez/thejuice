@@ -67,8 +67,9 @@ class Juicer:
 		self.hits 	= normalized
 
 	def fill(self):
-		images = self.getimages()
-		self.images = images
+		images 		= self.getimages()
+		from pprint import pprint
+		pprint(images)
 		self.pic	= self.getpicture()
 		self.limits = self.getlimits()
 
@@ -79,19 +80,23 @@ class Juicer:
 					hit["image"] = image
 					images.remove(image)
 
-		currentdates = [hit["date"] for hit in self.hits]
-		for img in images:
-			res	= re.search("([12]\d{3})", img, re.IGNORECASE)
-			if res and "svg" not in img:
-				date = res.group(0)
-				if date not in currentdates and self.limits["start"] < date < self.limits["end"]:
-					currentdates.append(date)
-					self.hits.append({
-						'date': date,
-						'datetime': datetime.strptime(date, "%Y"),
-						'content': '',
-						'image': img
-					})
+		limits			= self.getlimits(str=False)
+		start, end		= limits["start"], limits["end"]
+		currentdates 	= [hit["date"] for hit in self.hits]
+		if images:
+			for image in images:
+				res	= re.search("([12]\d{3})", image, re.IGNORECASE)
+				if res:
+					date	= res.group(0)
+					dt 		= datetime.strptime(date, "%Y")
+					if date not in currentdates and start < dt < end:
+						currentdates.append(date)
+						self.hits.append({
+							'date': date,
+							'datetime': dt,
+							'content': '',
+							'image': image
+						})
 
 		self.getkeywords()
 		self.geticons()
@@ -102,7 +107,7 @@ class Juicer:
 			needle = self.title.replace(" ", "_")
 			images = []
 			for img in self.images:
-				if re.search(needle, img, re.IGNORECASE) and ("gif" in img or "png" in img or "jpg" in img or "jpeg" in img):
+				if re.search(needle, img, re.IGNORECASE):
 					images.append(img)
 
 			if len(images):
@@ -111,9 +116,13 @@ class Juicer:
 
 		return None
 
+	def checkextension(self, file):
+		return re.search("(\.gif|\.png|\.jpg|\.jpeg)", file, re.IGNORECASE)
+
 	def getimages(self):
-		query = self.title.replace(" ", "+")
-		endpoint = IMAGES.format(query=query)
+		self.images = list(filter(self.checkextension, self.images))
+		query		= self.title.replace(" ", "+")
+		endpoint	= IMAGES.format(query=query)
 
 		try:
 			req = requests.get(endpoint)
@@ -131,7 +140,8 @@ class Juicer:
 							res = req.json()
 
 							image = res["query"]["pages"]["-1"]["imageinfo"][0]["url"]
-							self.images.append(image)
+							if self.checkextension(image):
+								self.images.append(image)
 					except Exception as e:
 						print(e)
 						pass
@@ -141,10 +151,11 @@ class Juicer:
 
 		return self.images
 
-	def getlimits(self):
+	def getlimits(self, str=True):
+		key = "date" if str else "datetime"
 		limits = {
-			"start": self.hits[0]["date"],
-			"end": self.hits[len(self.hits) - 1]["date"]
+			"start": self.hits[0][key],
+			"end": self.hits[len(self.hits) - 1][key]
 		}
 
 		return limits

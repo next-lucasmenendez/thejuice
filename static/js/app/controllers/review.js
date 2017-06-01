@@ -18,10 +18,13 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 	});
 
 	$scope.showEdit	= false;
-
-	$scope.results 	= DataStorage.get("results");
-	$scope.format	= 'infographic';
-	$scope.lang		= DataStorage.get("lang") || 'en';
+	var query = $stateParams.query;
+	if (query) {
+		$scope.results = DataStorage.get(query);
+		$scope.lang = DataStorage.get("lang") || 'en';
+	} else {
+		$state.go('base.search');
+	}
 
 	if (!Boolean($scope.results)) {
 		var query = $stateParams.query;
