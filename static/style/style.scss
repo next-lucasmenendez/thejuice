@@ -513,13 +513,13 @@ body {
 			width: 100%;
 			height: auto;
 			font-size: 0;
+			padding: 1vh 0 2vh;
 
 			.info {
 				display: inline-block;
 				vertical-align: top;
 				width: 100%;
 				height: auto;
-				padding: 1vh 0;
 				font-size: 16px;
 
 				h1 {
@@ -527,6 +527,7 @@ body {
 					font-weight: 400;
 					padding: 2vh 0;
 				}
+				p {width: 50%;}
 			}
 		}
 		.preview-table {

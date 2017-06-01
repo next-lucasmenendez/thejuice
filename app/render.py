@@ -31,8 +31,9 @@ class Render:
 		filename	= "{design}.html".format(design=self.design)
 		template 	= environment.get_template(filename)
 
-
-		name 	= base64.b64encode(self.title.encode()).decode('utf-8')
+		dt		= datetime.today().strftime("%s")
+		mark	= ("{date}-{name}".format(date=dt, name=self.title)).encode()
+		name 	= base64.b64encode(mark).decode('utf-8')
 		data	= {
 			"title": self.title,
 			"items": self.hits,
