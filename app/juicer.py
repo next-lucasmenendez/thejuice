@@ -1,14 +1,19 @@
 import re
+import os
+import sys
+import json
 import requests
 import wikipedia
 
 from random import randint
+from textblob import TextBlob
 from datetime import datetime
 from app.database import DB
 
 IMAGES="https://en.wikipedia.org/w/api.php?action=query&prop=images&format=json&titles={query}"
 IMAGEINFO="https://en.wikipedia.org/w/api.php?action=query&format=json&prop=imageinfo&iiprop=url&titles={query}"
-ICONS="/static/icons/{name}.png"
+ICONSINDEX="{base}/static/icons/icons.json"
+ICON="/static/icons/{file}"
 
 
 class Juicer:
@@ -50,7 +55,6 @@ class Juicer:
 			print(e)
 		return False
 
-
 	def clean(self):
 		hits = sorted(self.hits, key=lambda hit: hit["datetime"])
 		normalized = []
@@ -75,10 +79,6 @@ class Juicer:
 					hit["image"] = image
 					images.remove(image)
 
-		start, end = 0, len(self.hits) - 1
-		self.hits[start]["icon"] 	= ICONS.format(name="born")
-		self.hits[end]["icon"] 		= ICONS.format(name="dead")
-
 		currentdates = [hit["date"] for hit in self.hits]
 		for img in images:
 			res	= re.search("([12]\d{3})", img, re.IGNORECASE)
@@ -93,12 +93,16 @@ class Juicer:
 						'image': img
 					})
 
+		self.getkeywords()
+		self.geticons()
+		return
+
 	def getpicture(self):
 		if self.images:
 			needle = self.title.replace(" ", "_")
 			images = []
 			for img in self.images:
-				if re.search(needle, img, re.IGNORECASE) and "svg" not in img:
+				if re.search(needle, img, re.IGNORECASE) and ("gif" in img or "png" in img or "jpg" in img or "jpeg" in img):
 					images.append(img)
 
 			if len(images):
@@ -144,6 +148,44 @@ class Juicer:
 		}
 
 		return limits
+
+	def getkeywords(self):
+		for hit in self.hits:
+			content = hit['content']
+			blob 	= TextBlob(content)
+
+			keywords = []
+			for word, pos in blob.tags:
+				if str(pos).startswith("VB") or pos == "NN":
+					keywords.append(word)
+
+			hit['keywords'] = keywords
+
+		return True
+
+	def geticons(self):
+		main_path	= os.path.realpath(sys.argv[0])
+		base		= os.path.dirname(main_path)
+		index		= ICONSINDEX.format(base=base)
+
+		with open(index) as fd:
+			icons = json.loads(fd.read())
+
+			for hit in self.hits:
+				if 'icons' not in hit.keys():
+					hit['icons'] = []
+
+				for keyword in hit['keywords']:
+					for item in icons:
+						file = item['icon']
+						icon = ICON.format(file=file)
+						tags = item['tags']
+
+						if keyword in tags and icon not in hit['icons']:
+							hit['icons'].append(icon)
+
+			return True
+		return False
 
 	def torender(self):
 		self.fill()

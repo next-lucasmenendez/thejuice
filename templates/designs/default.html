@@ -70,10 +70,12 @@
 			</div>
 
 			{% for item in items %}
-				{% if item.icon %}
+				{% if item.icons %}
 					<div class="item with-icon">
 						<span class="date">{{ item.date }}</span>
-						<img class="icon" src="{{ item.icon }}"/>
+						{% for icon in item.icons %}
+							<img class="icon" src="{{ icon }}"/>
+						{% endfor %}
 				{% elif item.image %}
 					<div class="item with-image">
 						<span class="date">{{ item.date }}</span>

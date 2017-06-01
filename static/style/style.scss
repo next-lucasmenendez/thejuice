@@ -591,6 +591,21 @@ body {
 				}
 			}
 		}
+
+		.footer {
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+			height: 0;
+			margin: 2vh 0;
+			text-align: right;
+			.button {
+				box-shadow: 0px 5px 3px #f2f2f2;
+				i {
+					margin: 0 1vw;
+				}
+			}
+		}
 	}
 
 	/* Edit Popup */
@@ -730,6 +745,7 @@ body {
 				width: 100%;
 				transition: all .2s ease-in-out;
 				border: 1px solid #ddd;
+				border-radius: 4px;
 				&:hover, &:active {box-shadow: 0 4px 10px -5px #000;}
 
 				.indicator {
@@ -749,6 +765,8 @@ body {
 				.thumbnail {
 					width: 100%;
 					height: auto;
+					border-top-left-radius: 3px;
+					border-top-right-radius: 3px;
 				}
 
 				.name {

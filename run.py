@@ -75,8 +75,8 @@ def search():
 @app.route("/review", methods=["POST"])
 @as_json
 def review():
-	query = request.form.get("query")
-	lang = request.form.get("lang") or "en"
+	query	= request.form.get("query")
+	lang 	= request.form.get("lang") or "en"
 
 	if query:
 		juicer = Juicer(query=query, lang=lang, force=True)
@@ -92,10 +92,8 @@ def review():
 			else:
 				return {"success": False, "message": "Sorry... We could not find your request."}, 404
 		except Exception as e:
-			if juicer.opts:
-				return {"success": False, "options": juicer.opts}, 200
-			else:
-				return {"success": False, "message": "Sorry... We could not find your request."}, 404
+			print(e)
+			return {"success": False, "message": "Sorry... We could not find your request."}, 404
 	return {"success": False, "message": "No query provided"}, 400
 
 

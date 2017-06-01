@@ -38,6 +38,12 @@
 						</tr>
 					</tbody>
 				</table>
+				<div class="footer">
+					<button type="button" class="button" ng-click="design()">
+						Design
+						<i class="fa fa-angle-right"></i>
+					</button>
+				</div>
 			</div>
 		</div>
 	</form>
@@ -51,8 +57,8 @@
 				<input type="number" ng-model="current.datetime.year" placeholder="Year" required>
 			</div>
 			<textarea ng-model="current.content" placeholder="Hit content"></textarea>
-			<button type="submit" class="save">Save</button>
 			<button ng-click="closeEdit()" class="cancel">Cancel</button>
+			<button type="submit" class="save">Save</button>
 		</form>
 	</div>
 </div>

@@ -8,7 +8,7 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 	$scope.$on('$stateChangeSuccess', function () {
 		var prev = route.Link('Review', 'review', 'base.review', {query: $stateParams.query}),
 			current = route.Link('Design', 'design', 'base.design'),
-			next = route.Button('Download', 'download', $scope.download);
+			next = route.Button('Create', 'download', $scope.download);
 
 		route.clear();
 		route.setPrev(prev);
@@ -24,6 +24,11 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 			thumbnail: '/static/style/templates/default.jpg',
 			value: 'default',
 			name: 'Default'
+		},
+		{
+			thumbnail: '/static/style/templates/bl4ck.jpg',
+			value: 'bl4ck',
+			name: 'Bl4ck'
 		}
 	]
 

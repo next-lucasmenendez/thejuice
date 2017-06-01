@@ -507,6 +507,17 @@ body {
             text-align: center;
             border: none;
             cursor: pointer; }
+    .pills .preview .footer {
+      display: inline-block;
+      vertical-align: top;
+      width: 100%;
+      height: 0;
+      margin: 2vh 0;
+      text-align: right; }
+      .pills .preview .footer .button {
+        box-shadow: 0px 5px 3px #f2f2f2; }
+        .pills .preview .footer .button i {
+          margin: 0 1vw; }
   .pills .edit-popup {
     display: inline-block;
     vertical-align: top;
@@ -625,7 +636,8 @@ body {
         position: relative;
         width: 100%;
         transition: all .2s ease-in-out;
-        border: 1px solid #ddd; }
+        border: 1px solid #ddd;
+        border-radius: 4px; }
         .design .templates-list .template label:hover, .design .templates-list .template label:active {
           box-shadow: 0 4px 10px -5px #000; }
         .design .templates-list .template label .indicator {
@@ -643,7 +655,9 @@ body {
           z-index: 1; }
         .design .templates-list .template label .thumbnail {
           width: 100%;
-          height: auto; }
+          height: auto;
+          border-top-left-radius: 3px;
+          border-top-right-radius: 3px; }
         .design .templates-list .template label .name {
           display: block;
           text-align: center;

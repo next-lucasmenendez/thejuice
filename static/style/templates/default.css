@@ -141,10 +141,11 @@ body {
 }
 
 .item.with-icon .icon {
-	display: block;
+	display: inline-block;
 	vertical-align: top;
 	margin: 20px auto 0;
-	width: 50px;
+	width: 60px;
+	padding: 0 5px;
 }
 
 .item .date {
@@ -155,13 +156,14 @@ body {
 }
 
 .item .content {
-	display: inline-block;
-	vertical-align: top;
+	display: block;
 	text-align: left;
 	font-size: 16px;
 	margin-top: 20px;
 }
 .item.with-image .content {
+	display: inline-block;
+	vertical-align: top;
 	width: 50%;
 	max-width: 350px;
 	border-left: 10px solid transparent;
