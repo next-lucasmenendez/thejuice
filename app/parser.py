@@ -81,7 +81,8 @@ class Parser:
 					hits.append(hit)
 					results.append({
 						'datetime': date,
-						'date': datetime.strftime(date, format),
+						'date': datetime.strftime(date, format["rgx"]),
+						'format': format,
 						'content': hit
 					})
 
@@ -92,10 +93,11 @@ class Parser:
 				try:
 					fulldate	= dates[0]["datetime"]
 					format 		= dates[0]["format"]
-					date		= datetime.strftime(fulldate, format)
+					date		= datetime.strftime(fulldate, format["rgx"])
 					first		= {
 						'datetime': fulldate,
 						'date': date,
+						'format': format,
 						'content': HITS_TEXT[self.juicer.lang]["start"].format(name=self.juicer.title, date=date)
 					}
 					hits.append(first)
@@ -106,10 +108,11 @@ class Parser:
 			if hits[len(hits) - 1]["datetime"] < dates[1]["datetime"]:
 				fulldate	= dates[1]["datetime"]
 				format		= dates[1]["format"]
-				date		= datetime.strftime(fulldate, format)
+				date		= datetime.strftime(fulldate, format["rgx"])
 				hits.append({
 					'datetime': fulldate,
 					'date': date,
+					'format': format,
 					'content': HITS_TEXT[self.juicer.lang]["end"].format(name=self.juicer.title, date=date)
 				})
 

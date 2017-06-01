@@ -48,10 +48,31 @@ class Datefinder:
 	def parse_date(self, raw_date):
 		date	= None
 		format	= ""
-		formats	= ["%d de %B de %Y", "%d %B %Y", "%B de %Y", "%B %Y", "%Y"]
+		formats	= [
+			{
+				"rgx": "%d de %B de %Y",
+				"flag": 111
+			},
+			{
+				"rgx": "%d %B %Y",
+				"flag": 111,
+			},
+			{
+				"rgx": "%B de %Y",
+				"flag": 11
+			},
+			{
+				"rgx": "%B %Y",
+				"flag": 11
+			},
+			{
+				"rgx": "%Y",
+				"flag": 1
+			}
+		]
 		for f in formats:
 			try:
-				date = datetime.strptime(raw_date, f)
+				date = datetime.strptime(raw_date, f["rgx"])
 				format = f
 				break
 			except:

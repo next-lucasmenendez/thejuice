@@ -1,6 +1,63 @@
-<div class="header">
-	<a class="main-logo" href="/">
-		<img src="/static/img/logo.svg"/>
-	</a>
+<div class="header" ng-controller="headerCtrl">
+	<div class="wrapper">
+		<a class="main-logo" href="/">
+			<img src="/static/img/logo-w.svg"/>
+		</a>
+
+		<div class="usermenu" ng-init="{toggleMenu: false}">
+			<div class="picture"><img src="{{ picture }}"/></div>
+			<span class="username">{{ name }} :)</span>
+			<span class="toggleMenu" ng-click="toggleMenu = !toggleMenu">
+				<i class="fa fa-angle-down"></i>
+			</span>
+			<ul class="menu" ng-show="toggleMenu">
+				<li><a href="#"><i class="fa fa-sign-out"></i> Logout</a></li>
+			</ul>
+		</div>
+	</div>
 </div>
-<div ui-view></div>
+
+<div class="wrapper">
+	<div class="steps ng-hide" ng-controller="routeCtrl" ng-show="route">
+		<span class="go-button go-back ng-hide" ng-show="route.prev">
+			<a ui-state="route.prev.uri" ui-state-params="route.prev.params" ng-hide="route.prev.type == 'button'">
+				<i class="fa fa-angle-left"></i>
+				{{ route.prev.name }}
+			</a>
+
+			<a ng-click="route.prev.func()" ui-state-params="route.prev.params" ng-hide="route.prev.type == 'link'">
+				<i class="fa fa-angle-left"></i>
+				{{ route.prev.name }}
+			</a>
+		</span>
+
+		<ul class="bubbles" ng-class="{single: route.current.alias == 'search'}">
+			<li class="bubble" ng-class="{'active': route.current.alias == 'search'}">
+				<span class="number">1</span>
+				<span class="title">Search</span>
+			</li>
+			<li class="bubble" ng-class="{'active': route.current.alias == 'review'}">
+				<span class="number">2</span>
+				<span class="title">Review</span>
+			</li>
+			<li class="bubble" ng-class="{'active': route.current.alias == 'design'}">
+				<span class="number">3</span>
+				<span class="title">Design</span>
+			</li>
+		</ul>
+
+		<span class="go-button go-forward ng-hide" ng-show="route.next">
+			<a ui-state="route.next.uri" ui-state-params="route.next.params" ng-hide="route.next.type == 'button'">
+				{{ route.next.name }}
+				<i class="fa fa-angle-right"></i>
+			</a>
+
+			<a ng-click="route.next.func()" ui-state-params="route.next.params" ng-hide="route.next.type == 'link'">
+				{{ route.next.name }}
+				<i class="fa fa-angle-right"></i>
+			</a>
+		</span>
+	</div>
+
+	<div ui-view></div>
+</div>

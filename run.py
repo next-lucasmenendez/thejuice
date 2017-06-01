@@ -72,9 +72,9 @@ def search():
 	return {"success": False, "message": "Something was wrong..."}, 500
 
 
-@app.route("/preview", methods=["POST"])
+@app.route("/review", methods=["POST"])
 @as_json
-def preview():
+def review():
 	query = request.form.get("query")
 	lang = request.form.get("lang") or "en"
 
@@ -102,23 +102,19 @@ def preview():
 @app.route('/download', methods=["POST"])
 @as_json
 def download():
-	formats	= ["infographic"]
 	data	= request.get_json()
 
-	format_req	= data.get('format') or False
+	design		= data.get('design') or False
 	character	= data.get('character') or False
 
-	if character and format_req:
-		if format_req in formats:
-			character["fmt"] = format_req
-			render 	= Render(**character)
-			url 	= render.save()
+	if character and design:
+		character["design"] = design
+		render 	= Render(**character)
+		url 	= render.save()
+		if url:
+			return {"success": True, "result": url}, 200
 
-			if url:
-				return {"success": True, "result": url}, 200
-
-			return {"success": False, "message": "Something was wrong creating output."}, 500
-		return {"success": False, "message": "This format is not ready yet. But we're working on it!"}, 418
+		return {"success": False, "message": "Something was wrong creating output."}, 500
 	return {"success": False, "message": "Bad request. More data required."}, 400
 
 

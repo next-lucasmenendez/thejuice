@@ -4,20 +4,21 @@ import os
 import sys
 import base64
 
+from datetime import datetime
 from jinja2 import Environment
 from jinja2 import FileSystemLoader
 
 URL="/output/{name}"
 OUTPUT="{base}/templates/output/{name}.html"
-TEMPLATES="{base}/templates/formats"
+TEMPLATES="{base}/templates/designs"
 
 
 class Render:
-	def __init__(self, title, images, hits, fmt, pic, limits):
+	def __init__(self, title, images, hits, design, pic, limits):
 		self.title	= title
 		self.images	= images
 		self.hits	= hits
-		self.fmt	= fmt
+		self.design	= design
 		self.pic	= pic
 		self.limits = limits
 
@@ -27,7 +28,7 @@ class Render:
 		loader		= FileSystemLoader(templates)
 		environment = Environment(loader=loader)
 
-		filename	= "{format}.html".format(format=self.fmt)
+		filename	= "{design}.html".format(design=self.design)
 		template 	= environment.get_template(filename)
 
 

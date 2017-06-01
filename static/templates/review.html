@@ -1,0 +1,58 @@
+<div class="pills">
+	<form ng-submit="download()">
+		<input type="hidden" name="query" value="{{title}}">
+
+		<div class="wrapper-with-padding">
+			<div class="preview">
+				<!-- Header -->
+				<div class="preview-header">
+					<div class="img ng-hide" ng-show="results.picture" style="background-image: url('{{ results.picture }}')"></div>
+					<div class="info" ng-class="{'with-image': results.picture}">
+						<h1>Review the information about <b>{{ results.title }}</b></h1>
+						<p>We include every single event, but you might find some of them not really relevant. Feel free to edit or remove any of them, or to create any new one :).</p>
+					</div>
+				</div>
+
+				<!-- Preview -->
+				<table class="preview-table">
+					<tbody>
+						<tr ng-repeat="hit in results.hits | orderBy: sortByDate" ng-hide="hit.content == ''">
+							<td class="date">{{ hit.date }}</td>
+							<td class="content">{{ hit.content }}</td>
+							<td class="media">
+								<img src="{{ hit.icon || hit.image }}"/>
+							</td>
+							<td class="actions">
+								<span class="action" ng-click="edit(hit)">
+									<i class="fa fa-pencil"></i>
+									Edit
+								</span>
+								<span class="action" ng-click="delete(hit)">
+									<i class="fa fa-trash-o"></i>
+									Delete
+								</span>
+							</td>
+						</tr>
+						<tr>
+							<td ng-click="edit()"><i class="fa fa-plus"></i> Add new</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</form>
+
+	<!-- Edit Hit -->
+	<div class="edit-popup" ng-class="{hidden: !showEdit}">
+		<form class="edit-form" ng-submit="save()">
+			<div class="date">
+				<input type="number" min="0" max="31" ng-model="current.datetime.day" placeholder="Day">
+				<input type="number" min="0" max="12" ng-model="current.datetime.month" placeholder="Month">
+				<input type="number" ng-model="current.datetime.year" placeholder="Year" required>
+			</div>
+			<textarea ng-model="current.content" placeholder="Hit content"></textarea>
+			<button type="submit" class="save">Save</button>
+			<button ng-click="closeEdit()" class="cancel">Cancel</button>
+		</form>
+	</div>
+</div>
