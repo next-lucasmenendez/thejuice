@@ -2,7 +2,18 @@
 	<p class="disclaimer">Search any historical character you want.<br/>We have them all!</p>
 
 	<form class="search-form" ng-submit="submitSearchForm()">
-		<div class="languages">
+
+		<input type="text" class="query" name="query" ng-model="query" placeholder="Search a historical character..." autocomplete="off"/>
+		<button class="button" type="submit">
+			<span class="icon">
+				<i class="fa fa-search"></i>
+			</span>
+			Search
+		</button>
+
+		<autosuggestions query="query" lang="lang" callback="submitSearchForm(name)"></autosuggestions>
+
+		<div class="languages" ng-hide="query">
 			<input type="radio" id="langen" name="lang" ng-model="lang" value="en" ng-checked="true">
 			<label for="langen">
 				<img src="/static/img/flags/en.png"/>
@@ -14,15 +25,5 @@
 				ES
 			</label>
 		</div>
-
-		<input type="text" class="query" name="query" ng-model="query" placeholder="Search a historical character..." autocomplete="off"/>
-		<button class="button" type="submit">
-			<span class="icon">
-				<i class="fa fa-search"></i>
-			</span>
-			Search
-		</button>
-
-		<autosuggestions query="query" lang="lang" callback="submitSearchForm(name)"></autosuggestions>
 	</form>
 </div>

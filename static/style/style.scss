@@ -466,15 +466,14 @@ body {
 
 		.results {
 			position: absolute;
-			top: 100px; left: 0;
-			display: inline-block;
+			display: block;
+			margin-top: -1px;
 			vertical-align: top;
 			width: 67%;
 			height: auto;
 			max-height: 150px;
 			overflow-y: auto;
-			border: 1px solid #ccc;
-			border-top: none;
+			border: 1px solid #dddddd;
 			z-index: 1;
 
 			.item {
