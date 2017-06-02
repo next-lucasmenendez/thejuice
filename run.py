@@ -6,6 +6,7 @@ from datetime import datetime
 
 from flask import Flask
 from flask import request
+from flask import redirect
 from flask import make_response
 from flask import render_template
 
@@ -119,9 +120,13 @@ def download():
 @app.route('/output/<string:query>')
 def output(query):
 	if query:
-		template = "output/{}.html".format(query)
-		return render_template(template)
-	return render_template('error.html')
+		try:
+			template = "output/{}.html".format(query)
+			return render_template(template)
+		except Exception as e:
+			print("Template not found")
+			pass
+	return redirect('/')
 
 
 if __name__ == "__main__":
