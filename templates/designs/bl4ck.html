@@ -49,7 +49,11 @@
 		</script>
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	</head>
-	<body {% if picture %}style="background-image: url('{{ picture }}')"{% endif %}>
+	<body>
+		{% if picture %}
+			<div class="background" style="background-image: url('{{ picture }}')"></div>
+		{% endif %}
+
 		<div class="wrapper">
 			<div class="addthis_inline_share_toolbox"></div>
 		</div>
