@@ -129,5 +129,13 @@ def output(query):
 	return redirect('/')
 
 
+@app.route('/question', methods=["GET"])
+def question():
+	query = request.form.get('query')
+	lang = request.form.get('lang') or "en"
+
+
+
+
 if __name__ == "__main__":
 	app.run(host="0.0.0.0", debug=True)
