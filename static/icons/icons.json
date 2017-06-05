@@ -89,7 +89,7 @@
 	},
 	{
 		"icon": "users.svg",
-		"tags": ["friends", ""]
+		"tags": ["friends"]
 	},
 
 	{
@@ -127,5 +127,1045 @@
 	{
 		"icon": "gift.svg",
 		"tags": ["gift", "present"]
+	},
+	{
+		"icon": "001-mauritius.svg",
+		"tags": ["mauritius"]
+	},
+	{
+		"icon": "003-austria.svg",
+		"tags": ["austria"]
+	},
+	{
+		"icon": "004-oman.svg",
+		"tags": ["oman"]
+	},
+	{
+		"icon": "005-ethiopia.svg",
+		"tags": ["ethiopia"]
+	},
+	{
+		"icon": "006-tanzania.svg",
+		"tags": ["tanzania"]
+	},
+	{
+		"icon": "007-nicaragua.svg",
+		"tags": ["nicaragua"]
+	},
+	{
+		"icon": "008-estonia.svg",
+		"tags": ["estonia"]
+	},
+	{
+		"icon": "009-uganda.svg",
+		"tags": ["uganda"]
+	},
+	{
+		"icon": "010-slovenia.svg",
+		"tags": ["slovenia"]
+	},
+	{
+		"icon": "011-zimbabwe.svg",
+		"tags": ["zimbabwe"]
+	},
+	{
+		"icon": "012-sao-tome-and-prince.svg",
+		"tags": ["sao tome and prince"]
+	},
+	{
+		"icon": "013-italy.svg",
+		"tags": ["italy"]
+	},
+	{
+		"icon": "014-wales.svg",
+		"tags": ["wales"]
+	},
+	{
+		"icon": "015-el-salvador.svg",
+		"tags": ["el salvador"]
+	},
+	{
+		"icon": "016-nepal.svg",
+		"tags": ["nepal"]
+	},
+	{
+		"icon": "017-christmas-island.svg",
+		"tags": ["christmas island"]
+	},
+	{
+		"icon": "018-lebanon.svg",
+		"tags": ["lebanon"]
+	},
+	{
+		"icon": "019-ceuta.svg",
+		"tags": ["ceuta"]
+	},
+	{
+		"icon": "020-iraq.svg",
+		"tags": ["iraq"]
+	},
+	{
+		"icon": "021-cook-islands.svg",
+		"tags": ["cook islands"]
+	},
+	{
+		"icon": "022-syria.svg",
+		"tags": ["syria"]
+	},
+	{
+		"icon": "023-cocos-island.svg",
+		"tags": ["cocos island"]
+	},
+	{
+		"icon": "024-honduras.svg",
+		"tags": ["honduras"]
+	},
+	{
+		"icon": "025-anguilla.svg",
+		"tags": ["anguilla"]
+	},
+	{
+		"icon": "026-qatar.svg",
+		"tags": ["qatar"]
+	},
+	{
+		"icon": "027-american-samoa.svg",
+		"tags": ["american samoa"]
+	},
+	{
+		"icon": "028-puerto-rico.svg",
+		"tags": ["puerto rico"]
+	},
+	{
+		"icon": "029-comoros.svg",
+		"tags": ["comoros"]
+	},
+	{
+		"icon": "030-north-korea.svg",
+		"tags": ["north korea"]
+	},
+	{
+		"icon": "031-corsica.svg",
+		"tags": ["corsica"]
+	},
+	{
+		"icon": "032-zambia.svg",
+		"tags": ["zambia"]
+	},
+	{
+		"icon": "033-saint-kitts-and-nevis.svg",
+		"tags": ["saint kitts and nevis"]
+	},
+	{
+		"icon": "034-china.svg",
+		"tags": ["china"]
+	},
+	{
+		"icon": "035-luxembourg.svg",
+		"tags": ["luxembourg"]
+	},
+	{
+		"icon": "036-central-african-republic.svg",
+		"tags": ["central african republic"]
+	},
+	{
+		"icon": "037-jamaica.svg",
+		"tags": ["jamaica"]
+	},
+	{
+		"icon": "038-cape-verde.svg",
+		"tags": ["cape verde"]
+	},
+	{
+		"icon": "039-monaco.svg",
+		"tags": ["monaco"]
+	},
+	{
+		"icon": "040-bhutan.svg",
+		"tags": ["bhutan"]
+	},
+	{
+		"icon": "041-paraguay.svg",
+		"tags": ["paraguay"]
+	},
+	{
+		"icon": "042-aruba.svg",
+		"tags": ["aruba"]
+	},
+	{
+		"icon": "043-montserrat.svg",
+		"tags": ["montserrat"]
+	},
+	{
+		"icon": "044-latvia.svg",
+		"tags": ["latvia"]
+	},
+	{
+		"icon": "045-andorra.svg",
+		"tags": ["andorra"]
+	},
+	{
+		"icon": "046-micronesia.svg",
+		"tags": ["micronesia"]
+	},
+	{
+		"icon": "047-dominican-republic.svg",
+		"tags": ["dominican republic"]
+	},
+	{
+		"icon": "048-abkhazia.svg",
+		"tags": ["abkhazia"]
+	},
+	{
+		"icon": "049-tunisia.svg",
+		"tags": ["tunisia"]
+	},
+	{
+		"icon": "050-mauritania.svg",
+		"tags": ["mauritania"]
+	},
+	{
+		"icon": "051-cayman-islands.svg",
+		"tags": ["cayman islands"]
+	},
+	{
+		"icon": "052-kosovo.svg",
+		"tags": ["kosovo"]
+	},
+	{
+		"icon": "053-ghana.svg",
+		"tags": ["ghana"]
+	},
+	{
+		"icon": "054-canary-islands.svg",
+		"tags": ["canary islands"]
+	},
+	{
+		"icon": "055-scotland.svg",
+		"tags": ["scotland"]
+	},
+	{
+		"icon": "056-guinea-bissau.svg",
+		"tags": ["guinea bissau"]
+	},
+	{
+		"icon": "057-burundi.svg",
+		"tags": ["burundi"]
+	},
+	{
+		"icon": "058-myanmar.svg",
+		"tags": ["myanmar"]
+	},
+	{
+		"icon": "059-gabon.svg",
+		"tags": ["gabon"]
+	},
+	{
+		"icon": "060-benin.svg",
+		"tags": ["benin"]
+	},
+	{
+		"icon": "061-saba-island.svg",
+		"tags": ["saba island"]
+	},
+	{
+		"icon": "062-namibia.svg",
+		"tags": ["namibia"]
+	},
+	{
+		"icon": "063-japan.svg",
+		"tags": ["japan"]
+	},
+	{
+		"icon": "064-lithuania.svg",
+		"tags": ["lithuania"]
+	},
+	{
+		"icon": "065-eritrea.svg",
+		"tags": ["eritrea"]
+	},
+	{
+		"icon": "066-chad.svg",
+		"tags": ["chad"]
+	},
+	{
+		"icon": "067-kenya.svg",
+		"tags": ["kenya"]
+	},
+	{
+		"icon": "068-djibouti.svg",
+		"tags": ["djibouti"]
+	},
+	{
+		"icon": "069-british-indian-ocean-territory.svg",
+		"tags": ["british indian ocean territory"]
+	},
+	{
+		"icon": "070-tuvalu-1.svg",
+		"tags": ["tuvalu"]
+	},
+	{
+		"icon": "071-serbia.svg",
+		"tags": ["serbia"]
+	},
+	{
+		"icon": "072-bonaire.svg",
+		"tags": ["bonaire"]
+	},
+	{
+		"icon": "073-togo.svg",
+		"tags": ["togo"]
+	},
+	{
+		"icon": "074-kazakhstan.svg",
+		"tags": ["kazakhstan"]
+	},
+	{
+		"icon": "075-antigua-and-barbuda.svg",
+		"tags": ["antiqua and barbuda"]
+	},
+	{
+		"icon": "076-suriname.svg",
+		"tags": ["suriname"]
+	},
+	{
+		"icon": "077-jordan.svg",
+		"tags": ["jordan"]
+	},
+	{
+		"icon": "078-belize.svg",
+		"tags": ["belize"]
+	},
+	{
+		"icon": "079-st-barts.svg",
+		"tags": ["st barts"]
+	},
+	{
+		"icon": "080-iceland.svg",
+		"tags": ["iceland"]
+	},
+	{
+		"icon": "081-bermuda.svg",
+		"tags": ["bermuda"]
+	},
+	{
+		"icon": "082-united-nations.svg",
+		"tags": ["united nations"]
+	},
+	{
+		"icon": "083-somalia.svg",
+		"tags": ["somalia"]
+	},
+	{
+		"icon": "084-barbados.svg",
+		"tags": ["barbados"]
+	},
+	{
+		"icon": "085-solomon-islands.svg",
+		"tags": ["solomon islands"]
+	},
+	{
+		"icon": "086-nigeria.svg",
+		"tags": ["nigeria"]
+	},
+	{
+		"icon": "087-aland-islands.svg",
+		"tags": ["aland islands"]
+	},
+	{
+		"icon": "088-uruguay.svg",
+		"tags": ["uruguay"]
+	},
+	{
+		"icon": "089-sint-maarten.svg",
+		"tags": ["sint maarten"]
+	},
+	{
+		"icon": "090-burkina-faso.svg",
+		"tags": ["burkina faso"]
+	},
+	{
+		"icon": "091-slovakia.svg",
+		"tags": ["slovakia"]
+	},
+	{
+		"icon": "092-sierra-leone.svg",
+		"tags": ["sierra leone"]
+	},
+	{
+		"icon": "093-basque-country.svg",
+		"tags": ["basque country"]
+	},
+	{
+		"icon": "094-south-korea.svg",
+		"tags": ["south korea"]
+	},
+	{
+		"icon": "095-pitcairn-islands.svg",
+		"tags": ["pitcairn slands"]
+	},
+	{
+		"icon": "096-mozambique.svg",
+		"tags": ["mozambique"]
+	},
+	{
+		"icon": "097-san-marino.svg",
+		"tags": ["san marino"]
+	},
+	{
+		"icon": "098-guatemala.svg",
+		"tags": ["guatemala"]
+	},
+	{
+		"icon": "099-albania.svg",
+		"tags": ["albania"]
+	},
+	{
+		"icon": "100-pakistan.svg",
+		"tags": ["pakistan"]
+	},
+	{
+		"icon": "101-northern-cyprus.svg",
+		"tags": ["northern cyprus"]
+	},
+	{
+		"icon": "102-balearic-islands.svg",
+		"tags": ["balearic islands"]
+	},
+	{
+		"icon": "103-marshall-island.svg",
+		"tags": ["marshall island"]
+	},
+	{
+		"icon": "104-ecuador.svg",
+		"tags": ["ecuador"]
+	},
+	{
+		"icon": "105-cameroon.svg",
+		"tags": ["cameroon"]
+	},
+	{
+		"icon": "106-panama.svg",
+		"tags": ["panama"]
+	},
+	{
+		"icon": "107-kwait.svg",
+		"tags": ["kwait"]
+	},
+	{
+		"icon": "108-armenia.svg",
+		"tags": ["armenia"]
+	},
+	{
+		"icon": "109-romania.svg",
+		"tags": ["romania"]
+	},
+	{
+		"icon": "110-guinea.svg",
+		"tags": ["guinea"]
+	},
+	{
+		"icon": "111-afghanistan.svg",
+		"tags": ["afghanistan"]
+	},
+	{
+		"icon": "112-laos.svg",
+		"tags": ["laos"]
+	},
+	{
+		"icon": "113-greenland.svg",
+		"tags": ["greenland"]
+	},
+	{
+		"icon": "114-british-virgin-islands.svg",
+		"tags": ["british virgin islands"]
+	},
+	{
+		"icon": "115-hungary.svg",
+		"tags": ["hungary"]
+	},
+	{
+		"icon": "116-curacao.svg",
+		"tags": ["curacao"]
+	},
+	{
+		"icon": "117-angola.svg",
+		"tags": ["angola"]
+	},
+	{
+		"icon": "118-malasya.svg",
+		"tags": ["malasya"]
+	},
+	{
+		"icon": "119-brunei.svg",
+		"tags": ["brunei"]
+	},
+	{
+		"icon": "120-bahamas.svg",
+		"tags": ["bahamas"]
+	},
+	{
+		"icon": "121-new-zealand.svg",
+		"tags": ["new zealand"]
+	},
+	{
+		"icon": "123-british-columbia.svg",
+		"tags": ["british columbia"]
+	},
+	{
+		"icon": "124-vatican-city.svg",
+		"tags": ["vatican city"]
+	},
+	{
+		"icon": "125-finland.svg",
+		"tags": ["finland"]
+	},
+	{
+		"icon": "126-botswana.svg",
+		"tags": ["botswana"]
+	},
+	{
+		"icon": "127-sri-lanka.svg",
+		"tags": ["sri lanka"]
+	},
+	{
+		"icon": "128-spain.svg",
+		"tags": ["spain"]
+	},
+	{
+		"icon": "129-ossetia.svg",
+		"tags": ["ossetia"]
+	},
+	{
+		"icon": "130-sicily.svg",
+		"tags": ["sicily"]
+	},
+	{
+		"icon": "131-chile.svg",
+		"tags": ["chile"]
+	},
+	{
+		"icon": "132-bosnia-and-herzegovina.svg",
+		"tags": ["bosnia and herzegovina"]
+	},
+	{
+		"icon": "133-saudi-arabia.svg",
+		"tags": ["saudi arabia"]
+	},
+	{
+		"icon": "134-liechtenstein.svg",
+		"tags": ["liechtenstein"]
+	},
+	{
+		"icon": "135-belarus.svg",
+		"tags": ["belarus"]
+	},
+	{
+		"icon": "136-iran.svg",
+		"tags": ["iran"]
+	},
+	{
+		"icon": "137-fiji.svg",
+		"tags": ["fiji"]
+	},
+	{
+		"icon": "138-bahrain.svg",
+		"tags": ["bahrain"]
+	},
+	{
+		"icon": "139-venezuela.svg",
+		"tags": ["venezuela"]
+	},
+	{
+		"icon": "140-east-timor.svg",
+		"tags": ["east timor"]
+	},
+	{
+		"icon": "141-azerbaijan.svg",
+		"tags": ["azerbaijan"]
+	},
+	{
+		"icon": "142-tibet.svg",
+		"tags": ["tibet"]
+	},
+	{
+		"icon": "143-norway.svg",
+		"tags": ["norway"]
+	},
+	{
+		"icon": "144-algeria.svg",
+		"tags": ["algeria"]
+	},
+	{
+		"icon": "145-ukraine.svg",
+		"tags": ["ukraine"]
+	},
+	{
+		"icon": "146-gambia.svg",
+		"tags": ["gambia"]
+	},
+	{
+		"icon": "147-bangladesh.svg",
+		"tags": ["bangladesh"]
+	},
+	{
+		"icon": "148-madeira.svg",
+		"tags": ["madeira"]
+	},
+	{
+		"icon": "149-czech-republic.svg",
+		"tags": ["czech republic"]
+	},
+	{
+		"icon": "150-bolivia.svg",
+		"tags": ["bolivia"]
+	},
+	{
+		"icon": "151-united-arab-emirates.svg",
+		"tags": ["united arab emirates"]
+	},
+	{
+		"icon": "152-kyrgyzstan.svg",
+		"tags": ["kyrgyzstan"]
+	},
+	{
+		"icon": "153-cuba.svg",
+		"tags": ["cuba"]
+	},
+	{
+		"icon": "154-swaziland.svg",
+		"tags": ["swaziland"]
+	},
+	{
+		"icon": "155-israel.svg",
+		"tags": ["israel"]
+	},
+	{
+		"icon": "156-costa-rica.svg",
+		"tags": ["costa rica"]
+	},
+	{
+		"icon": "157-republic-of-the-congo.svg",
+		"tags": ["republic of the congo"]
+	},
+	{
+		"icon": "158-egypt.svg",
+		"tags": ["egypt"]
+	},
+	{
+		"icon": "159-cambodia.svg",
+		"tags": ["cambodia"]
+	},
+	{
+		"icon": "160-northern-marianas-islands.svg",
+		"tags": ["marianas islands"]
+	},
+	{
+		"icon": "161-ivory-coast.svg",
+		"tags": ["ivory coast"]
+	},
+	{
+		"icon": "162-germany.svg",
+		"tags": ["germany"]
+	},
+	{
+		"icon": "163-papua-new-guinea.svg",
+		"tags": ["new guinea"]
+	},
+	{
+		"icon": "164-croatia.svg",
+		"tags": ["croatia"]
+	},
+	{
+		"icon": "165-belgium.svg",
+		"tags": ["belgium"]
+	},
+	{
+		"icon": "166-morocco.svg",
+		"tags": ["morocco"]
+	},
+	{
+		"icon": "167-macao.svg",
+		"tags": ["macao"]
+	},
+	{
+		"icon": "168-bulgaria.svg",
+		"tags": ["bulgaria"]
+	},
+	{
+		"icon": "169-liberia.svg",
+		"tags": ["liberia"]
+	},
+	{
+		"icon": "170-greece.svg",
+		"tags": ["greece"]
+	},
+	{
+		"icon": "171-galapagos-islands.svg",
+		"tags": ["galapagos islands"]
+	},
+	{
+		"icon": "172-st-lucia.svg",
+		"tags": ["st lucia"]
+	},
+	{
+		"icon": "173-mali.svg",
+		"tags": ["mali"]
+	},
+	{
+		"icon": "174-denmark.svg",
+		"tags": ["denmark"]
+	},
+	{
+		"icon": "175-rapa-nui.svg",
+		"tags": ["rapa nui"]
+	},
+	{
+		"icon": "176-lesotho.svg",
+		"tags": ["lesotho"]
+	},
+	{
+		"icon": "177-colombia.svg",
+		"tags": ["colombia"]
+	},
+	{
+		"icon": "178-palau.svg",
+		"tags": ["palau"]
+	},
+	{
+		"icon": "179-ireland.svg",
+		"tags": ["ireland"]
+	},
+	{
+		"icon": "180-french-polynesia.svg",
+		"tags": ["french polynesia"]
+	},
+	{
+		"icon": "181-trinidad-and-tobago.svg",
+		"tags": ["trinidad and tobago"]
+	},
+	{
+		"icon": "182-niue.svg",
+		"tags": ["niue"]
+	},
+	{
+		"icon": "183-hong-kong.svg",
+		"tags": ["hong kong"]
+	},
+	{
+		"icon": "184-sweden.svg",
+		"tags": ["sweden"]
+	},
+	{
+		"icon": "185-haiti.svg",
+		"tags": ["haiti"]
+	},
+	{
+		"icon": "186-dominica.svg",
+		"tags": ["dominica"]
+	},
+	{
+		"icon": "187-vanuatu.svg",
+		"tags": ["vanuatu"]
+	},
+	{
+		"icon": "188-peru.svg",
+		"tags": ["peru"]
+	},
+	{
+		"icon": "189-equatorial-guinea.svg",
+		"tags": ["equatorial guinea"]
+	},
+	{
+		"icon": "190-uzbekistn.svg",
+		"tags": ["uzbekistn"]
+	},
+	{
+		"icon": "191-tonga.svg",
+		"tags": ["tonga"]
+	},
+	{
+		"icon": "192-philippines.svg",
+		"tags": ["philippines"]
+	},
+	{
+		"icon": "193-norfolk-island.svg",
+		"tags": ["norfolk island"]
+	},
+	{
+		"icon": "194-malta.svg",
+		"tags": ["malta"]
+	},
+	{
+		"icon": "195-france.svg",
+		"tags": ["france"]
+	},
+	{
+		"icon": "196-tajikistan.svg",
+		"tags": ["tajikistan"]
+	},
+	{
+		"icon": "197-melilla.svg",
+		"tags": ["melilla"]
+	},
+	{
+		"icon": "198-argentina.svg",
+		"tags": ["argentina"]
+	},
+	{
+		"icon": "199-sudan.svg",
+		"tags": ["sudan"]
+	},
+	{
+		"icon": "200-south-africa.svg",
+		"tags": ["south africa"]
+	},
+	{
+		"icon": "201-martinique.svg",
+		"tags": ["martinique"]
+	},
+	{
+		"icon": "202-taiwan.svg",
+		"tags": ["taiwan"]
+	},
+	{
+		"icon": "203-sahrawi-arab-democratic-republic.svg",
+		"tags": ["sahrawi arab democratic republic"]
+	},
+	{
+		"icon": "204-guernsey.svg",
+		"tags": ["guernsey"]
+	},
+	{
+		"icon": "205-switzerland.svg",
+		"tags": ["switzerland"]
+	},
+	{
+		"icon": "206-rwanda.svg",
+		"tags": ["rwanda"]
+	},
+	{
+		"icon": "207-guam.svg",
+		"tags": ["guam"]
+	},
+	{
+		"icon": "208-palestine.svg",
+		"tags": ["palestine"]
+	},
+	{
+		"icon": "209-indonesia.svg",
+		"tags": ["indonesia"]
+	},
+	{
+		"icon": "210-grenada.svg",
+		"tags": ["grenada"]
+	},
+	{
+		"icon": "211-poland.svg",
+		"tags": ["poland"]
+	},
+	{
+		"icon": "212-moldova.svg",
+		"tags": ["moldova"]
+	},
+	{
+		"icon": "213-gibraltar.svg",
+		"tags": ["gibraltar"]
+	},
+	{
+		"icon": "214-malawi.svg",
+		"tags": ["malawi"]
+	},
+	{
+		"icon": "215-falkland-islands.svg",
+		"tags": ["islands"]
+	},
+	{
+		"icon": "216-england.svg",
+		"tags": ["england"]
+	},
+	{
+		"icon": "217-virgin-islands.svg",
+		"tags": ["virgin islands"]
+	},
+	{
+		"icon": "218-turkey.svg",
+		"tags": ["turkey"]
+	},
+	{
+		"icon": "219-isle-of-man.svg",
+		"tags": ["isle of man"]
+	},
+	{
+		"icon": "220-vietnam.svg",
+		"tags": ["vietnam"]
+	},
+	{
+		"icon": "221-tuvalu.svg",
+		"tags": ["tuvalu"]
+	},
+	{
+		"icon": "222-niger.svg",
+		"tags": ["niger"]
+	},
+	{
+		"icon": "223-turks-and-caicos.svg",
+		"tags": ["turks and caicos"]
+	},
+	{
+		"icon": "224-portugal.svg",
+		"tags": ["portugal"]
+	},
+	{
+		"icon": "225-maldives.svg",
+		"tags": ["maldives"]
+	},
+	{
+		"icon": "226-united-states.svg",
+		"tags": ["united states"]
+	},
+	{
+		"icon": "227-senegal.svg",
+		"tags": ["senegal"]
+	},
+	{
+		"icon": "228-nauru.svg",
+		"tags": ["nauru"]
+	},
+	{
+		"icon": "229-turkmenistan.svg",
+		"tags": ["turkmenistan"]
+	},
+	{
+		"icon": "230-singapore.svg",
+		"tags": ["singapore"]
+	},
+	{
+		"icon": "231-libya.svg",
+		"tags": ["libya"]
+	},
+	{
+		"icon": "232-yemen.svg",
+		"tags": ["yemen"]
+	},
+	{
+		"icon": "233-transnistria.svg",
+		"tags": ["transnistria"]
+	},
+	{
+		"icon": "234-australia.svg",
+		"tags": ["australia"]
+	},
+	{
+		"icon": "235-tokelau.svg",
+		"tags": ["tokelau"]
+	},
+	{
+		"icon": "236-republic-of-macedonia.svg",
+		"tags": ["republic of macedonia"]
+	},
+	{
+		"icon": "237-netherlands.svg",
+		"tags": ["netherlands"]
+	},
+	{
+		"icon": "238-thailand.svg",
+		"tags": ["thailand"]
+	},
+	{
+		"icon": "239-montenegro.svg",
+		"tags": ["montenegro"]
+	},
+	{
+		"icon": "240-azores-islands.svg",
+		"tags": ["azores islands"]
+	},
+	{
+		"icon": "241-st-vincent-and-the-grenadines.svg",
+		"tags": ["vincent and the grenadines"]
+	},
+	{
+		"icon": "242-madagascar.svg",
+		"tags": ["madagascar"]
+	},
+	{
+		"icon": "243-canada.svg",
+		"tags": ["canada"]
+	},
+	{
+		"icon": "244-south-sudan.svg",
+		"tags": ["south sudan"]
+	},
+	{
+		"icon": "245-jersey.svg",
+		"tags": ["jersey"]
+	},
+	{
+		"icon": "246-india.svg",
+		"tags": ["india"]
+	},
+	{
+		"icon": "247-somaliland.svg",
+		"tags": ["somaliland"]
+	},
+	{
+		"icon": "248-russia.svg",
+		"tags": ["russia"]
+	},
+	{
+		"icon": "249-democratic-republic-of-congo.svg",
+		"tags": ["democratic republic of congo"]
+	},
+	{
+		"icon": "250-sint-eustatius.svg",
+		"tags": ["sint eustatius"]
+	},
+	{
+		"icon": "251-samoa.svg",
+		"tags": ["samoa"]
+	},
+	{
+		"icon": "252-mexico.svg",
+		"tags": ["mexico"]
+	},
+	{
+		"icon": "253-seychelles.svg",
+		"tags": ["seychelles"]
+	},
+	{
+		"icon": "254-nato.svg",
+		"tags": ["nato"]
+	},
+	{
+		"icon": "255-brazil.svg",
+		"tags": ["brazil"]
+	},
+	{
+		"icon": "256-georgia.svg",
+		"tags": ["georgia"]
+	},
+	{
+		"icon": "257-sardinia.svg",
+		"tags": ["sardinia"]
+	},
+	{
+		"icon": "258-mongolia.svg",
+		"tags": ["mongolia"]
+	},
+	{
+		"icon": "259-european-union.svg",
+		"tags": ["european union"]
+	},
+	{
+		"icon": "260-united-kingdom.svg",
+		"tags": ["united kingdom"]
+	},
+	{
+		"icon": "261-kiribati.svg",
+		"tags": ["kiribati"]
+	},
+	{
+		"icon": "262-hawaii.svg",
+		"tags": ["hawaii"]
 	}
 ]
