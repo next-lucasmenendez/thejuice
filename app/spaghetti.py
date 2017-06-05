@@ -1,4 +1,3 @@
-from __future__ import print_function
 import sys
 
 from nltk import UnigramTagger, BigramTagger
@@ -9,16 +8,19 @@ try:
 except ImportError:
     import pickle
 
+
 def load_tagger(filename):
     """ Function to load tagger. """
     with open(filename,'rb') as fin:
         tagger = pickle.load(fin)
     return tagger
 
+
 def save_tagger(filename, tagger):
     """ Function to save tagger. """
     with open(filename, 'wb') as fout:
         pickle.dump(tagger, fout)
+
 
 def train_tagger(corpus_name, corpus):
     """ Function to train tagger. """
@@ -30,7 +32,7 @@ def train_tagger(corpus_name, corpus):
     save_tagger('{}_bigram.tagger'.format(corpus_name), bi_tag)
     _msg = str("Tagger trained with {} using "
             "UnigramTagger and BigramTagger.").format(corpus_name)
-    print (_msg, file=sys.stderr)
+    print(_msg, file=sys.stderr)
 
 def unchunk(corpus): 
     """ Function to unchunk corpus. """
@@ -49,8 +51,8 @@ class CESSTagger():
             load_tagger('cess_unigram.tagger').tag(['estoy'])
             load_tagger('cess_bigram.tagger').tag(['estoy'])
         except IOError:
-            print ("*** First-time use of cess tagger ***", file=sys.stderr)
-            print ("Training tagger ...", file=sys.stderr)
+            print("*** First-time use of cess tagger ***", file=sys.stderr)
+            print("Training tagger ...", file=sys.stderr)
             # Load CESS corpus.
             cess_sents = cess.tagged_sents()
             train_tagger('cess',cess_sents)
@@ -67,7 +69,8 @@ class CESSTagger():
 def pos_tag(tokens, use_mwe=False):
     tagger = CESSTagger(use_mwe)
     return tagger.uni.tag(tokens)
-    
+
+
 def pos_tag_sents(sentences, use_mwe=False):
     tagger = CESSTagger(use_mwe)
     return tagger.uni.tag_sents(sentences)

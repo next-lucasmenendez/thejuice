@@ -12,6 +12,7 @@ import wikipedia
 import random
 from itertools import chain
 
+
 class Article:
     """Retrieves and analyzes wikipedia articles"""
 
@@ -23,7 +24,7 @@ class Article:
 
     def generate_trivia_sentences(self, lang):
         sentences = self.summary.sentences
-        if lang=='es':
+        if lang == 'es':
             # Trivial sentence tokenizer
             raw_sentences = sentences #self.page.summary.split('.')
             # Trivial word tokenizer
@@ -50,11 +51,11 @@ class Article:
     # Method to detect gender. Required for spanish nouns
     def detect_gender(self, word, lang):
         gender = 'm'
-        if (lang != 'es'):
+        if lang != 'es':
             return gender
 
         tag = sgt.pos_tag([word])[0][1]
-        if (tag and len(tag) > 2):
+        if tag and (len(tag) > 2):
             gender = tag[2]
         else:
             gender = 'x'
