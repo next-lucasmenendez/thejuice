@@ -85,7 +85,20 @@
 	},
 	{
 		"icon": "id-card-2.svg",
-		"tags": ["work"]
+		"tags": ["work", "worker", "workers"]
+	},
+	{
+		"icon": "users.svg",
+		"tags": ["friends", ""]
+	},
+
+	{
+		"icon": "hold.svg",
+		"tags": ["president", "law"]
+	},
+	{
+		"icon": "notebook-5.svg",
+		"tags": ["book", "publish"]
 	},
 	{
 		"icon": "users-1.svg",
