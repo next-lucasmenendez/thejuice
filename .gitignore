@@ -8,3 +8,4 @@ access.log
 .DS_Store
 __pycache__
 templates/output/
+*.tagger
