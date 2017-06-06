@@ -62,11 +62,24 @@ def search():
 	if query:
 
 		# Retrieve the trivia sentences
-		questions = []
 		article = Article(title=query, lang=lang)
-		questions = questions + article.generate_trivia_sentences(lang=lang)
+		trivia_sentences = article.generate_trivia_sentences(lang=lang)
 
-		return {"success": True, "results": questions}, 200
+		questions = dict(
+			title=trivia_sentences[0]['title'],
+			url=trivia_sentences[0]['url'],
+			questions=[]
+		)
+		for sentence in trivia_sentences:
+			question = dict(
+				question=sentence['question'],
+				correct_answer=sentence['answer'],
+				answers=sentence['similar_words'][:-1]
+			)
+			question['answers'].append(sentence['answer'])
+			questions['questions'].append(question)
+
+		return {"success": True, "result": questions}, 200
 
 	return {"success": False, "result": "No query provided."}, 400
 

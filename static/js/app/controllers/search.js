@@ -23,7 +23,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
         service.request('POST', '/question', {query: $scope.query, lang: $scope.lang}).then(
             function (response) {
                 if (response.success) {
-                    DataStorage.set($scope.query, response.results);
+                    DataStorage.set($scope.query, response.result);
                     DataStorage.set("lang", $scope.lang);
                     $state.go('base.review', {query: $scope.query});
                 } else {
