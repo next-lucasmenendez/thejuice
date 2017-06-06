@@ -53,7 +53,7 @@ def login():
 	return {"success": False, "result": "No name and/or email provided."}, 400
 
 
-@app.route('/search', methods=["POST"])
+@app.route('/question', methods=["POST"])
 @as_json
 def search():
 	query = request.form.get('query') or False

@@ -20,7 +20,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 	$scope.submitSearchForm = function() {
         $rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
         $window.ga('send', 'event', 'index', 'search', $scope.query);
-        service.request('POST', '/search', {query: $scope.query, lang: $scope.lang}).then(
+        service.request('POST', '/question', {query: $scope.query, lang: $scope.lang}).then(
             function (response) {
                 if (response.success) {
                     DataStorage.set($scope.query, response.results);
