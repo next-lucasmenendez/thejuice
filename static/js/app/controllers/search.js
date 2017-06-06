@@ -18,7 +18,6 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 	$scope.lang = "en";
 	$scope.submitSearchForm = function(query) {
 		if (query) {
-			$rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
 			$window.ga('send', 'event', 'index', 'search', query);
 			service.request('POST', '/review', {query: query, lang: $scope.lang}).then(
 				function (response) {
@@ -38,10 +37,6 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 				}
 			);
 
-		} else if ($scope.query) {
-			$window.ga('send', 'event', 'index', 'search', $scope.query);
-			DataStorage.set("lang", $scope.lang);
-			$state.go('base.review', {query: $scope.query, lang: $scope.lang});
 		}
 	}
 

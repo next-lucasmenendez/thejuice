@@ -13,6 +13,7 @@ from flask import render_template
 from app.juicer import Juicer
 from app.parser import Parser
 from app.render import Render
+from app.datasource import DataSource
 
 app	= Flask(__name__)
 
@@ -55,22 +56,32 @@ def login():
 	return {"success": False, "result": "No name and/or email provided."}, 400
 
 
-@app.route("/search", methods=["POST"])
+@app.route("/search/<string:query>", methods=["GET"])
 @as_json
-def search():
-	query	= request.form.get('query')
-	lang	= request.form.get('lang') or "en"
+def search(query):
 
+	lang = request.args.get('lang') or "en"
 	try:
-		juicer 	= Juicer(query=query, lang=lang)
-		results	= juicer.find()
-		status 	= 200 if results else 404
+		#juicer 	= Juicer(query=query, lang=lang)
+		#results	= juicer.find()
+
+		datasource	= DataSource(lang=lang)
+		results		= datasource.search(query=query)
+		status 		= 200 if results else 404
 
 		return {"success": True, "results": results}, status
 	except:
 		pass
 
 	return {"success": False, "message": "Something was wrong..."}, 500
+
+@app.route("/get/<int:pageid>", methods=["GET"])
+@as_json
+def get(pageid):
+	datasource = DataSource()
+	entity = datasource.get(pageid=pageid)
+
+	return {"success": True, "content": entity}, 420
 
 
 @app.route("/review", methods=["POST"])

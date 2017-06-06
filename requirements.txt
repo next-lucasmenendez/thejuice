@@ -8,3 +8,4 @@ six==1.10.0
 textblob==0.12.0
 xmltodict==0.11.0
 Unidecode==0.4.20
+SPARQLWrapper==1.8.0
