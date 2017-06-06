@@ -595,6 +595,8 @@ body {
       .pills .edit-popup .edit-form textarea {
         max-width: 100%;
         min-height: 100px; }
+      .pills .edit-popup .edit-form h3 {
+        font-size: medium; }
       .pills .edit-popup .edit-form .answers {
         margin-top: 2vh;
         border-top: 1px solid rgba(0, 0, 0, 0.4);
