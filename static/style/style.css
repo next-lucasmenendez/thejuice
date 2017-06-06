@@ -499,6 +499,14 @@ body {
             width: 15%; }
           .pills .preview .preview-table tr td.content {
             width: 50%; }
+            .pills .preview .preview-table tr td.content .answers {
+              width: 100%;
+              margin: 1em 0 .5em; }
+              .pills .preview .preview-table tr td.content .answers .answer {
+                display: inline-block;
+                width: 25%; }
+                .pills .preview .preview-table tr td.content .answers .answer.correct {
+                  color: #2ecc71; }
           .pills .preview .preview-table tr td.media {
             width: 10%;
             text-align: center;
