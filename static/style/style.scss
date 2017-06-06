@@ -683,7 +683,7 @@ body {
 			font-size: 0;
 
 			input, textarea {
-				display: inline-block;
+				display: block;
 				vertical-align: top;
 				padding: 1vh 1vw;
 				font-family: 'Raleway';
@@ -694,24 +694,19 @@ body {
 				box-sizing: border-box;
 				box-shadow: 0px 5px 3px #f2f2f2;
 				border: 1px solid #ccc;
+				width: 100%;
+				margin: 1vh 0;
 			}
 
-			.date {
-				display: inline-block;
-				vertical-align: top;
-				width: 100%;
-				height: auto;
-				font-size: 0;
-				margin: 1vh 0;
-				input {
-					width: 30%;
-					margin: 1vh 1.5%;
-				}
-			}
 			textarea {
-				width: 100%;
-				margin: 1vh 0;
-				min-height: 200px;
+				max-width: 100%;
+				min-height: 100px;
+			}
+
+			.answers {
+				margin-top: 2vh;
+				border-top: 1px solid rgba(0, 0, 0, 0.4);
+				padding-top: 1vh;
 			}
 
 			button {
