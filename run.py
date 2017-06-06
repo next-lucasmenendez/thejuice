@@ -77,6 +77,7 @@ def search():
 				answers=sentence['similar_words'][:-1]
 			)
 			question['answers'].append(sentence['answer'])
+			question['answers'].sort()
 			questions['questions'].append(question)
 
 		return {"success": True, "result": questions}, 200
