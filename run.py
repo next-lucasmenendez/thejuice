@@ -65,19 +65,18 @@ def search():
 		article = Article(title=query, lang=lang)
 		trivia_sentences = article.generate_trivia_sentences(lang=lang)
 
-		questions = dict(
-			title=trivia_sentences[0]['title'],
-			url=trivia_sentences[0]['url'],
-			questions=[]
-		)
+		questions = {
+			'title': trivia_sentences[0]['title'],
+			'url': trivia_sentences[0]['url'],
+			'questions': []
+		}
 		for sentence in trivia_sentences:
-			question = dict(
-				question=sentence['question'],
-				correct_answer=sentence['answer'],
-				answers=sentence['similar_words'][:-1]
-			)
-			question['answers'].append(sentence['answer'])
-			question['answers'].sort()
+			question = {
+				'question': sentence['question'],
+				'answers': [{'name': a, 'correct': False} for a in sentence['similar_words'][0:3]]
+			}
+			question['answers'].append({'name': sentence['answer'], 'correct': True})
+			question['answers'] = sorted(question['answers'], key=lambda answer: answer['name'])
 			questions['questions'].append(question)
 
 		return {"success": True, "result": questions}, 200
