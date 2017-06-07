@@ -182,7 +182,7 @@ body {
 }
 
 .submit {
-	margin: 10vh auto;
+	margin: 15vh auto;
 	width: 50%;
 	min-width: 300px;
 	max-width: 1024px;
@@ -222,6 +222,13 @@ body {
 		&:hover {
 			background-color: #007b9f;
 		}
+	}
+	.error {
+		background-color: rgba(228, 4, 4, 0.8);
+		padding: 1vh 2vh;
+		margin: 2vh 0 0;
+		border-radius: 5px;
+		color: white;
 	}
 }
 
