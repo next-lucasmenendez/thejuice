@@ -72,13 +72,11 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 		$window.ga('send', 'event', 'review', 'submited', $scope.query);
 
 			var result = angular.copy($scope.result);
-			console.log(result);
 
 			service.request("POST", "/download", {result: result}, true).then(
 				function (response) {
 					if (response.success) {
-						console.log(response);
-						//$window.location.href = response.result;
+						$window.location.href = response.result;
 					} else {
 						$state.go('base.search');
 					}
