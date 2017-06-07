@@ -71,10 +71,10 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 		if ($scope.result.questions) {
 		$window.ga('send', 'event', 'review', 'submited', $scope.query);
 
-			var results = angular.copy($scope.result);
-			console.log(results);
+			var result = angular.copy($scope.result);
+			console.log(result);
 
-			service.request("POST", "/download", {character: results}, true).then(
+			service.request("POST", "/download", {result: result}, true).then(
 				function (response) {
 					if (response.success) {
 						console.log(response);

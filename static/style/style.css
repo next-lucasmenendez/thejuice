@@ -568,7 +568,7 @@ body {
       left: 50%;
       transform: translate(-50%, -50%);
       width: 90%;
-      max-width: 400px;
+      max-width: 600px;
       height: auto;
       max-height: 90%;
       overflow-y: auto;
