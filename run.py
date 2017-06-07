@@ -8,8 +8,10 @@ from flask import Flask
 from flask import request
 from flask import make_response
 from flask import render_template
+from flask import redirect
 
 from app.article import Article
+from app.render import Render
 
 app	= Flask(__name__)
 
@@ -44,12 +46,16 @@ def login():
 			access_log = "%s/access.log" % current_path
 			with open(access_log, "a") as fd:
 				date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-				record = "[{date}] Name: {name} - Email: {email}\n".format(date=date, name=name, email=email)
+				record = "[{date}] Name: {name} - Email: {email}\n".format(
+					date=date, name=name, email=email)
 
 				fd.write(record)
 		except:
 			pass
-		return {"success": True, "result": "Welcome {name}!".format(name=name)}, 200
+		return {
+					"success": True,
+					"result": "Welcome {name}!".format(name=name)
+				}, 200
 	return {"success": False, "result": "No name and/or email provided."}, 400
 
 
@@ -73,7 +79,12 @@ def search():
 		for sentence in trivia_sentences:
 			question = {
 				'question': sentence['question'],
-				'answers': [{'name': a, 'correct': False} for a in sentence['similar_words'][0:3]]
+				'answers': [
+					{
+						'name': a,
+						'correct': False
+					} for a in sentence['similar_words'][0:3]
+				]
 			}
 			question['answers'].append({'name': sentence['answer'], 'correct': True})
 			question['answers'] = sorted(question['answers'], key=lambda answer: answer['name'])
@@ -84,10 +95,31 @@ def search():
 	return {"success": False, "result": "No query provided."}, 400
 
 
-@app.route('/verify', methods=["POST"])
+@app.route('/download', methods=["POST"])
 @as_json
-def verify():
-	pass
+def download():
+	data = request.get_json()
+	result = data.get('result') or False
+
+	if result:
+		render = Render(**result)
+		url = render.save()
+		if url:
+			return {"success": True, "result": url}, 200
+
+	return {"success": False, "message": "Bad request. More data required."}, 400
+
+
+@app.route('/output/<string:query>')
+def output(query):
+	if query:
+		try:
+			template = "output/{}.html".format(query)
+			return render_template(template)
+		except Exception as e:
+			print("Template not found")
+			pass
+	return redirect('/')
 
 
 if __name__ == "__main__":
