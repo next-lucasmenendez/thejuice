@@ -148,25 +148,30 @@ body {
 			margin: 5% 0;
 			display: block;
 
-			.answer {
+			div {
 				display: inline-block;
 				width: 22%;
-				border: 1px solid white;
-				padding: 2%;
 				margin: 0 1%;
-				text-align: center;
-				box-sizing: border-box;
-				cursor: pointer;
 
-				&:hover {
-					background-color: rgba(0, 0, 0, 0.3);
+				.answer {
+					padding: 1.5vh 1vw;
+					border: 1px solid white;
+					display: inline-block;
+					width: 100%;
+					text-align: center;
+					box-sizing: border-box;
+					cursor: pointer;
+
+					&:hover {
+						background-color: rgba(0, 0, 0, 0.3);
+					}
 				}
-			}
-			input {
-				display: none;
+				input {
+					display: none;
 
-				&:checked + .answer {
-					background-color: white;
+					&:checked + .answer {
+						background-color: white;
+					}
 				}
 			}
 		}

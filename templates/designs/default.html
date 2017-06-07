@@ -72,8 +72,10 @@
 						<form class="answers">
 							{% set index = loop.index %}
 							{% for answer in question.answers %}
-								<input id="{{ answer.name|lower }}" name="question{{ index }}" type="radio">
-								<label for="{{ answer.name|lower }}" class="answer" data="{{ answer['correct'] }}">{{ answer['name'] }}</label>
+								<div>
+									<input id="{{ answer.name|lower }}" name="question{{ index }}" type="radio">
+									<label for="{{ answer.name|lower }}" class="answer" data="{{ answer['correct'] }}">{{ answer['name'] }}</label>
+								</div>
 							{% endfor %}
 						</form>
 					</div>

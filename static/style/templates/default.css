@@ -110,21 +110,24 @@ body {
     .questions .question .answers {
       margin: 5% 0;
       display: block; }
-      .questions .question .answers .answer {
+      .questions .question .answers div {
         display: inline-block;
         width: 22%;
-        border: 1px solid white;
-        padding: 2%;
-        margin: 0 1%;
-        text-align: center;
-        box-sizing: border-box;
-        cursor: pointer; }
-        .questions .question .answers .answer:hover {
-          background-color: rgba(0, 0, 0, 0.3); }
-      .questions .question .answers input {
-        display: none; }
-        .questions .question .answers input:checked + .answer {
-          background-color: white; }
+        margin: 0 1%; }
+        .questions .question .answers div .answer {
+          padding: 1.5vh 1vw;
+          border: 1px solid white;
+          display: inline-block;
+          width: 100%;
+          text-align: center;
+          box-sizing: border-box;
+          cursor: pointer; }
+          .questions .question .answers div .answer:hover {
+            background-color: rgba(0, 0, 0, 0.3); }
+        .questions .question .answers div input {
+          display: none; }
+          .questions .question .answers div input:checked + .answer {
+            background-color: white; }
     .questions .question .content {
       max-width: 1024px;
       margin: auto; }
