@@ -7,22 +7,30 @@ from random import randint
 from textblob import TextBlob
 from datetime import datetime
 
+from app.datasource import DataSource
+from app.parser import Parser
+
 ICONSINDEX="{base}/static/icons/icons.json"
 ICON="/static/icons/{file}"
 
 
 class Juicer:
-	def __init__(self, name=None, text=None, images=None, birth=None, death=None):
+	def __init__(self, name=None, text=None, images=None, birth=None, death=None, lang="en"):
 		self.name 	= name
 		self.text 	= text
 		self.images = images
-
-		self.pic	= self.__getpicture()
+		self.lang	= lang
+		self.pic	= None
 		self.hits	= None
 		self.limits = {
 			"start": birth,
-			"end": death or datetime.today().strftime("%Y-%m-%d")
+			"end": death
 		}
+
+	def __parse(self):
+		start, end = self.__parselimits()
+		parser = Parser(text=self.text, start=start, end=end, lang=self.lang)
+		self.hits = parser.parse()
 
 	def __clean(self):
 		hits = sorted(self.hits, key=lambda hit: hit["datetime"])
@@ -45,7 +53,7 @@ class Juicer:
 					images.remove(image)
 
 		start, end		= self.__parselimits()
-		currentdates 	= [hit["date"] for hit in self.hits]
+		currentdates	= [hit["date"] for hit in self.hits]
 		if images:
 			for image in images:
 				res	= re.search("([12]\d{3})", image, re.IGNORECASE)
@@ -67,17 +75,14 @@ class Juicer:
 
 	def __getpicture(self):
 		if self.images:
-			needle = self.name.replace(" ", "_")
 			images = []
+			needle = self.name.replace(" ", "_")
 			for img in self.images:
 				if re.search(needle, img, re.IGNORECASE):
 					images.append(img)
-
 			if len(images):
-				picture = randint(0, len(images) - 1)
-				return images[picture]
-
-		return None
+				index = randint(0, len(images) - 1)
+				self.pic = images[index]
 
 	def __getkeywords(self):
 		for hit in self.hits:
@@ -118,23 +123,45 @@ class Juicer:
 
 	def __parselimits(self):
 		start	= None
-		end		= None
-		formats	= [
-			"%Y-%m-%d",
-			"%Y-%m"
-			"%Y"
-		]
+		end		= datetime.today() if not self.limits["end"] else None
+		formats	= ["%Y-%m-%d", "%Y-%m", "%Y"]
 
 		for fmt in formats:
 			try:
-				start	= datetime.strptime(self.limits["start"], fmt) if not start else start
-				end		= datetime.strptime(self.limits["end"], fmt).replace(month=12, day=31) if not end else end
+				if not start:
+					start = datetime.strptime(self.limits["start"], fmt)
+
+				if not end:
+					end	= datetime.strptime(self.limits["end"], fmt).replace(month=12, day=31)
 			except:
 				pass
 
 		return start, end
 
+	def search(self, query):
+		if query:
+			datasource = DataSource(lang=self.lang)
+			return datasource.search(query=query)
+		return False
+
+	def get(self, pageid):
+		if pageid:
+			datasource	= DataSource(lang=self.lang)
+			entity		= datasource.get(pageid=pageid)
+
+			self.name	= entity.get("name")
+			self.text	= entity.get("text")
+			self.images	= entity.get("images")
+			self.limits	= {
+				"start": entity.get("birth"),
+				"end": entity.get("death")
+			}
+			return True
+		return False
+
 	def torender(self):
+		self.__parse()
+		self.__getpicture()
 		self.__fill()
 		self.__clean()
 

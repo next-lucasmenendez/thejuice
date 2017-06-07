@@ -1,5 +1,6 @@
 import re
 import requests
+import wikipedia
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 DBPEDIA="http://dbpedia.org/sparql"
@@ -61,22 +62,17 @@ class DataSource:
 			for key in result.keys():
 				item[key] = result[key]['value']
 
-			endpoint	= WIKIPEDIA.format(lang=self.lang)
-			data		= {
-				"action": "parse",
-				"format": "json",
-				"prop": "text|images",
-				"pageid": pageid
-			}
+			try:
+				wikipedia.set_lang(self.lang)
+				page = wikipedia.page(pageid=pageid)
+				raw, images = page.content, page.images
 
-			res = requests.get(endpoint, params=data)
-			if res.status_code == requests.codes.ok:
-				parse	= res.json()['parse']
-				raw		= parse['text']['*']
-
-				item["images"]	= self.__getimages(parse['images']),
+				item["images"]	= self.__getimages(images)
 				item["text"]	= self.__cleantext(raw)
-				return item
+			except Exception as e:
+				print(e)
+				return False
+			return item
 
 		return False
 
@@ -85,40 +81,25 @@ class DataSource:
 		text = re.sub('<[^<]+>', "", raw)
 		text = re.sub('(\[(\d+|edit)\])', "", text)
 
-		return text
+		lines = []
+		chars = 0
+		for line in text.splitlines():
+			if line.startswith("=") or not line:
+				continue
+			lines.append(line)
+			chars += len(line)
+
+		content = ""
+		for line in lines:
+			content += line
+		return content
 
 	def __getimages(self, images):
 		# Filter images by extension
-		queries = []
+		results = []
 		for img in images:
 			found = re.search("(\.gif|\.png|\.jpg|\.jpeg)", img, re.IGNORECASE)
 			if found:
-				filename = "File:{img}".format(img=img)
-				queries.append(filename)
+				results.append(img)
 
-		#Setting Wikipedia Api Request
-		endpoint	= WIKIPEDIA.format(lang=self.lang)
-		query		= "|".join(queries)
-		data		= {
-			"action": "query",
-			"format": "json",
-			"prop": "imageinfo",
-			"titles": query,
-			"iiprop": "url"
-		}
-
-		images = []
-		try:
-			req = requests.get(endpoint, params=data)
-			if req.status_code is requests.codes.ok:
-				res		= req.json()
-				pages	= res["query"]["pages"]
-
-				for page in pages.values():
-					image = page["imageinfo"][0]["url"]
-					images.append(image)
-		except Exception as e:
-			print(e)
-			pass
-
-		return images
+		return results

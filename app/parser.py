@@ -18,39 +18,20 @@ HITS_TEXT	= {
 
 
 class Parser:
-	def __init__(self, juicer=None):
-		self.juicer = juicer
-		self.text	= self.juicer.text
-		if not self.juicer:
+	def __init__(self, text=None, start=None, end=None, lang="en"):
+		self.text	= text
+		self.start	= start
+		self.end	= end
+		self.lang 	= lang
+		if not text or not start or not end:
 			return
 
-		self.clean_text()
-
-	def clean_text(self):
-		if not self.text:
-			return False
-
-		lines = []
-		chars = 0
-		for line in self.text.splitlines():
-			if line.startswith("=") or not line:
-				continue
-			lines.append(line)
-			chars += len(line)
-
-		content = ""
-		for line in lines:
-			content += line
-
-		self.text = content
-
-	def generate(self, min_length=MIN_LENGTH, max_length=MAX_LENGTH):
+	def parse(self, min_length=MIN_LENGTH, max_length=MAX_LENGTH):
 		if not self.text:
 			return False
 
 		datefinder	= Datefinder(self.text)
 		dates 		= datefinder.results()
-		limits		= sorted(dates[0:2], key=lambda l: l["datetime"])
 
 		hits 	= []
 		results = []
@@ -75,7 +56,7 @@ class Parser:
 
 			date 	= d["datetime"]
 			format	= d["format"]
-			if limits[0]["datetime"] <= date <= limits[1]["datetime"]:
+			if self.start <= date <= self.end:
 				hit = self.text[initial:final].strip()
 				if max_length > len(hit) > min_length and hit not in hits and hit[0].isupper():
 					hits.append(hit)
@@ -86,37 +67,4 @@ class Parser:
 						'content': hit
 					})
 
-		if results:
-			hits = sorted(results, key=lambda date: date["datetime"])
-
-			if hits[0]["datetime"] > dates[0]["datetime"]:
-				try:
-					fulldate	= dates[0]["datetime"]
-					format 		= dates[0]["format"]
-					date		= datetime.strftime(fulldate, format["rgx"])
-					first		= {
-						'datetime': fulldate,
-						'date': date,
-						'format': format,
-						'content': HITS_TEXT[self.juicer.lang]["start"].format(name=self.juicer.title, date=date)
-					}
-					hits.append(first)
-				except Exception as e:
-					print(e)
-					pass
-
-			if hits[len(hits) - 1]["datetime"] < dates[1]["datetime"]:
-				fulldate	= dates[1]["datetime"]
-				format		= dates[1]["format"]
-				date		= datetime.strftime(fulldate, format["rgx"])
-				hits.append({
-					'datetime': fulldate,
-					'date': date,
-					'format': format,
-					'content': HITS_TEXT[self.juicer.lang]["end"].format(name=self.juicer.title, date=date)
-				})
-
-			self.juicer.hits = sorted(hits, key=lambda hit: hit["datetime"])
-			return True
-
-		return False
+		return sorted(results, key=lambda hit: hit["datetime"])

@@ -1,3 +1,3 @@
 <ul class='results ng-hide' ng-show='results'>
-	<li id='result{{result.id}}' class='item' ng-repeat='result in results' ng-class="{'current': result.active}" ng-click="callback({name: result.name})">{{result.name}}</li>
+	<li id='result{{result.id}}' class='item' ng-repeat='result in results' ng-class="{'current': result.active}" ng-click="callback({name: result.id})">{{result.name}}</li>
 </ul>

@@ -11,9 +11,7 @@ from flask import make_response
 from flask import render_template
 
 from app.juicer import Juicer
-from app.parser import Parser
 from app.render import Render
-from app.datasource import DataSource
 
 app	= Flask(__name__)
 
@@ -62,12 +60,9 @@ def search(query):
 
 	lang = request.args.get('lang') or "en"
 	try:
-		#juicer 	= Juicer(query=query, lang=lang)
-		#results	= juicer.find()
-
-		datasource	= DataSource(lang=lang)
-		results		= datasource.search(query=query)
-		status 		= 200 if results else 404
+		juicer	= Juicer(lang=lang)
+		results	= juicer.search(query=query)
+		status	= 200 if results else 404
 
 		return {"success": True, "results": results}, status
 	except:
@@ -75,34 +70,18 @@ def search(query):
 
 	return {"success": False, "message": "Something was wrong..."}, 500
 
-@app.route("/get/<int:pageid>", methods=["GET"])
+@app.route("/review/<int:pageid>", methods=["GET"])
 @as_json
-def get(pageid):
-	datasource = DataSource()
-	entity = datasource.get(pageid=pageid)
-
-	return {"success": True, "content": entity}, 420
-
-
-@app.route("/review", methods=["POST"])
-@as_json
-def review():
-	query	= request.form.get("query")
-	lang 	= request.form.get("lang") or "en"
-
-	if query:
-		juicer = Juicer(query=query, lang=lang, force=True)
+def review(pageid):
+	lang 		= request.args.get('lang') or 'en'
+	if pageid:
 		try:
-			success = juicer.get()
-			if not success:
-				raise
-
-			parser	= Parser(juicer)
-			success	= parser.generate()
+			juicer	= Juicer(lang=lang)
+			success	= juicer.get(pageid=pageid)
 			if success:
 				return {"success": True, "result": juicer.torender()}, 200
 			else:
-				return {"success": False, "message": "Sorry... We could not find your request."}, 404
+				return {"success": False, "message": "Sorry... We have problems ;("}, 500
 		except Exception as e:
 			print(e)
 			return {"success": False, "message": "Sorry... We could not find your request."}, 404

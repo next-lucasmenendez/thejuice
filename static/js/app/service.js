@@ -6,18 +6,32 @@ var app = angular.module("app");
 
 app.service('service', function ($rootScope, $q, $http) {
 	this.request = function (method, url, data, as_json) {
-		as_json	= Boolean(as_json);
-		data 	= (data) ? ((as_json) ? angular.toJson(data) : $.param(data)) : null;
+		var payload = {
+			method: method,
+			url: url
+		};
+
+		if (data) {
+			if (method === "GET") {
+				payload.params = data;
+			} else {
+				if (Boolean(as_json)) {
+					payload.data = angular.toJson(data);
+					payload.headers = {
+						'Content-Type': 'application/json'
+					}
+				} else {
+					payload.data = $.param(data);
+					payload.headers = {
+						'Content-Type': 'application/x-www-form-urlencoded'
+					}
+				}
+			}
+
+		}
 
 		var result = $q.defer();
-		$http({
-			method: method,
-			url: url,
-			data: data,
-			headers : {
-				'Content-Type': (as_json) ? 'application/json' : 'application/x-www-form-urlencoded'
-			}
-		}).then(
+		$http(payload).then(
 			function (response) {
 				if (response.status >= 200 && response.status <= 300) {
 					result.resolve(response.data);
@@ -28,7 +42,7 @@ app.service('service', function ($rootScope, $q, $http) {
 			function (error) {
 				result.reject(error);
 			}
-		)
+		);
 		return result.promise;
 	};
 });

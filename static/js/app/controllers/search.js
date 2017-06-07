@@ -19,7 +19,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 	$scope.submitSearchForm = function(query) {
 		if (query) {
 			$window.ga('send', 'event', 'index', 'search', query);
-			service.request('POST', '/review', {query: query, lang: $scope.lang}).then(
+			service.request('GET', '/review', {query: query, lang: $scope.lang}).then(
 				function (response) {
 					if (response.success) {
 						DataStorage.set(query, response.result);
