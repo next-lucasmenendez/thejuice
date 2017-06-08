@@ -1,6 +1,7 @@
 import json
 import os
 import datetime
+import smtplib
 
 from functools import wraps
 
@@ -14,6 +15,7 @@ from app.article import Article
 from app.render import Render
 
 app	= Flask(__name__)
+app.config.from_pyfile('config.py')
 
 
 def as_json(func):
@@ -36,9 +38,9 @@ def index():
 @app.route("/login", methods=["GET", "POST"])
 @as_json
 def login():
-	data 	= request.get_json()
-	name 	= data.get('name')
-	email	= data.get('email')
+	data = request.get_json()
+	name = data.get('name')
+	email = data.get('email')
 
 	if name and email:
 		try:
@@ -122,6 +124,75 @@ def output(query):
 			print("Template not found")
 			pass
 	return redirect('/')
+
+
+@app.route('/validate', methods=['POST'])
+@as_json
+def validate():
+	data = request.get_json()
+	student_email = data.get('studentEmail')
+	teacher_email = data.get('teacherEmail')
+	title = data.get('title')
+	questions = data.get('questions')
+
+	if student_email and teacher_email and title:
+		correct_answers = 0
+		questions_text = ''
+		for question in questions:
+			if question['select'] == question['correct']:
+				correct_answers += 1
+			questions_text += """{0}
+Student answer: {1}
+Correct answer: {2}
+
+""".format(question['question'], question['select'], question['correct'])
+
+		summary = correct_answers*100/len(questions)
+		body = """Hi!
+
+{0} has just completed the test about {1} created with theJuice.
+
+Here you have the results:
+
+Success rate: {2}%
+Correct answers: {3}
+Failed answers: {4}
+
+Questions / Answers:
+
+{5}""".format(student_email, title, summary, correct_answers, len(questions)-correct_answers, questions_text)
+
+		try:
+			send_mail(teacher_email, student_email, 'One student has answered a Trivia', body)
+			send_mail(student_email, teacher_email, 'You have answered a Trivia!', body)
+
+			return {"success": True, "message": "Emails sent."}, 200
+		except Exception:
+			return {"success": False, "message": "Server error. Error when send email."}, 500
+
+	return {"success": False, "message": "Bad request. More data required."}, 400
+
+
+def send_mail(email_from, email_to, subject, content):
+	template = "From: Noa <{frm}>\nTo: {to}\nSubject: {subject}\n\n{message}"
+	try:
+		host, port = app.config.get('SMTP_ADDRESS'), app.config.get("SMTP_PORT")
+		server = smtplib.SMTP(host=host, port=port)
+
+		server.ehlo()
+		server.starttls()
+
+		username, password = app.config.get('SMTP_USERNAME'), app.config.get('SMTP_PASSWORD')
+		server.ehlo()
+		server.login(username, password)
+
+		message = template.format(frm=email_from, to=email_to, message=content, subject=subject)
+		server.sendmail(email_from, email_to, message)
+
+		server.quit()
+	except smtplib.SMTPException as err:
+		print(err)
+		raise err
 
 
 if __name__ == "__main__":
