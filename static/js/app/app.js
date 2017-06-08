@@ -18,10 +18,10 @@ var checkAccessToken = function ($q, $state, $timeout) {
 	});
 
 	return result.promise;
-}
+};
 
 app.run(function($rootScope, $location, $window) {
-	$window.ga('create', 'UA-92654268-2', 'auto');
+	$window.ga('create', 'UA-92654268-3', 'auto');
 });
 
 app.config(function($stateProvider, $urlRouterProvider) {
