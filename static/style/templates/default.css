@@ -145,8 +145,8 @@ body {
     display: block;
     font-size: 30px;
     width: 100%;
-    margin: 2% auto;
-    padding: 3%;
+    margin: 1vh auto;
+    padding: 2vh 2vw;
     border-radius: 5px;
     border: 2px solid #0085AC;
     font-weight: 200;
@@ -165,12 +165,18 @@ body {
     cursor: pointer; }
     .submit button:hover {
       background-color: #007b9f; }
-  .submit .error {
-    background-color: rgba(228, 4, 4, 0.8);
-    padding: 1vh 2vh;
-    margin: 2vh 0 0;
-    border-radius: 5px;
-    color: white; }
+
+.error {
+  background-color: rgba(228, 4, 4, 0.8);
+  padding: 1vh 0;
+  margin: 2vh 0 0;
+  border-radius: 5px;
+  color: white;
+  text-align: left; }
+  .error li {
+    display: block;
+    list-style: none;
+    padding: 1vh 2vw; }
 
 @media (max-width: 500px) {
   .header .image {
