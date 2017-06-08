@@ -9,3 +9,4 @@ access.log
 __pycache__
 templates/output/
 *.tagger
+config.py
