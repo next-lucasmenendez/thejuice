@@ -1,6 +1,10 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,400,700');
 
+$main: #4caf50;
+$main_dark: #2c8630;
+$main_blue: #0085AC;
+
 * {
 	margin: 0;
 	padding: 0;
@@ -47,33 +51,32 @@ body {
 	width: auto;
     height: auto;
     text-align: center;
-	background: #0085AC;
+	background: $main;
     font-size: 16px;
     color: #ffffff;
 	text-decoration: none;
 	text-transform: none;
-    border: 0;
     border-radius: 3px;
     cursor: pointer;
 	outline: none;
 	padding: 10px 20px;
 	box-sizing: border-box;
-	border: 1px solid #0085AC;
+	border: 1px solid $main;
 	font-family: 'Raleway', sans-serif;
 	transition: all .2s ease-in-out;
 }
 
 .button.outline {
 	background: #ffffff;
-	color: #0085AC;
+	color: $main;
 }
 
 .button:hover,
 .button:active,
 .button.outline:hover,
 .button.outline:active {
-	background: #007b9f;
-	border-color: #007b9f;
+	background: $main_dark;
+	border-color: $main_dark;
 	color: #ffffff;
 }
 
@@ -90,7 +93,7 @@ body {
 	vertical-align: top;
 	width: 100%;
 	height: auto;
-	background: #007b9f;
+	background: $main_dark;
 	color: white;
 	padding: 1vh 0;
 	font-size: 0;
@@ -177,7 +180,7 @@ body {
 			text-align: center;
 			transition: all .2s ease-in-out;
 			cursor: pointer;
-			&:hover, &:active {background: #0085AC;}
+			&:hover, &:active {background: $main;}
 		}
 
 		.menu {
@@ -229,9 +232,9 @@ body {
 			text-align: right;
 			a {
 				color: white;
-				background: #0085AC;
-				box-shadow: 0px 5px 3px #f2f2f2;
-				&:hover, &:active {background: #007b9f;}
+				background: $main;
+				box-shadow: 0 5px 3px #f2f2f2;
+				&:hover, &:active {background: $main_dark;}
 			}
 		}
 
@@ -273,9 +276,10 @@ body {
 			color: #bbbbbb;
 			&.active {
 				.number {
-					background: #0085AC;
+					background: $main;
 					color: white;
 					font-weight: bold;
+					border: none;
 				}
 				.title {color: black;}
 			}
@@ -382,11 +386,18 @@ body {
 			width: 70%;
 			height: auto;
 			text-align: center;
+			font-size: 2.5em;
+			max-height: 70px;
 			img {
 				display: inline-block;
 				vertical-align: top;
 				width: 100%;
 				max-width: 400px;
+			}
+			span {
+				vertical-align: middle;
+				line-height: 100px;
+				margin: 0 2vw;
 			}
 		}
 	}
@@ -405,6 +416,7 @@ body {
 			width: 30%;
 			height: 50px;
 			box-shadow: 0px 5px 3px #f2f2f2;
+			background-color: $main_blue;
 		}
 	}
 }
@@ -472,7 +484,7 @@ body {
 				display: inline-block;
 				vertical-align: top;
 				text-transform: uppercase;
-				color: #007b9f;
+				color: $main_dark;
 				background: transparent;
 				width: auto;
 				height: 30px;
@@ -516,7 +528,7 @@ body {
 				cursor: pointer;
 				transition: all .2s ease-in-out;
 				&:hover, &:active, &.current {
-					background: #007b9f;
+					background: $main_dark;
 					color: white;
 				}
 			}
@@ -733,11 +745,11 @@ body {
 
 				&.cancel {margin-right:0;}
 				&.save {
-					background: #007b9f;
+					background: $main_dark;
 					color: white;
 					border-color: transparent;
 					&:hover, &:active {
-						background: #0085AC;
+						background: $main;
 					}
 				}
 			}

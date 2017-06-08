@@ -37,9 +37,9 @@ body {
 	display: inline-block;
 	width: auto;
 	max-width: 70%;
-	text-align: left;
 	font-size: 40px;
 	line-height: 70px;
+	text-align: center;
 
 	.name {
 		display: block;
@@ -49,6 +49,10 @@ body {
 		display: block;
 		font-family: 'Abril Fatface', cursive;
 		font-weight: normal;
+	}
+	.trivia {
+		text-transform: uppercase;
+		margin: 3vh 0 0;
 	}
 }
 
@@ -145,13 +149,15 @@ body {
 		}
 		.answers {
 			margin: 5vh 0;
-			display: block;
+			display: flex;
+			flex-flow: row wrap;
+			justify-content: space-between;
 			font-size: 25px;
 
 			div {
 				display: inline-block;
 				width: 22%;
-				margin: .5vh 1vw;
+				margin: .5vh .5vw;
 
 				.answer {
 					padding: 1.5vh 1vw;
@@ -186,7 +192,7 @@ body {
 	margin: 15vh auto;
 	width: 50%;
 	min-width: 300px;
-	max-width: 1024px;
+	max-width: 600px;
 	font-size: 20px;
 	text-align: right;
 
