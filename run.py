@@ -166,7 +166,7 @@ Questions / Answers:
 			send_mail(teacher_email, student_email, 'One student has answered a Trivia', body)
 			send_mail(student_email, teacher_email, 'You have answered a Trivia!', body)
 
-			return {"success": True, "message": "Emails sent."}, 200
+			return {"success": True, "message": "Emails sent.", "score": summary}, 200
 		except Exception:
 			return {"success": False, "message": "Server error. Error when send email."}, 500
 
