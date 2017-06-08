@@ -4,7 +4,7 @@
 
 var app = angular.module("app");
 
-app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $stateParams, $timeout, service, route, DataStorage) {
+app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $stateParams, $timeout, requests, route, DataStorage) {
 	$scope.$on('$stateChangeSuccess', function () {
 		var prev = route.Link('Search', 'search', 'base.search'),
 			current = route.Link('Review', 'review', 'base.review'),
@@ -33,7 +33,7 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 			$rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
 			$window.ga('send', 'event', 'index', 'search', query);
 
-			service.request('POST', '/review', {query: query, force: true, lang: $scope.lang}).then(
+			requests.call('POST', '/review', {query: query, force: true, lang: $scope.lang}).then(
 				function (response) {
 					if (response.success) {
 						$scope.results 	= response.result;

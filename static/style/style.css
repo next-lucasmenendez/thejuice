@@ -429,7 +429,7 @@ body {
       vertical-align: top;
       width: 67%;
       height: auto;
-      max-height: 150px;
+      max-height: 300px;
       overflow-y: auto;
       border: 1px solid #dddddd;
       z-index: 1; }

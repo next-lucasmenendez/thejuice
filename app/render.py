@@ -14,9 +14,8 @@ TEMPLATES="{base}/templates/designs"
 
 
 class Render:
-	def __init__(self, title, images, hits, design, pic, limits):
-		self.title	= title
-		self.images	= images
+	def __init__(self, name, hits, design, pic, limits):
+		self.name	= name
 		self.hits	= hits
 		self.design	= design
 		self.pic	= pic
@@ -32,10 +31,10 @@ class Render:
 		template 	= environment.get_template(filename)
 
 		dt		= datetime.today().strftime("%s")
-		mark	= ("{date}-{name}".format(date=dt, name=self.title)).encode()
+		mark	= ("{date}-{name}".format(date=dt, name=self.name)).encode()
 		name 	= base64.b64encode(mark).decode('utf-8')
 		data	= {
-			"title": self.title,
+			"name": self.name,
 			"items": self.hits,
 			"limits": self.limits,
 			"picture": self.pic

@@ -135,7 +135,7 @@ app.directive("contenteditable", function() {
 	};
 });
 
-app.directive("autosuggestions", function($rootScope, $compile, $timeout, service) {
+app.directive("autosuggestions", function($rootScope, $compile, $timeout, requests) {
 	return {
 		restrict: "E",
 		replace: true,
@@ -149,7 +149,9 @@ app.directive("autosuggestions", function($rootScope, $compile, $timeout, servic
 			scope.$watch('query', function (newValue, oldValue) {
 				if (newValue != oldValue) {
 					if (newValue.length > 2) {
-						service.request('POST', '/search', {query: newValue, lang: scope.lang}).then(
+						var uri = '/search/' + newValue;
+
+						requests.call('GET', uri, {lang: scope.lang}).then(
 							function (result) {
 								$timeout(function () {
 									scope.current = false;

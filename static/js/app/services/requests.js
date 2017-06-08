@@ -4,8 +4,8 @@
 
 var app = angular.module("app");
 
-app.service('service', function ($rootScope, $q, $http) {
-	this.request = function (method, url, data, as_json) {
+app.service('requests', function ($rootScope, $q, $http) {
+	this.call = function (method, url, data, as_json) {
 		var payload = {
 			method: method,
 			url: url

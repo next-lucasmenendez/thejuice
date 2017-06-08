@@ -1,10 +1,8 @@
 import re
-import requests
 import wikipedia
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 DBPEDIA="http://dbpedia.org/sparql"
-WIKIPEDIA="http://{lang}.wikipedia.org/w/api.php"
 
 class DataSource:
 	def __init__(self, lang="en"):
@@ -12,7 +10,7 @@ class DataSource:
 
 	def search(self, query):
 		q = '''
-		SELECT DISTINCT ?name ?birth ?death ?description ?id WHERE {{
+		SELECT DISTINCT ?name ?id WHERE {{
 			?person rdf:type dbo:Person . 
 			?person foaf:name ?name . 
 			?person dbo:wikiPageID ?id . 

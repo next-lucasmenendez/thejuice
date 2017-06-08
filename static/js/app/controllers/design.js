@@ -4,7 +4,7 @@
 
 var app = angular.module('app');
 
-app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams, $filter, service, route, DataStorage) {
+app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams, $filter, requests, route, DataStorage) {
 	$scope.$on('$stateChangeSuccess', function () {
 		var prev = route.Link('Review', 'review', 'base.review', {query: $stateParams.query}),
 			current = route.Link('Design', 'design', 'base.design'),
@@ -53,7 +53,7 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 				return  new Date(a.date) - new Date(b.date);
 			});
 
-			service.request("POST", "/download", {design: $scope.design, character: results}, true).then(
+			requests.call("POST", "/download", {design: $scope.design, character: results}, true).then(
 				function (response) {
 					if (response.success) {
 						$window.location.href = response.result;

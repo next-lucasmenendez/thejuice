@@ -59,64 +59,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl: '/static/templates/search.html',
 			controller: 'searchCtrl',
 			resolve: {
-				control: checkAccessToken,
-				onEnter: function ($rootScope) {
-					$rootScope.steps = {
-						previous: false,
-						current: {
-							name: "Search",
-							uri: "base.search"
-						},
-						next: {
-							name: "Review",
-							uri: "base.review"
-						}
-					};
-				}
+				control: checkAccessToken
 			}
 		})
 		.state('base.review', {
 			url: 'review/:query',
 			templateUrl: '/static/templates/review.html',
-			controller: 'reviewCtrl',
-				onEnter: function ($rootScope) {
-					$rootScope.step = "review";
-					$rootScope.steps = {
-						previous: {
-							name: "Search",
-							uri: "base.search"
-						},
-						current: {
-							name: "Review",
-							uri: "base.review"
-						},
-						next: {
-							name: "Design",
-							uri: "base.design"
-						}
-					};
-				}
+			controller: 'reviewCtrl'
 		})
 		.state('base.design', {
 			url: 'design/:query',
 			templateUrl: '/static/templates/design.html',
-			controller: 'designCtrl',
-				onEnter: function ($rootScope) {
-					$rootScope.steps = {
-						previous: {
-							name: "Review",
-							uri: "base.review"
-						},
-						current: {
-							name: "Design",
-							uri: "base.design"
-						},
-						next: {
-							name: "Download",
-							uri: "base.download"
-						}
-					};
-				}
+			controller: 'designCtrl'
 		});
 	$urlRouterProvider.otherwise('/search');
 });

@@ -98,6 +98,7 @@ def download():
 
 	if character and design:
 		character["design"] = design
+		print(character)
 		render 	= Render(**character)
 		url 	= render.save()
 		if url:
