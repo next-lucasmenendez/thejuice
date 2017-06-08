@@ -69,11 +69,14 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 
 	$scope.download = function() {
 		if ($scope.result.questions) {
-		$window.ga('send', 'event', 'review', 'submited', $scope.query);
-
+			$window.ga('send', 'event', 'review', 'submited', $scope.query);
+			var email = sessionStorage.getItem('email');
 			var result = angular.copy($scope.result);
 
-			service.request("POST", "/download", {result: result}, true).then(
+			service.request("POST", "/download", {
+				result: result,
+				email: email
+			}, true).then(
 				function (response) {
 					if (response.success) {
 						$window.location.href = response.result;

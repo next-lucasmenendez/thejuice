@@ -100,8 +100,10 @@ def search():
 def download():
 	data = request.get_json()
 	result = data.get('result') or False
+	email = data.get('email') or False
 
-	if result:
+	if result and email:
+		result['email'] = email
 		render = Render(**result)
 		url = render.save()
 		if url:

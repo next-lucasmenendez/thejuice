@@ -13,10 +13,11 @@ TEMPLATES="{base}/templates/designs"
 
 
 class Render:
-	def __init__(self, url, title, questions, design=None):
+	def __init__(self, url, title, questions, email, design=None):
 		self.title = title
 		self.url = url
 		self.questions = questions
+		self.email = email
 		self.design = design or 'default'
 
 	def save(self):
@@ -34,6 +35,7 @@ class Render:
 		name = base64.b64encode(mark).decode('utf-8')
 		data = {
 			"title": self.title,
+			"teacher_email": self.email,
 			"questions": self.questions
 		}
 
