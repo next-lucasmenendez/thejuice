@@ -62,7 +62,7 @@ function checkQuestions() {
 		questions.push({
 			question: $(this).find('.text').text(),
 			correct: $(this).find('.answers').find('label[data="True"]').text(),
-			select: $(this).find('input:checked').attr('id')
+			select: $(this).find('input:checked').val()
 		});
 	});
 
