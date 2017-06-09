@@ -135,7 +135,8 @@ body {
             background-color: white; }
     .questions .question .content {
       max-width: 1024px;
-      margin: auto; }
+      margin: auto;
+      width: 100%; }
   .questions .congrats {
     margin: 8vh 10vw 5vh;
     min-height: 41vh; }
