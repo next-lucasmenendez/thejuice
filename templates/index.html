@@ -46,7 +46,19 @@
 			})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 		</script>
 
-		<!-- Facebook -->
+		<!-- Facebook Pixel Code -->
+		<script>
+			!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+			n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+			n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+			t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+			document,'script','https://connect.facebook.net/en_US/fbevents.js');
+			fbq('init', '950736555006881'); // Insert your pixel ID here.
+			fbq('track', 'PageView');
+		</script>
+		<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=950736555006881&ev=PageView&noscript=1"/></noscript>
+
+		<!-- Facebook SDK -->
 		<script>
 			window.fbAsyncInit = function() { FB.init({ appId: '228111074341577', xfbml: true, version: 'v2.8' }); };
 			(function(d, s, id){
@@ -82,6 +94,7 @@
 
 		<!-- Service -->
 		<script src="/static/js/app/service.js"></script>
+		<script src="/static/js/app/tracker.js"></script>
 		<!-- Factory -->
 		<script src="/static/js/app/factory.js"></script>
 		<!-- UI Elements -->

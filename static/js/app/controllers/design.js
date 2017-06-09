@@ -4,7 +4,7 @@
 
 var app = angular.module('app');
 
-app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams, $filter, service, route, DataStorage) {
+app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams, $filter, service, tracker, route, DataStorage) {
 	$scope.$on('$stateChangeSuccess', function () {
 		var prev = route.Link('Review', 'review', 'base.review', {query: $stateParams.query}),
 			current = route.Link('Design', 'design', 'base.design'),
@@ -30,12 +30,26 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 		{
 			thumbnail: '/static/style/templates/default.jpg',
 			value: 'default',
-			name: 'Default'
+			name: 'Default',
+			paid: false,
+			price: "Free",
+			avalible: true
 		},
 		{
 			thumbnail: '/static/style/templates/bl4ck.jpg',
 			value: 'bl4ck',
-			name: 'Bl4ck'
+			name: 'Bl4ck',
+			paid: false,
+			price: "Free",
+			avalible: true
+		},
+		{
+			thumbnail: '/static/style/templates/chattemplate.jpg',
+			value: false,
+			name: 'ChatTemplate',
+			paid: true,
+			price: "$ 0.99",
+			avalible: false
 		}
 	]
 
@@ -43,10 +57,17 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 		$scope.design = design;
 	}
 
+	$scope.messageSoon = false;
+	$scope.comingSoon = function () {
+		$scope.messageSoon = !$scope.messageSoon;
+		tracker.all('design', 'template', 'paid template');
+	}
+
+
 	$scope.download = function() {
 		if ($scope.design && $scope.results) {
-			$window.ga('send', 'event', 'design', 'template', $scope.design);
-			$window.ga('send', 'event', 'design', 'query', $scope.results.title);
+			tracker.all('design', 'template', $scope.design);
+			tracker.all('design', 'query', $scope.results.title);
 
 			var results = angular.copy($scope.results);
 			results.hits.sort(function(a, b){

@@ -5,7 +5,7 @@
 var app = angular.module('app');
 
 
-app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, service, route, DataStorage) {
+app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, service, tracker, route, DataStorage) {
 	$scope.$on('$stateChangeSuccess', function () {
 		var current = route.Link('Search', 'search', 'base.search');
 
@@ -19,7 +19,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 	$scope.submitSearchForm = function(query) {
 		if (query) {
 			$rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
-			$window.ga('send', 'event', 'index', 'search', query);
+			tracker.all('index', 'search', query);
 			service.request('POST', '/review', {query: query, lang: $scope.lang}).then(
 				function (response) {
 					if (response.success) {
@@ -39,7 +39,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 			);
 
 		} else if ($scope.query) {
-			$window.ga('send', 'event', 'index', 'search', $scope.query);
+			tracker.all('index', 'search', $scope.query);
 			DataStorage.set("lang", $scope.lang);
 			$state.go('base.review', {query: $scope.query, lang: $scope.lang});
 		}

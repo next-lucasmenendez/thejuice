@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>{{ title }} - TheJuice</title>
+		<title>{{ name }} - TheJuice</title>
 		<link rel="stylesheet" href="/static/style/templates/bl4ck.css"/>
         <meta name="description" content="The juice helps teachers translate their knowledge into a language students understand">
 
@@ -25,13 +25,13 @@
 
         <!--facebook-->
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="{{ title }} - TheJuice">
+        <meta property="og:title" content="{{ name }} - TheJuice">
         <meta property="og:description" content="Translating teachers knowledge to fit into pupils social media">
         <meta property="og:image" content="{{ picture }}">
         <meta property="og:url" content="http://history.takethejuice.com/">
 
         <!--twitter-->
-        <meta name="twitter:title" content="{{ title }} - TheJuice">
+        <meta name="twitter:title" content="{{ name }} - TheJuice">
         <meta name="twitter:description" content="Translating teachers knowledge to fit into pupils social media">
         <meta name="twitter:image" content="{{ picture }}">
         <meta name="twitter:card" content="summary_large_image">
@@ -45,13 +45,15 @@
 
 			ga('create', 'UA-92654268-2', 'auto');
 			ga('send', 'pageview');
-			ga('send', 'event', 'output', 'infographic', '{{ title }}');
+			ga('send', 'event', 'output', 'infographic', '{{ name }}');
 		</script>
 		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	</head>
 	<body>
 		{% if picture %}
 			<div class="background" style="background-image: url('{{ picture }}')"></div>
+		{% else %}
+			<div class="background"></div>
 		{% endif %}
 
 		<div class="wrapper">
@@ -62,15 +64,15 @@
 				{% if picture %}
 				<img class="image" src="{{ picture }}"/>
 				<div class="text with-picture">
-					<h1 class="name">{{ title }}</h1>
-					<span class="date">{{ limits.start }} - {{ limits.end }}</span>
+					<h1 class="name">{{ name }}</h1>
+					<span class="date">{{ limits.start }} - {{ limits.end or "Present" }}</span>
 				</div>
 				{% else %}
 				<div class="text">
-					<h1 class="name">{{ title }}</h1>
-					<span class="date">{{ limits.start }} - {{ limits.end }}</span>
+					<h1 class="name">{{ name }}</h1>
+					<span class="date">{{ limits.start }} - {{ limits.end or "Present" }}</span>
 				</div>
-				{% endif %}		
+				{% endif %}
 			</div>
 
 			<div class="items">
@@ -81,7 +83,7 @@
 						<div class="content">
 							{{ item.content }}
 						</div>
-						{% if item.icons %}	
+						{% if item.icons %}
 						<div class="icons">
 							{% for icon in item.icons %}
 							<img class="icon" src="{{ icon }}"/>
