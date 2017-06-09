@@ -136,6 +136,18 @@ body {
     .questions .question .content {
       max-width: 1024px;
       margin: auto; }
+  .questions .congrats {
+    margin: 8vh 10vw 5vh;
+    min-height: 41vh; }
+    .questions .congrats h1 {
+      margin: 4vh 0;
+      font-size: 7vw; }
+    .questions .congrats p {
+      font-size: 3vw;
+      margin: 1vh 1vw; }
+      .questions .congrats p .score {
+        font-weight: 400;
+        font-size: 4vw; }
 
 .submit {
   margin: 15vh auto;

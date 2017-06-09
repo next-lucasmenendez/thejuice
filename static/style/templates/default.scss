@@ -186,6 +186,24 @@ body {
 			margin: auto;
 		}
 	}
+	.congrats {
+		margin: 8vh 10vw 5vh;
+		min-height: 41vh;
+
+		h1 {
+			margin: 4vh 0;
+			font-size: 7vw;
+		}
+		p {
+			font-size: 3vw;
+			margin: 1vh 1vw;
+
+			.score {
+				font-weight: 400;
+				font-size: 4vw;
+			}
+		}
+	}
 }
 
 .submit {
