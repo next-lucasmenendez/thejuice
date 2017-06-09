@@ -774,11 +774,21 @@ body {
 				transition: all .2s ease-in-out;
 				border: 1px solid #ddd;
 				border-radius: 4px;
+				overflow: hidden;
 				&:hover, &:active {box-shadow: 0 4px 10px -5px #000;}
+
+				.price {
+					display: inline-block;
+					vertical-align: top;
+					width: 100%;
+					height: auto;
+					padding: 12px;
+					text-align: center;
+				}
 
 				.indicator {
 					position: absolute;
-					top: 10px; left: 10px;
+					top: 7px; left: 10px;
 					width: 30px;
 					height: 30px;
 					border-radius: 50%;
@@ -793,14 +803,30 @@ body {
 				.thumbnail {
 					width: 100%;
 					height: auto;
-					border-top-left-radius: 3px;
-					border-top-right-radius: 3px;
 				}
 
 				.name {
 					display: block;
 					text-align: center;
 					padding: 1vh 1vw;
+				}
+
+				.coming-soon {
+					position: absolute;
+					top: 0; left: 0;
+					width: 100%;
+					height: 100%;
+					text-align: center;
+					background: rgba(0, 0, 0, 0.8);
+					color: white;
+					font-size: 25px;
+					font-weight: bold;
+
+					span {
+						position: absolute;
+						top: 50%; left: 50%;
+						transform: translate(-50%, -50%);
+					}
 				}
 			}
 		}

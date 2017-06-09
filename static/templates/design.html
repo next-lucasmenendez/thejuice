@@ -3,10 +3,17 @@
 	<ul class="templates-list">
 		<li class="template" ng-repeat="template in templates">
 			<input type="radio" id="input{{ template.value }}" ng-checked="design == template.value">
-			<label for="input{{ template.value }}" ng-click="select(template.value)">
-				<span class="indicator">
+			<label for="input{{ template.value }}" ng-click="template.avalible ? select(template.value) : comingSoon()">
+				<div class="coming-soon" ng-show="messageSoon && !template.avalible">
+					<span>
+						<i class="fa fa-calendar-times-o" aria-hidden="true"></i>
+						<p>Coming soon</p>
+					</span>
+				</div>
+				<span class="indicator" ng-hide="!template.avalible">
 					<i class="fa fa-check"></i>
 				</span>
+				<span class="price">{{ template.price }}</span>
 				<img class="thumbnail" src="{{ template.thumbnail }}"/>
 				<span class="name">{{ template.name }}</span>
 			</label>

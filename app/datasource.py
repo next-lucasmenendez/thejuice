@@ -1,22 +1,25 @@
 import re
 import wikipedia
+from app.database import DB
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 DBPEDIA="http://dbpedia.org/sparql"
+DBTABLE="figures"
 
 class DataSource:
 	def __init__(self, lang="en"):
 		self.lang = lang
 
+	'''
 	def search(self, query):
-		q = '''
+		q = 
 		SELECT DISTINCT ?name ?id WHERE {{
 			?person rdf:type dbo:Person . 
 			?person foaf:name ?name . 
 			?person dbo:wikiPageID ?id . 
 			FILTER contains(lcase(?name), "{query}").
 		}} GROUP BY ?name
-		'''
+		
 		sparql = SPARQLWrapper(DBPEDIA)
 		sparql.setQuery(q.format(query=query))
 		sparql.setReturnFormat(JSON)
@@ -36,6 +39,11 @@ class DataSource:
 
 				suggestions.append(item)
 		return suggestions
+	'''
+
+	def search(self, query):
+		db = DB()
+		return db.search(DBTABLE, "name", query)
 
 	def get(self, pageid):
 		q = '''

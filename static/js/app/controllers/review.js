@@ -4,7 +4,7 @@
 
 var app = angular.module("app");
 
-app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $stateParams, $timeout, requests, route, DataStorage) {
+app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $stateParams, $timeout, requests, tracker, route, DataStorage) {
 	$scope.$on('$stateChangeSuccess', function () {
 		var prev = route.Link('Search', 'search', 'base.search'),
 			current = route.Link('Review', 'review', 'base.review'),
@@ -31,7 +31,7 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 
 		if (query) {
 			$rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
-			$window.ga('send', 'event', 'index', 'search', query);
+			tracker.all('index', 'search', query);
 
 			requests.call('POST', '/review', {query: query, force: true, lang: $scope.lang}).then(
 				function (response) {
@@ -94,8 +94,10 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 		if (!$scope.current.hasOwnProperty('$$hashKey')) {
 			$scope.results.hits.push(angular.copy($scope.current));
 			$window.ga('send', 'event', 'review', 'event created');
+			tracker.all('review', 'event', 'created');
 		} else {
 			$window.ga('send', 'event', 'review', 'event edited');
+			tracker.all('review', 'event', 'edited');
 		}
 		$scope.showEdit	= false;
 	}
@@ -107,6 +109,7 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 	$scope.design = function() {
 		var query = $stateParams.query || $scope.query;
 		$window.ga('send', 'event', 'review', 'submited', query);
+		tracker.all('review', 'submited', query);
 		if ($scope.results && query) {
 			DataStorage.set(query, $scope.results);
 			DataStorage.set("lang", $scope.lang);
