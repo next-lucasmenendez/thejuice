@@ -17,4 +17,5 @@ exec(open(venv_start).read(), dict(__file__=venv_start))
 
 # import app as application
 sys.path.append(base_path)
+print("EY")
 from run import app as application
