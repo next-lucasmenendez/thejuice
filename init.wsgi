@@ -1,9 +1,20 @@
 #!/usr/bin/python3
+
 import sys
-import logging
-from run import app
+import site
 
-logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0, "/var/www/theJuice/")
+base_path	= '/var/www/theJuice'
+packages	= '%s/venv/lib/python3.5/dist-packages' % base_path
+packages64	= '%s/venv/lib64/python3.5/dist-packages' % base_path
+venv_start	= '%s/venv/bin/activate_this.py' % base_path
 
-app.run(host="0.0.0.0", debug=True, port=80)
+# Add virtualenv site packages
+site.addsitedir(packages)
+site.addsitedir(packages64)
+
+# Fired up virtualenv before include application
+exec(open(venv_start).read(), dict(__file__=venv_start))
+
+# import app as application
+sys.path.append(base_path)
+from run import app as application
