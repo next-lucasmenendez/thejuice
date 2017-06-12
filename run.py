@@ -155,7 +155,7 @@ Correct answer: {2}
 
 Here you have the results:
 
-Success rate: {2}%
+Success rate: {2:.2f}%
 Correct answers: {3}
 Failed answers: {4}
 
@@ -167,7 +167,7 @@ Questions / Answers:
 			send_mail(teacher_email, student_email, 'One student has answered a Trivia', body)
 			send_mail(student_email, teacher_email, 'You have answered a Trivia!', body)
 
-			return {"success": True, "message": "Emails sent.", "score": summary}, 200
+			return {"success": True, "message": "Emails sent.", "score": "{:.2f}".format(summary)}, 200
 		except Exception:
 			return {"success": False, "message": "Server error. Error when send email."}, 500
 
@@ -175,7 +175,7 @@ Questions / Answers:
 
 
 def send_mail(email_from, email_to, subject, content):
-	template = "From: Noa <{frm}>\nTo: {to}\nSubject: {subject}\n\n{message}"
+	template = "From: Mark from theJuice <{frm}>\nTo: {to}\nSubject: {subject}\n\n{message}"
 	try:
 		host, port = app.config.get('SMTP_ADDRESS'), app.config.get("SMTP_PORT")
 		server = smtplib.SMTP(host=host, port=port)

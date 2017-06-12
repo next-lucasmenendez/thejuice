@@ -23,7 +23,11 @@ $(function() {
 			    dataType: 'json',
 				success: function(success) {
 					showCongratulations(success.score);
-				}
+				},
+			    error: function(error) {
+					console.log(error);
+					printErrors('send-email', 'There was a problem and your Trivia wasn\'t send');
+			    }
 			});
 	    }
     });
