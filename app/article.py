@@ -84,10 +84,10 @@ class Article:
         synset = synsets[0]
 
         # Get the hypernym for this synset (again, take the first)
-        hypernym = synset.hypernyms()[0]#.hypernyms()[0]
-
-        # Get some hyponyms from this hypernym
-        hyponyms = hypernym.hyponyms()
+        # hypernym = synset.hypernyms()[0]#.hypernyms()[0]
+        #
+        # # Get some hyponyms from this hypernym
+        # hyponyms = hypernym.hyponyms()
 
         # Alternative 2 (new): Get the hyponyms for all the hypernyms for all the synsets
         # First get all the synonyms and lemmas to be removed from distractors
