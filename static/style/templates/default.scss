@@ -248,6 +248,9 @@ body {
 		&:hover {
 			background-color: #007b9f;
 		}
+		#spinner {
+			animation: spinner 1s infinite;
+		}
 	}
 }
 
@@ -290,4 +293,9 @@ body {
 			margin-right: auto;
 		}
 	}
+}
+
+@keyframes spinner {
+    from {transform: rotate(0deg);}
+    to {transform: rotate(360deg);}
 }

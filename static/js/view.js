@@ -9,6 +9,7 @@ $(function() {
     	var email = checkEmail();
     	var questions = checkQuestions();
 
+	    $('#spinner').slideDown();
     	if (email && questions) {
     		$.ajax({
 				url: '/validate',
@@ -25,10 +26,12 @@ $(function() {
 					showCongratulations(success.score);
 				},
 			    error: function(error) {
-					console.log(error);
+					$('#spinner').slideUp()
 					printErrors('send-email', 'There was a problem and your Trivia wasn\'t send');
 			    }
 			});
+	    } else {
+    		$('#spinner').slideUp();
 	    }
     });
 });

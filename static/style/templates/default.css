@@ -184,6 +184,8 @@ body {
     cursor: pointer; }
     .submit button:hover {
       background-color: #007b9f; }
+    .submit button #spinner {
+      animation: spinner 1s infinite; }
 
 .error {
   background-color: rgba(228, 4, 4, 0.8);
@@ -210,5 +212,10 @@ body {
       width: 100%;
       margin-left: auto;
       margin-right: auto; } }
+@keyframes spinner {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(360deg); } }
 
 /*# sourceMappingURL=default.css.map */
