@@ -164,20 +164,8 @@ Questions / Answers:
 {5}""".format(student_email, title, summary, correct_answers, len(questions)-correct_answers, questions_text)
 
 		try:
-			thread_email_teacher = threading.Thread(target=send_mail, kwargs={
-				'email_from': teacher_email,
-				'email_to': student_email,
-				'subject': 'One student has answered a Trivia',
-				'content': body
-			})
-			thread_email_student = threading.Thread(target=send_mail, kwargs={
-				'email_from': student_email,
-				'email_to': teacher_email,
-				'subject': 'You have answered a Trivia!',
-				'content': body
-			})
-			thread_email_teacher.start()
-			thread_email_student.start()
+			send_mail(teacher_email, student_email, 'One student has answered a Trivia', body)
+			send_mail(student_email, teacher_email, 'You have answered a Trivia!', body)
 
 			return {"success": True, "message": "Emails sent.", "score": summary}, 200
 		except Exception:
