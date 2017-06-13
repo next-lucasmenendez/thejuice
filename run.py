@@ -17,6 +17,7 @@ from flask import redirect
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.header import Header
+from wikipedia.exceptions import DisambiguationError
 
 from app.article import Article
 from app.render import Render
@@ -83,31 +84,38 @@ def search():
 	lang = request.form.get('lang') or "en"
 
 	if query:
+		try:
+			# Retrieve the trivia sentences
+			article = Article(title=query, lang=lang)
+			trivia_sentences = article.generate_trivia_sentences(lang=lang)
 
-		# Retrieve the trivia sentences
-		article = Article(title=query, lang=lang)
-		trivia_sentences = article.generate_trivia_sentences(lang=lang)
+			if len(trivia_sentences) > 0:
+				questions = {
+					'title': trivia_sentences[0]['title'],
+					'url': trivia_sentences[0]['url'],
+					'questions': []
+				}
+				for sentence in trivia_sentences:
+					question = {
+						'question': sentence['question'],
+						'answers': [
+							{
+								'name': a,
+								'correct': False
+							} for a in sentence['similar_words'][0:3]
+						]
+					}
+					question['answers'].append({'name': sentence['answer'], 'correct': True})
+					question['answers'] = sorted(question['answers'], key=lambda answer: answer['name'])
+					questions['questions'].append(question)
 
-		questions = {
-			'title': trivia_sentences[0]['title'],
-			'url': trivia_sentences[0]['url'],
-			'questions': []
-		}
-		for sentence in trivia_sentences:
-			question = {
-				'question': sentence['question'],
-				'answers': [
-					{
-						'name': a,
-						'correct': False
-					} for a in sentence['similar_words'][0:3]
-				]
-			}
-			question['answers'].append({'name': sentence['answer'], 'correct': True})
-			question['answers'] = sorted(question['answers'], key=lambda answer: answer['name'])
-			questions['questions'].append(question)
-
-		return {"success": True, "result": questions}, 200
+				return {"success": True, "result": questions}, 200
+			return {"success": False, "message": "Sorry, no historical figures found."}, 404
+		except DisambiguationError:
+			return {"success": False, "message": "There are a lot of results. Try to specify more the request.",
+						"type": "DisambiguationError"}, 500
+		except Exception as err:
+			return {"success": False, "message": "There are a lot of results. Try to specify more the request."}, 500
 
 	return {"success": False, "result": "No query provided."}, 400
 
