@@ -32,6 +32,9 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
                 $rootScope.$broadcast('hideSpinner');
             },
             function (error) {
+            	if (error.data.type === 'DisambiguationError') {
+            		$window.ga('send', 'event', 'search', 'DisambiguationError', $scope.query);
+	            }
                 $rootScope.$broadcast('hideSpinner');
                 $rootScope.$broadcast('showNotification', error.data.message);
                 $state.go('base.search');
