@@ -362,61 +362,133 @@ body {
 
 /* Login */
 
-.login {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 90%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 50px 5% 100px;
-	text-align: center;
-
-	.login-header {
-		display: inline-block;
-		vertical-align: top;
+.login-main {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	width: 100vw;
+	height: 85vh;
+	background-image: url("/static/img/background-login.jpg");
+	z-index: 0;
+	&:before{
+		content: '';
+		position: absolute;
+		top: 0; left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: linear-gradient(rgba(#005404, .7), rgba(#005404, .7));
+		z-index: -1;
+	}
+	.inner {
+		position: absolute;
+		top: 50%; left: 50%;
 		width: 100%;
 		height: auto;
 		text-align: center;
-		padding: 2vh 0;
-		.main-logo {
+		transform: translate(-50%, -50%);
+		.login-header {
 			display: inline-block;
 			vertical-align: top;
-			width: 70%;
+			width: auto;
 			height: auto;
-			text-align: center;
-			font-size: 2.5em;
-			max-height: 70px;
-			img {
+			.main-logo {
+				vertical-align: top;
+				display: inline-block;
+				width: 100%;
+				height: auto;
+				padding: 4vh 10vw;
+				white-space: nowrap;
+
+				img {height: 6vh;}
+				span {
+					display: inline-block;
+					vertical-align: bottom;
+					font-size: 4vh;
+					color: white;
+					line-height: 6vh;
+					margin: 0 1vw;
+				}
+			}
+			.login-disclaimer {
 				display: inline-block;
 				vertical-align: top;
 				width: 100%;
-				max-width: 400px;
+				height: auto;
+				padding: 4vh 10vw;
+				font-size: 3.5vh;
+				line-height: 5vh;
+				color: white;
+				max-width: 900px;
 			}
-			span {
-				vertical-align: middle;
-				line-height: 100px;
-				margin: 0 2vw;
+		}
+		.login-form {
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+			padding: 4vh 10vw;
+			.button {
+				padding: 2.5vh;
+				font-size: 2vh;
+				color: black;
+				background: white;
+				border: none;
+				font-weight: 350;
+			}
+		}
+
+		.login-steps {
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+			height: auto;
+			padding: 4vh 10vw;
+			font-size: 0;
+			text-align: center;
+			& > * {font-size: initial}
+
+			.step {
+				display: inline-block;
+				vertical-align: top;
+				position: relative;
+				width: 31%;
+				margin: 0 1%;
+				padding: 2vh 1vw;
+				color: white;
+				font-size: 2vh;
+				& > * {
+					display: block;
+					margin: 1vh 0;
+				}
+
+				.step-icon {font-size: 5vh;}
+				.step-number {font-weight: bold;}
 			}
 		}
 	}
+}
 
-	.login-form {
-		display: inline-block;
-		vertical-align: top;
-		position: relative;
+.login-footer {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	width: 100%;
+	height: 15vh;
+	background: white;
+
+	.brand {
+		position: absolute;
+		top: 50%; left: 0;
 		width: 100%;
 		height: auto;
+		transform: translateY(-50%);
 		text-align: center;
-		max-width: 640px;
-		margin: 2vh 0;
-		font-size: 0;
-		.button {
-			width: 30%;
-			height: 50px;
-			box-shadow: 0px 5px 3px #f2f2f2;
-			background-color: $main_blue;
+		p {
+			line-height: 3vh;
+			a {
+				text-decoration: none;
+				color: $main_blue;
+				font-weight: bold;
+			}
 		}
 	}
 }
