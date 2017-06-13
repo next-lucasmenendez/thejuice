@@ -115,7 +115,7 @@ def search():
 			return {"success": False, "message": "There are a lot of results. Try to specify more the request.",
 						"type": "DisambiguationError"}, 500
 		except Exception as err:
-			return {"success": False, "message": "There are a lot of results. Try to specify more the request."}, 500
+			return {"success": False, "message": "An error ocurred. Try again."}, 500
 
 	return {"success": False, "result": "No query provided."}, 400
 
