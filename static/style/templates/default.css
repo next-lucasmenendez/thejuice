@@ -149,6 +149,9 @@ body {
       .questions .congrats p .score {
         font-weight: 400;
         font-size: 4vw; }
+      .questions .congrats p.source {
+        font-size: 1.5em;
+        margin: 10vh 1vw; }
 
 .submit {
   margin: 15vh auto;

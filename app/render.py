@@ -36,7 +36,8 @@ class Render:
 		data = {
 			"title": self.title,
 			"teacher_email": self.email,
-			"questions": self.questions
+			"questions": self.questions,
+			"url": self.url
 		}
 
 		result = template.render(data).encode('utf-8')

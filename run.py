@@ -3,6 +3,7 @@ import os
 import datetime
 import smtplib
 import logging
+import sys
 from logging import FileHandler
 from logging import Formatter
 
@@ -26,6 +27,7 @@ file_handler.setFormatter(Formatter(
     '[in %(pathname)s:%(lineno)d]'
 ))
 app.logger.addHandler(file_handler)
+sys.getfilesystemencoding()
 
 
 def as_json(func):
@@ -173,8 +175,8 @@ Questions / Answers:
 {5}""".format(student_email, title, summary, correct_answers, len(questions)-correct_answers, questions_text)
 
 		try:
-			send_mail(teacher_email, student_email, 'One student has answered a Trivia', body)
-			send_mail(student_email, teacher_email, 'You have answered a Trivia!', body)
+			send_mail(teacher_email, student_email, 'One student has answered a Trivia', body.encode('utf-8'))
+			send_mail(student_email, teacher_email, 'You have answered a Trivia!', body.encode('utf-8'))
 
 			return {"success": True, "message": "Emails sent.", "score": "{:.2f}".format(summary)}, 200
 		except Exception:
