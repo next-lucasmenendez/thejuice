@@ -149,14 +149,15 @@ class Juicer:
 			datasource	= DataSource(lang=self.lang)
 			entity		= datasource.get(pageid=pageid)
 
-			self.name	= entity.get("name")
-			self.text	= entity.get("text")
-			self.images	= entity.get("images")
-			self.limits	= {
-				"start": entity.get("birth"),
-				"end": entity.get("death")
-			}
-			return True
+			if entity:
+				self.name	= entity.get("name")
+				self.text	= entity.get("text")
+				self.images	= entity.get("images")
+				self.limits	= {
+					"start": entity.get("birth"),
+					"end": entity.get("death")
+				}
+				return True
 		return False
 
 	def torender(self):

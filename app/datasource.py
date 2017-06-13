@@ -10,15 +10,18 @@ class DataSource:
 	def __init__(self, lang="en"):
 		self.lang = lang
 
-	'''
+
 	def search(self, query):
-		q = 
-		SELECT DISTINCT ?name ?id WHERE {{
+		q = '''
+		SELECT DISTINCT ?name ?id ?birth ?death WHERE {{
 			?person rdf:type dbo:Person . 
 			?person foaf:name ?name . 
 			?person dbo:wikiPageID ?id . 
+			?person dbo:birthDate ?birth . 
+			OPTIONAL{{?person dbo:deathDate ?death}} . 
 			FILTER contains(lcase(?name), "{query}").
 		}} GROUP BY ?name
+		'''
 		
 		sparql = SPARQLWrapper(DBPEDIA)
 		sparql.setQuery(q.format(query=query))
@@ -39,11 +42,12 @@ class DataSource:
 
 				suggestions.append(item)
 		return suggestions
-	'''
 
+	'''
 	def search(self, query):
 		db = DB()
 		return db.search(DBTABLE, "name", query)
+	'''
 
 	def get(self, pageid):
 		q = '''
@@ -55,30 +59,34 @@ class DataSource:
 				OPTIONAL{{?person dbo:deathDate ?death}} . 
 			}} GROUP BY ?name
 		'''
-		sparql = SPARQLWrapper(DBPEDIA)
-		sparql.setQuery(q.format(pageid=pageid))
+		sparql	= SPARQLWrapper(DBPEDIA)
+		query	= q.format(pageid=pageid)
+		sparql.setQuery(query)
 		sparql.setReturnFormat(JSON)
 
-		response = sparql.query().convert()
-		results = response['results']['bindings']
+		response	= sparql.query().convert()
+		results		= response.get('results')
 		if results:
-			item	= {}
-			result	= results[0]
+			bindings = results.get('bindings')
 
-			for key in result.keys():
-				item[key] = result[key]['value']
+			if bindings:
+				item	= {}
+				result	= bindings[0]
 
-			try:
-				wikipedia.set_lang(self.lang)
-				page = wikipedia.page(pageid=pageid)
-				raw, images = page.content, page.images
+				for key in result.keys():
+					item[key] = result[key]['value']
 
-				item["images"]	= self.__getimages(images)
-				item["text"]	= self.__cleantext(raw)
-			except Exception as e:
-				print(e)
-				return False
-			return item
+				try:
+					wikipedia.set_lang(self.lang)
+					page = wikipedia.page(pageid=pageid)
+					raw, images = page.content, page.images
+
+					item["images"]	= self.__getimages(images)
+					item["text"]	= self.__cleantext(raw)
+				except Exception as e:
+					print(e)
+					return False
+				return item
 
 		return False
 
