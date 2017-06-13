@@ -27,7 +27,7 @@ $(function() {
 				},
 			    error: function(error) {
 					$('#spinner').slideUp()
-					printErrors('send-email', 'There was a problem and your Trivia wasn\'t send');
+					printErrors('send-email', 'There was a problem and your Trivia wasn\'t sent');
 			    }
 			});
 	    } else {
