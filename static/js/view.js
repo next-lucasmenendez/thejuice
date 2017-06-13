@@ -23,10 +23,13 @@ $(function() {
 			    contentType: 'application/json; charset=utf-8',
 			    dataType: 'json',
 				success: function(success) {
-					showCongratulations(success.score);
+					showCongratulations(success.score,
+						$('.submit input#url').val(),
+						$('.header .text .name').text() + ' ' + $('.header .text .surname').text()
+					);
 				},
 			    error: function(error) {
-					$('#spinner').slideUp()
+					$('#spinner').slideUp();
 					printErrors('send-email', 'There was a problem and your Trivia wasn\'t sent');
 			    }
 			});
@@ -83,7 +86,7 @@ function checkQuestions() {
 	return questions;
 }
 
-function showCongratulations(score) {
+function showCongratulations(score, url, title) {
 	$('.submit').remove();
 	$('.question').remove();
 	$('.header').remove();
@@ -92,6 +95,7 @@ function showCongratulations(score) {
 		'<h1>Congratulations</h1>' +
 		'<p>You have finished the Trivia.</p>' +
 		'<p>Your score was <span class="score">' + score + '%</span></p>' +
+		'<p class="source">You can improve your results by reading the original article:<br \><a target="_blank" href="' + url + '">' + title + '</a></p>' +
 		'</div>'
 	);
 

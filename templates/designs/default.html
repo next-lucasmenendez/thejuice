@@ -87,7 +87,8 @@
 				<p>Introduce your email so we can send you the results of your test :)</p>
 				<ul class="error" style="display: none;"></ul>
 				<input type="email" name="studentEmail" id="studentEmail" placeholder="email">
-				<input type="email" name="teacherEmail" id="teacherEmail" placeholder="email" style="display: none;" value="{{ teacher_email }}">
+				<input type="email" id="teacherEmail" style="display: none;" value="{{ teacher_email }}">
+				<input type="text" id="url" style="display: none;" value="{{ url }}">
 				<button>Send <i id="spinner" class="fa fa-circle-o-notch" style="display: none;"></i></button>
 			</div>
 
