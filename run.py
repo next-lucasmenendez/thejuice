@@ -14,6 +14,9 @@ from flask import request
 from flask import make_response
 from flask import render_template
 from flask import redirect
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+from email.header import Header
 
 from app.article import Article
 from app.render import Render
@@ -175,18 +178,18 @@ Questions / Answers:
 {5}""".format(student_email, title, summary, correct_answers, len(questions)-correct_answers, questions_text)
 
 		try:
-			send_mail(teacher_email, student_email, 'One student has answered a Trivia', body.encode('utf-8'))
-			send_mail(student_email, teacher_email, 'You have answered a Trivia!', body.encode('utf-8'))
+			send_mail(teacher_email, 'One student has answered a Trivia', body)
+			send_mail(student_email, 'You have answered a Trivia!', body)
 
 			return {"success": True, "message": "Emails sent.", "score": "{:.2f}".format(summary)}, 200
-		except Exception:
+		except Exception as e:
+			print(e)
 			return {"success": False, "message": "Server error. Error when send email."}, 500
 
 	return {"success": False, "message": "Bad request. More data required."}, 400
 
 
-def send_mail(email_from, email_to, subject, content):
-	template = "From: Mark from theJuice <{frm}>\nTo: {to}\nSubject: {subject}\n\n{message}"
+def send_mail(email_to, subject, content):
 	try:
 		host, port = app.config.get('SMTP_ADDRESS'), app.config.get("SMTP_PORT")
 		server = smtplib.SMTP(host=host, port=port)
@@ -198,11 +201,21 @@ def send_mail(email_from, email_to, subject, content):
 		server.ehlo()
 		server.login(username, password)
 
-		message = template.format(frm=email_from, to=email_to, message=content, subject=subject)
-		server.sendmail(email_from, email_to, message)
+		message = MIMEMultipart('alternative')
+		message.set_charset('utf8')
+		frm = 'Mark from theJuice <{frm}>'.format(frm=username)
+		message['FROM'] = frm
+		message['Subject'] = Header(subject.encode('utf-8'), 'UTF-8')
+		message['To'] = email_to
+		plain = MIMEText(content.encode('utf-8'), 'plain', 'utf-8')
+		message.attach(plain)
+
+		server.sendmail(username, email_to, message.as_string())
 
 		server.quit()
-	except smtplib.SMTPException as err:
+	except Exception as err:
+		exc_type, exc_obj, exc_tb = sys.exc_info()
+		print(exc_tb.tb_lineno)
 		print(err)
 		raise err
 
