@@ -428,11 +428,14 @@ body {
 			padding: 4vh 10vw;
 			.button {
 				padding: 2.5vh;
-				font-size: 2vh;
+				font-size: 20px;
 				color: black;
 				background: white;
 				border: none;
-				font-weight: 350;
+				font-weight: 400;
+				box-shadow: 0 10px 25px -15px #000;
+				transition: all .2s ease-in-out;
+				&:hover, &:active {background: #eee;}
 			}
 		}
 
@@ -454,13 +457,13 @@ body {
 				margin: 0 1%;
 				padding: 2vh 1vw;
 				color: white;
-				font-size: 2vh;
+				font-size: 18px;
 				& > * {
 					display: block;
 					margin: 1vh 0;
 				}
 
-				.step-icon {font-size: 5vh;}
+				.step-icon {font-size: 40px;}
 				.step-number {font-weight: bold;}
 			}
 		}
@@ -483,7 +486,8 @@ body {
 		transform: translateY(-50%);
 		text-align: center;
 		p {
-			line-height: 3vh;
+			line-height: 30px;
+			font-size: 16px;
 			a {
 				text-decoration: none;
 				color: $main_blue;

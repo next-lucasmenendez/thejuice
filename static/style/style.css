@@ -373,11 +373,15 @@ body {
       padding: 4vh 10vw; }
       .login-main .inner .login-form .button {
         padding: 2.5vh;
-        font-size: 2vh;
+        font-size: 20px;
         color: black;
         background: white;
         border: none;
-        font-weight: 350; }
+        font-weight: 400;
+        box-shadow: 0 10px 25px -15px #000;
+        transition: all .2s ease-in-out; }
+        .login-main .inner .login-form .button:hover, .login-main .inner .login-form .button:active {
+          background: #eee; }
     .login-main .inner .login-steps {
       display: inline-block;
       vertical-align: top;
@@ -396,12 +400,12 @@ body {
         margin: 0 1%;
         padding: 2vh 1vw;
         color: white;
-        font-size: 2vh; }
+        font-size: 18px; }
         .login-main .inner .login-steps .step > * {
           display: block;
           margin: 1vh 0; }
         .login-main .inner .login-steps .step .step-icon {
-          font-size: 5vh; }
+          font-size: 40px; }
         .login-main .inner .login-steps .step .step-number {
           font-weight: bold; }
 
@@ -421,7 +425,8 @@ body {
     transform: translateY(-50%);
     text-align: center; }
     .login-footer .brand p {
-      line-height: 3vh; }
+      line-height: 30px;
+      font-size: 16px; }
       .login-footer .brand p a {
         text-decoration: none;
         color: #0085AC;

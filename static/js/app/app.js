@@ -22,6 +22,10 @@ var checkAccessToken = function ($q, $state, $timeout) {
 
 app.run(function($rootScope, $location, $window) {
 	$window.ga('create', 'UA-92654268-3', 'auto');
+
+	$rootScope.$on('$stateChangeSuccess', function () {
+		$window.ga('send', 'pageview', $location.path());
+	});
 });
 
 app.config(function($stateProvider, $urlRouterProvider) {
