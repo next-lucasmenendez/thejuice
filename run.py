@@ -19,7 +19,7 @@ from app.render import Render
 
 app	= Flask(__name__)
 app.config.from_pyfile('config.py')
-file_handler = FileHandler('/var/log/thejuice/warning.log')
+file_handler = FileHandler('warning.log')
 file_handler.setLevel(logging.WARNING)
 file_handler.setFormatter(Formatter(
     '%(asctime)s %(levelname)s: %(message)s '
