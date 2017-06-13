@@ -19,7 +19,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 	$scope.query = "";
 	$scope.submitSearchForm = function() {
         $rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
-        $window.ga('send', 'event', 'index', 'search', $scope.query);
+        $window.ga('send', 'event', 'index', 'search', $scope.lang, $scope.query);
         service.request('POST', '/question', {query: $scope.query, lang: $scope.lang}).then(
             function (response) {
                 if (response.success) {
@@ -33,7 +33,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
             },
             function (error) {
             	if (error.data.type === 'DisambiguationError') {
-            		$window.ga('send', 'event', 'search', 'DisambiguationError', $scope.query);
+            		$window.ga('send', 'event', 'search', 'DisambiguationError', $scope.lang, $scope.query);
 	            }
                 $rootScope.$broadcast('hideSpinner');
                 $rootScope.$broadcast('showNotification', error.data.message);
