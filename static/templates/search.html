@@ -11,11 +11,7 @@
 			Search
 		</button>
 
-		<!--<autosuggestions query="query" lang="lang" callback="reviewPage(pageId)"></autosuggestions>-->
-
-		<ul class='results ng-hide' ng-show='results'>
-			<li class='item' ng-repeat='result in results' ng-click="reviewPage(result.id)">{{result.name}}</li>
-		</ul>
+		<autosuggestions query="query" items="results" lang="lang" submit="reviewPage(pageId)" search="submitSearchForm(query)"></autosuggestions>
 
 		<div class="languages" ng-hide="query">
 			<input type="radio" id="langen" name="lang" ng-model="lang" value="en" ng-checked="true">

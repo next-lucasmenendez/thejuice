@@ -144,6 +144,12 @@ class Juicer:
 			return datasource.search(query=query)
 		return False
 
+	def autosuggest(self, query):
+		if query:
+			datasource = DataSource(lang=self.lang)
+			return datasource.autosuggest(query=query)
+		return False
+
 	def get(self, pageid):
 		if pageid:
 			datasource	= DataSource(lang=self.lang)

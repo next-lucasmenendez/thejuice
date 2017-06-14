@@ -43,11 +43,11 @@ class DataSource:
 				suggestions.append(item)
 		return suggestions
 
-	'''
-	def search(self, query):
+
+	def autosuggest(self, query):
 		db = DB()
 		return db.search(DBTABLE, "name", query)
-	'''
+
 
 	def get(self, pageid):
 		q = '''

@@ -141,19 +141,33 @@ app.directive("autosuggestions", function($rootScope, $compile, $timeout, reques
 		replace: true,
 		scope: {
             query: '=',
+			items: "=",
 			lang: '=',
-			callback: '&'
+			search: '&',
+			submit: '&'
         },
 		templateUrl: "/static/templates/autosuggestions.html",
 		link: function (scope, elem) {
+			scope.$watch('items', function (newValues, oldValues) {
+				if (newValues != oldValues) {
+					$timeout(function () {
+						scope.searchAvalible = false;
+						scope.current = false;
+						scope.results = newValues;
+						scope.$apply();
+					});
+				}
+			});
+
 			scope.$watch('query', function (newValue, oldValue) {
 				if (newValue != oldValue) {
 					if (newValue.length > 2) {
-						var uri = '/search/' + newValue;
+						var uri = '/autosuggest/' + newValue;
 
 						requests.call('GET', uri, {lang: scope.lang}).then(
 							function (result) {
 								$timeout(function () {
+									scope.searchAvalible = true;
 									scope.current = false;
 									scope.results = result.results;
 									scope.$apply();
@@ -161,6 +175,7 @@ app.directive("autosuggestions", function($rootScope, $compile, $timeout, reques
 							},
 							function (error) {
 								$timeout(function () {
+									scope.searchAvalible = false;
 									scope.current = false;
 									scope.results = false;
 									scope.$apply();
@@ -169,6 +184,7 @@ app.directive("autosuggestions", function($rootScope, $compile, $timeout, reques
 						)
 					} else {
 						$timeout(function () {
+							scope.searchAvalible = false;
 							scope.current = false;
 							scope.results = false;
 							scope.$apply();

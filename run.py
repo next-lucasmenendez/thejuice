@@ -57,11 +57,25 @@ def login():
 @app.route("/search/<string:query>", methods=["GET"])
 @as_json
 def search(query):
-
 	lang = request.args.get('lang') or "en"
 	try:
 		juicer	= Juicer(lang=lang)
 		results	= juicer.search(query=query)
+		status	= 200 if results else 404
+
+		return {"success": True, "results": results}, status
+	except:
+		pass
+
+	return {"success": False, "message": "Something was wrong..."}, 500
+
+@app.route("/autosuggest/<string:query>", methods=["GET"])
+@as_json
+def autosuggest(query):
+	lang = request.args.get('lang') or "en"
+	try:
+		juicer	= Juicer(lang=lang)
+		results	= juicer.autosuggest(query=query)
 		status	= 200 if results else 404
 
 		return {"success": True, "results": results}, status
@@ -120,4 +134,4 @@ def output(query):
 
 
 if __name__ == "__main__":
-	app.run(host="0.0.0.0", debug=True, port=5000)
+	app.run(host="0.0.0.0", debug=True, port=80)

@@ -1,3 +1,4 @@
 <ul class='results ng-hide' ng-show='results'>
-	<li id='result{{result.id}}' class='item' ng-repeat='result in results' ng-class="{'current': result.active}" ng-click="callback({pageId: result.id})">{{result.name}}</li>
+	<li	class='item ng-hide' ng-show="searchAvalible" ng-click="search({query: query})">Search on Wikipedia: <i>{{ query }}</i>...</li>
+	<li id='result{{result.id}}' class='item' ng-repeat='result in results' ng-class="{'current': result.active}" ng-click="submit({ pageId: result.id })">{{ result.name }}</li>
 </ul>
