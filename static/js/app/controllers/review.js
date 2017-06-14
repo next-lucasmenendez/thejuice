@@ -4,7 +4,7 @@
 
 var app = angular.module("app");
 
-app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $stateParams, $timeout, service, route, DataStorage) {
+app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $stateParams, $timeout, service, tracker, route, DataStorage) {
 	$scope.$on('$stateChangeSuccess', function () {
 		var prev = route.Link('Search', 'search', 'base.search'),
 			current = route.Link('Review', 'review', 'base.review'),
@@ -60,16 +60,16 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 
 		if (!$scope.current.hasOwnProperty('$$hashKey')) {
 			$scope.result.questions.push(angular.copy($scope.current));
-			$window.ga('send', 'event', 'review', 'question created');
+			tracker.all('review', 'question', 'created');
 		} else {
-			$window.ga('send', 'event', 'review', 'question edited');
+			tracker.all('review', 'question', 'edited');
 		}
 		$scope.showEdit	= false;
 	};
 
 	$scope.download = function() {
 		if ($scope.result.questions) {
-			$window.ga('send', 'event', 'review', 'submited', $scope.query);
+			tracker.all('review', 'submited', $scope.query);
 			var email = sessionStorage.getItem('email');
 			var result = angular.copy($scope.result);
 
