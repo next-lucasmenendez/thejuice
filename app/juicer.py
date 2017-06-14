@@ -124,7 +124,7 @@ class Juicer:
 	def __parselimits(self):
 		start	= None
 		end		= datetime.today() if not self.limits["end"] else None
-		formats	= ["%Y-%m-%d", "%Y-%m", "%Y"]
+		formats	= ["%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%Y-%m", "%Y"]
 
 		for fmt in formats:
 			try:

@@ -4,11 +4,44 @@ from app.database import DB
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 DBPEDIA="http://dbpedia.org/sparql"
-DBTABLE="figures"
+DBTABLE="figures_en"
 
 class DataSource:
 	def __init__(self, lang="en"):
 		self.lang = lang
+
+	def __sparql(self, query):
+		sparql = SPARQLWrapper(DBPEDIA)
+		sparql.setQuery(query)
+		sparql.setReturnFormat(JSON)
+
+		return sparql.query().convert()
+
+	def __getdbpedia(self, pageid):
+		q = '''
+			SELECT DISTINCT ?name ?birth ?death ?description ?id WHERE {{
+				?person rdf:type dbo:Person . 
+				?person dbo:wikiPageID {pageid} . 
+				?person foaf:name ?name . 
+				?person dbo:birthDate ?birth . 
+				OPTIONAL{{?person dbo:deathDate ?death}} . 
+			}} GROUP BY ?name
+		'''.format(pageid=pageid)
+
+		response	= self.__sparql(q)
+		results		= response.get('results')
+		if results:
+			bindings = results.get('bindings')
+
+			if bindings:
+				item = {}
+				result = bindings[0]
+
+				for key in result.keys():
+					item[key] = result[key]['value']
+
+				return item
+		return None
 
 
 	def search(self, query):
@@ -21,14 +54,10 @@ class DataSource:
 			OPTIONAL{{?person dbo:deathDate ?death}} . 
 			FILTER contains(lcase(?name), "{query}").
 		}} GROUP BY ?name
-		'''
-		
-		sparql = SPARQLWrapper(DBPEDIA)
-		sparql.setQuery(q.format(query=query))
-		sparql.setReturnFormat(JSON)
+		'''.format(query=query)
 
 		suggestions	= []
-		response	= sparql.query().convert()
+		response	= self.__sparql(q)
 		results		= response['results']['bindings']
 
 		ids = []
@@ -43,50 +72,32 @@ class DataSource:
 				suggestions.append(item)
 		return suggestions
 
-
 	def autosuggest(self, query):
 		db = DB()
 		return db.search(DBTABLE, "name", query)
 
-
 	def get(self, pageid):
-		q = '''
-			SELECT DISTINCT ?name ?birth ?death ?description ?id WHERE {{
-				?person rdf:type dbo:Person . 
-				?person dbo:wikiPageID {pageid} . 
-				?person foaf:name ?name . 
-				?person dbo:birthDate ?birth . 
-				OPTIONAL{{?person dbo:deathDate ?death}} . 
-			}} GROUP BY ?name
-		'''
-		sparql	= SPARQLWrapper(DBPEDIA)
-		query	= q.format(pageid=pageid)
-		sparql.setQuery(query)
-		sparql.setReturnFormat(JSON)
+		db 		= DB()
+		results = db.search(DBTABLE, "id", pageid)
 
-		response	= sparql.query().convert()
-		results		= response.get('results')
 		if results:
-			bindings = results.get('bindings')
+			item = results[0]
+		else:
+			item = self.__getdbpedia(pageid=pageid)
 
-			if bindings:
-				item	= {}
-				result	= bindings[0]
+		if item:
+			try:
+				wikipedia.set_lang(self.lang)
+				page = wikipedia.page(pageid=pageid)
+				raw, images = page.content, page.images
 
-				for key in result.keys():
-					item[key] = result[key]['value']
+				item["images"] = self.__getimages(images)
+				item["text"] = self.__cleantext(raw)
 
-				try:
-					wikipedia.set_lang(self.lang)
-					page = wikipedia.page(pageid=pageid)
-					raw, images = page.content, page.images
-
-					item["images"]	= self.__getimages(images)
-					item["text"]	= self.__cleantext(raw)
-				except Exception as e:
-					print(e)
-					return False
 				return item
+			except Exception as e:
+				print(e)
+				return False
 
 		return False
 
