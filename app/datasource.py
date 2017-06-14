@@ -43,7 +43,6 @@ class DataSource:
 				return item
 		return None
 
-
 	def search(self, query):
 		q = '''
 		SELECT DISTINCT ?name ?id ?birth ?death WHERE {{

@@ -175,7 +175,7 @@ app.directive("autosuggestions", function($rootScope, $compile, $timeout, reques
 							},
 							function (error) {
 								$timeout(function () {
-									scope.searchAvalible = false;
+									scope.searchAvalible = Boolean(newValue);
 									scope.current = false;
 									scope.results = false;
 									scope.$apply();
@@ -184,7 +184,7 @@ app.directive("autosuggestions", function($rootScope, $compile, $timeout, reques
 						)
 					} else {
 						$timeout(function () {
-							scope.searchAvalible = false;
+							scope.searchAvalible = Boolean(newValue);
 							scope.current = false;
 							scope.results = false;
 							scope.$apply();
@@ -217,6 +217,7 @@ app.directive("autosuggestions", function($rootScope, $compile, $timeout, reques
 						} else if (key == down) {
 							current = (current < last) ? current + 1 : first;
 						} else if (key == enter) {
+							e.preventDefault();
 							scope.chooseItem(current);
 						}
 					}
@@ -234,8 +235,8 @@ app.directive("autosuggestions", function($rootScope, $compile, $timeout, reques
 			}
 
 			scope.chooseItem = function(index) {
-				var q = scope.results[index].name;
-				scope.callback({name: q});
+				var result = scope.results[index];
+				scope.submit({pageId: result.id});
 			}
 		}
 	}
