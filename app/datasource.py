@@ -4,7 +4,7 @@ from app.database import DB
 from SPARQLWrapper import SPARQLWrapper, JSON
 
 DBPEDIA="http://dbpedia.org/sparql"
-DBTABLE="figures_en"
+TABLE_PREFIX="figures_{lang}"
 
 class DataSource:
 	def __init__(self, lang="en"):
@@ -72,12 +72,14 @@ class DataSource:
 		return suggestions
 
 	def autosuggest(self, query):
-		db = DB()
-		return db.search(DBTABLE, "name", query)
+		db 		= DB()
+		table	= TABLE_PREFIX.format(lang=self.lang)
+		return db.search(table, "name", query)
 
 	def get(self, pageid):
-		db 		= DB()
-		results = db.search(DBTABLE, "id", pageid)
+		db		= DB()
+		table	= TABLE_PREFIX.format(lang=self.lang)
+		results = db.search(table, "id", pageid)
 
 		if results:
 			item = results[0]

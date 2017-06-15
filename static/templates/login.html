@@ -1,16 +1,59 @@
-<div class="login">
-	<div class="login-header">
-		<a class="main-logo" href="/">
-			<img src="/static/img/logo.svg"/>
-		</a>
-	</div>
+<div class="login-main">
+	<div class="inner">
+		<div class="login-header">
+			<div class="main-logo">
+				<img  src="/static/img/logo-w.svg"/><span>// history</span>
+			</div>
+			<div class="login-disclaimer">
+				<p>Create <b>infographics in seconds</b> about any historical figure</p>
+			</div>
+		</div>
 
-	<form class="login-form" ng-submit="submitLoginForm()">
-		<button class="button" type="submit">
-			<span class="icon">
-				<i class="fa fa-facebook"></i>
-			</span>
-			Facebook Login
-		</button>
-	</form>
+		<form class="login-form" ng-submit="submitLoginForm()">
+			<button class="button" type="submit">
+				<span class="icon">
+					<i class="fa fa-facebook"></i>
+				</span>
+				Facebook Login
+			</button>
+		</form>
+
+		<div class="login-steps">
+			<div class="step">
+				<span class="step-icon">
+					<i class="fa fa-search"></i>
+				</span>
+				<span class="step-number">1</span>
+				<p class="step-desc">Search any figure</p>
+			</div>
+			<div class="step">
+				<span class="step-icon">
+					<i class="fa fa-pencil"></i>
+				</span>
+				<span class="step-number">2</span>
+				<p class="step-desc">Review the generated events</p>
+			</div>
+
+			<div class="step">
+				<span class="step-icon">
+					<i class="fa fa-paint-brush"></i>
+				</span>
+				<span class="step-number">3</span>
+				<p class="step-desc">Select a template</p>
+			</div>
+			<div class="step">
+				<span class="step-icon">
+					<i class="fa fa-file-image-o"></i>
+				</span>
+				<span class="step-number">4</span>
+				<p class="step-desc">Enjoy the infographic!</p>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="login-footer">
+	<div class="brand">
+		<p>Made with <i class="fa fa-heart"></i> by <a target="_blank" href="http://labs.beeva.com">labs.beeva.com</a> 2017. All Rights Reserved. <a target="_blank" href="http://takethejuice.com/en/legal.html">Terms and conditions.</a></p>
+		<p>Contact <a href="mailto:hello@takethejuice.com">hello@takethejuice.com</a></p>
+	</div>
 </div>

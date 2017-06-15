@@ -4,7 +4,7 @@ import sys
 import json
 
 from random import randint
-from textblob import TextBlob
+from polyglot.text import Text
 from datetime import datetime
 
 from app.datasource import DataSource
@@ -87,15 +87,14 @@ class Juicer:
 	def __getkeywords(self):
 		for hit in self.hits:
 			content = hit['content']
-			blob 	= TextBlob(content)
-
-			keywords = []
-			for word, pos in blob.tags:
-				if str(pos).startswith("VB") or pos == "NN":
-					keywords.append(word.lower())
-
+			if content:
+				blob = Text(content, hint_language_code=self.lang)
+				keywords = []
+				for word, pos in blob.pos_tags:
+					print(word, pos)
+					if pos == "VERB" or pos == "NOUN" or pos == "PROPN":
+						keywords.append(word.lower())
 			hit['keywords'] = keywords
-
 		return True
 
 	def __geticons(self):

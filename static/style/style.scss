@@ -1,6 +1,9 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,400,700');
 
+$main_blue: #0085AC;
+$secondary_blue: #007b9f;
+
 * {
 	margin: 0;
 	padding: 0;
@@ -47,7 +50,7 @@ body {
 	width: auto;
     height: auto;
     text-align: center;
-	background: #0085AC;
+	background: $main_blue;
     font-size: 16px;
     color: #ffffff;
 	text-decoration: none;
@@ -58,22 +61,22 @@ body {
 	outline: none;
 	padding: 10px 20px;
 	box-sizing: border-box;
-	border: 1px solid #0085AC;
+	border: 1px solid $main_blue;
 	font-family: 'Raleway', sans-serif;
 	transition: all .2s ease-in-out;
 }
 
 .button.outline {
 	background: #ffffff;
-	color: #0085AC;
+	color: $main_blue;
 }
 
 .button:hover,
 .button:active,
 .button.outline:hover,
 .button.outline:active {
-	background: #007b9f;
-	border-color: #007b9f;
+	background: $secondary_blue;
+	border-color: $secondary_blue;
 	color: #ffffff;
 }
 
@@ -90,7 +93,7 @@ body {
 	vertical-align: top;
 	width: 100%;
 	height: auto;
-	background: #007b9f;
+	background: $main_blue;
 	color: white;
 	padding: 1vh 0;
 	font-size: 0;
@@ -177,7 +180,7 @@ body {
 			text-align: center;
 			transition: all .2s ease-in-out;
 			cursor: pointer;
-			&:hover, &:active {background: #0085AC;}
+			&:hover, &:active {background: $main_blue;}
 		}
 
 		.menu {
@@ -229,9 +232,9 @@ body {
 			text-align: right;
 			a {
 				color: white;
-				background: #0085AC;
+				background: $main_blue;
 				box-shadow: 0px 5px 3px #f2f2f2;
-				&:hover, &:active {background: #007b9f;}
+				&:hover, &:active {background: $secondary_blue;}
 			}
 		}
 
@@ -273,7 +276,7 @@ body {
 			color: #bbbbbb;
 			&.active {
 				.number {
-					background: #0085AC;
+					background: $main_blue;
 					color: white;
 					font-weight: bold;
 				}
@@ -358,53 +361,138 @@ body {
 
 /* Login */
 
-.login {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	width: 90%;
-	max-width: 1200px;
-	margin: 0 auto;
-	padding: 50px 5% 100px;
-	text-align: center;
-
-	.login-header {
-		display: inline-block;
-		vertical-align: top;
+.login-main {
+	position: relative;
+	display: inline-block;
+	vertical-align: top;
+	width: 100vw;
+	height: 85vh;
+	background-image: url("/static/img/background-login.jpg");
+	z-index: 0;
+	&:before{
+		content: '';
+		position: absolute;
+		top: 0; left: 0;
+		width: 100%;
+		height: 100%;
+		background-image: linear-gradient(rgba($secondary_blue, .7), rgba($secondary_blue, .7));
+		z-index: -1;
+	}
+	.inner {
+		position: absolute;
+		top: 50%; left: 50%;
 		width: 100%;
 		height: auto;
 		text-align: center;
-		padding: 2vh 0;
-		.main-logo {
+		transform: translate(-50%, -50%);
+		.login-header {
 			display: inline-block;
 			vertical-align: top;
-			width: 70%;
+			width: auto;
 			height: auto;
-			text-align: center;
-			img {
+			.main-logo {
+				vertical-align: top;
+				display: inline-block;
+				width: 100%;
+				height: auto;
+				padding: 4vh 10vw;
+				white-space: nowrap;
+
+				img {height: 6vh;}
+				span {
+					display: inline-block;
+					vertical-align: bottom;
+					font-size: 4vh;
+					color: white;
+					line-height: 6vh;
+					margin: 0 1vw;
+				}
+			}
+			.login-disclaimer {
 				display: inline-block;
 				vertical-align: top;
 				width: 100%;
-				max-width: 400px;
+				height: auto;
+				padding: 4vh 10vw;
+				font-size: 3.5vh;
+				line-height: 5vh;
+				color: white;
+				max-width: 900px;
+			}
+		}
+		.login-form {
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+			padding: 4vh 10vw;
+			.button {
+				padding: 2.5vh;
+				font-size: 20px;
+				color: black;
+				background: white;
+				border: none;
+				font-weight: 400;
+				box-shadow: 0 10px 25px -15px #000;
+				transition: all .2s ease-in-out;
+				cursor: pointer;
+				&:hover, &:active {background: #eee;}
+			}
+		}
+
+		.login-steps {
+			display: inline-block;
+			vertical-align: top;
+			width: 100%;
+			height: auto;
+			padding: 4vh 10vw;
+			font-size: 0;
+			text-align: center;
+			& > * {font-size: initial}
+
+			.step {
+				display: inline-block;
+				vertical-align: top;
+				position: relative;
+				width: 23%;
+				margin: 0 1%;
+				padding: 2vh 1vw;
+				color: white;
+				font-size: 18px;
+				& > * {
+					display: block;
+					margin: 1vh 0;
+				}
+
+				.step-icon {font-size: 40px;}
+				.step-number {font-weight: bold;}
 			}
 		}
 	}
+}
 
-	.login-form {
-		display: inline-block;
-		vertical-align: top;
-		position: relative;
+.login-footer {
+	display: inline-block;
+	vertical-align: top;
+	position: relative;
+	width: 100%;
+	height: 15vh;
+	background: white;
+
+	.brand {
+		position: absolute;
+		top: 50%; left: 0;
 		width: 100%;
 		height: auto;
+		transform: translateY(-50%);
 		text-align: center;
-		max-width: 640px;
-		margin: 2vh 0;
-		font-size: 0;
-		.button {
-			width: 30%;
-			height: 50px;
-			box-shadow: 0px 5px 3px #f2f2f2;
+		p {
+			line-height: 30px;
+			font-size: 16px;
+			a {
+				text-decoration: none;
+				color: $main_blue;
+				font-weight: bold;
+			}
 		}
 	}
 }
@@ -421,7 +509,7 @@ body {
 		padding: 20px 0;
 	}
 
-	.search-form, .login-form {
+	.search-form {
 		display: inline-block;
 		vertical-align: top;
 		position: relative;
@@ -472,7 +560,7 @@ body {
 				display: inline-block;
 				vertical-align: top;
 				text-transform: uppercase;
-				color: #007b9f;
+				color: $secondary_blue;
 				background: transparent;
 				width: auto;
 				height: 30px;
@@ -516,7 +604,7 @@ body {
 				cursor: pointer;
 				transition: all .2s ease-in-out;
 				&:hover, &:active, &.current {
-					background: #007b9f;
+					background: $secondary_blue;
 					color: white;
 				}
 			}
@@ -720,11 +808,11 @@ body {
 
 				&.cancel {margin-right:0;}
 				&.save {
-					background: #007b9f;
+					background: $secondary_blue;
 					color: white;
 					border-color: transparent;
 					&:hover, &:active {
-						background: #0085AC;
+						background: $main_blue;
 					}
 				}
 			}
