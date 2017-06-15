@@ -72,11 +72,13 @@ class DataSource:
 		return suggestions
 
 	def autosuggest(self, query):
+		#Get suggestions based a query
 		db 		= DB()
 		table	= TABLE_PREFIX.format(lang=self.lang)
 		return db.search(table, "name", query)
 
 	def get(self, pageid):
+		#Get pageid data from database and wikipedia
 		db		= DB()
 		table	= TABLE_PREFIX.format(lang=self.lang)
 		results = db.search(table, "id", pageid)

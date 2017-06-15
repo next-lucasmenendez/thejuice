@@ -10,7 +10,6 @@ Morfessor==2.0.2a4
 pycld2==0.31
 PyICU==1.9.7
 polyglot==16.7.4
-textblob==0.12.0
 xmltodict==0.11.0
 Unidecode==0.4.20
 SPARQLWrapper==1.8.0
