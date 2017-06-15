@@ -61,9 +61,11 @@ def search(query):
 	try:
 		juicer	= Juicer(lang=lang)
 		results	= juicer.search(query=query)
-		status	= 200 if results else 404
 
-		return {"success": True, "results": results}, status
+		if results:
+			return {"success": True, "results": results}, 200
+		else:
+			return {"success": False, "message": "Sorry! Figure not found..."}, 404
 	except:
 		pass
 
