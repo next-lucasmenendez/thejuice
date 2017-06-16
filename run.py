@@ -12,8 +12,10 @@ from flask import render_template
 
 from app.juicer import Juicer
 from app.render import Render
+from app.notice import Notice
 
 app	= Flask(__name__)
+notice = Notice()
 
 
 def as_json(func):
@@ -65,6 +67,7 @@ def search(query):
 		if results:
 			return {"success": True, "results": results}, 200
 		else:
+			notice.notify("Figure '{name}' not found on '{lang}'".format(name=query, lang=lang))
 			return {"success": False, "message": "Sorry! Figure not found..."}, 404
 	except:
 		pass
@@ -97,10 +100,13 @@ def review(pageid):
 			if success:
 				return {"success": True, "result": juicer.torender()}, 200
 			else:
+				notice.notify("Figure '{pageid}' not found on '{lang}'".format(pageid=pageid, lang=lang))
 				return {"success": False, "message": "Sorry... We have problems ;("}, 500
 		except Exception as e:
-			print(e)
+			notice.notify("Figure '{pageid}' not found on '{lang}'".format(pageid=pageid, lang=lang))
 			return {"success": False, "message": "Sorry... We could not find your request."}, 404
+
+	notice.notify("Figure '{pageid}' not found on '{lang}'".format(pageid=pageid, lang=lang))
 	return {"success": False, "message": "No query provided"}, 400
 
 
