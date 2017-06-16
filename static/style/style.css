@@ -694,12 +694,11 @@ body {
         cursor: pointer; }
         .pills .edit-popup .edit-form button:hover, .pills .edit-popup .edit-form button:active {
           background: #f4f4f4; }
-        .pills .edit-popup .edit-form button.cancel {
-          margin-right: 0; }
         .pills .edit-popup .edit-form button.save {
           background: #007b9f;
           color: white;
-          border-color: transparent; }
+          border-color: transparent;
+          margin-right: 0; }
           .pills .edit-popup .edit-form button.save:hover, .pills .edit-popup .edit-form button.save:active {
             background: #0085AC; }
 

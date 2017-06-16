@@ -806,11 +806,11 @@ body {
 				cursor: pointer;
 				&:hover, &:active {background: #f4f4f4;}
 
-				&.cancel {margin-right:0;}
 				&.save {
 					background: $secondary_blue;
 					color: white;
 					border-color: transparent;
+					margin-right:0;
 					&:hover, &:active {
 						background: $main_blue;
 					}
