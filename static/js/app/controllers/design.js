@@ -23,7 +23,7 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 	$scope.templates	= [
 		{
 			thumbnail: '/static/style/templates/default.jpg',
-			value: 'nude',
+			value: 'simple',
 			name: 'Simple',
 			paid: false,
 			price: "Free",
