@@ -14,7 +14,7 @@ TEMPLATES="{base}/templates/designs"
 class Template:
 	def __init__(self, design='nude'):
 		self.base	= os.path.abspath(os.path.dirname(sys.argv[0]))
-		templates	= TEMPLATES.format(base=base)
+		templates	= TEMPLATES.format(base=self.base)
 		loader		= FileSystemLoader(templates)
 
 		self.design = design
