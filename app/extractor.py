@@ -12,7 +12,7 @@ from sumy.utils import get_stop_words
 
 EMOJISINDEX="{base}/static/assets/emojis_english.json"
 ICONSINDEX="{base}/static/assets/icons_english.json"
-ICONSTATIC="/static/icons/{file}"
+ICONFILE="/static/icons/{file}"
 
 
 class Extractor:
@@ -42,8 +42,6 @@ class Extractor:
 		return results
 
 	def __getemojis(self, sentences):
-		data = self.__getkeywords(sentences)
-
 		main_path	= os.path.realpath(sys.argv[0])
 		base		= os.path.dirname(main_path)
 		index		= EMOJISINDEX.format(base=base)
@@ -51,8 +49,8 @@ class Extractor:
 		with open(index) as fd:
 			emojis = json.loads(fd.read())
 
-			sentences = []
-			for sentence in data:
+			results = []
+			for sentence in sentences:
 				if 'emojis' not in sentence.keys():
 					sentence['emojis'] = []
 
@@ -62,9 +60,29 @@ class Extractor:
 
 						if keyword in emoji.get('keywords'):
 							sentence['emojis'].append(emoji.get('char'))
-				sentences.append(sentence)
-			return sentences
-		return False
+				results.append(sentence)
+		return sentences
+
+	def __geticons(self, sentences):
+		main_path	= os.path.realpath(sys.argv[0])
+		base		= os.path.dirname(main_path)
+		index		= ICONSINDEX.format(base=base)
+
+		with open(index) as fd:
+			icons = json.loads(fd.read())
+
+			results = []
+			for sentence in sentences:
+				if 'icons' not in sentence.keys():
+					sentence['icons'] = []
+
+				for keyword in sentence.get('keywords'):
+					for icon in icons:
+						if keyword in icon.get('tags'):
+							file = ICONFILE.format(file=icon.get('icon'))
+							sentence['icons'].append(file)
+				results.append(sentence)
+		return sentences
 
 	def getsentences(self, html, number=10):
 		sentences = []
@@ -73,4 +91,7 @@ class Extractor:
 		for sentence in self.summarizer(parser.document, number):
 			sentences.append(str(sentence))
 
-		return self.__getemojis(sentences) or sentences
+		sentences = self.__getkeywords(sentences)
+		sentences = self.__getemojis(sentences)
+		sentences = self.__geticons(sentences)
+		return sentences

@@ -4,7 +4,7 @@ MAINTAINER Lucas Menendez "epucas@gmail.com"
 ENV LANG=C.UTF-8
 
 RUN apt-get update
-RUN apt-get install -y python3 python3-dev python3-pip python3-lxml python-setuptools sqlite3 libsqlite3-dev libicu-dev libxml2-dev
+RUN apt-get install -y python3 python3-dev python3-pip python3-lxml python-setuptools libicu-dev libxml2-dev
 
 COPY requirements.txt ./
 
