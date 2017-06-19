@@ -10,8 +10,8 @@ from sumy.summarizers.lsa import LsaSummarizer as Summarizer
 from sumy.nlp.stemmers import Stemmer
 from sumy.utils import get_stop_words
 
-EMOJISINDEX="{base}/static/assets/emojis_english.json"
-ICONSINDEX="{base}/static/assets/icons_english.json"
+EMOJISINDEX="{base}/static/assets/emojis_{lang}.json"
+ICONSINDEX="{base}/static/assets/icons_{lang}.json"
 ICONFILE="/static/icons/{file}"
 
 
@@ -44,7 +44,7 @@ class Extractor:
 	def __getemojis(self, sentences):
 		main_path	= os.path.realpath(sys.argv[0])
 		base		= os.path.dirname(main_path)
-		index		= EMOJISINDEX.format(base=base)
+		index		= EMOJISINDEX.format(base=base, lang=self.lang)
 
 		with open(index) as fd:
 			emojis = json.loads(fd.read())
@@ -66,7 +66,7 @@ class Extractor:
 	def __geticons(self, sentences):
 		main_path	= os.path.realpath(sys.argv[0])
 		base		= os.path.dirname(main_path)
-		index		= ICONSINDEX.format(base=base)
+		index		= ICONSINDEX.format(base=base, lang=self.lang)
 
 		with open(index) as fd:
 			icons = json.loads(fd.read())
