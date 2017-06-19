@@ -22,7 +22,7 @@ class Template:
 
 	def __getfilename(self, title):
 		dt		= datetime.today().strftime("%s")
-		mark	= ("{date}-{name}".format(date=dt, name=title)).encode()
+		mark	= ("{date}-{name}".format(date=dt, name=title[:10])).encode()
 
 		return base64.b64encode(mark).decode('utf-8')
 

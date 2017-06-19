@@ -1,9 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab");
 body {
   margin: 10vh auto;
-  max-width: 700px;
-  padding: 2vh 5vw;
-  background: white;
+  max-width: 900px;
+  background: #e3e3e3;
   color: #222222;
   font-family: 'Roboto Slab', serif;
   letter-spacing: 0;
@@ -14,10 +13,16 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -moz-font-feature-settings: "liga" on; }
 
+h1 {
+  padding: 2vh 5vw; }
+
 ul {
   list-style: none;
-  margin: 5vh 0;
-  padding: 0; }
+  margin: 5vh 5vw;
+  padding: 2vh 3vw;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  font-size: 18px; }
   ul li {
     line-height: 30px;
     margin: 2vh 0; }
@@ -46,5 +51,9 @@ ul {
     font-weight: bold;
     text-decoration: none;
     text-transform: none; }
+
+@media screen and (max-width: 480px) {
+  ul {
+    margin: 5vh 0; } }
 
 /*# sourceMappingURL=nude.css.map */

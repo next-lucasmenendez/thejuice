@@ -65,10 +65,10 @@ def link():
 	lang	= request.form.get('lang') or 'english'
 	number	= request.form.get('number') or 10
 	if url:
-		parser		= Parser()
-		extractor	= Extractor(lang)
+		parser = Parser()
+		title, html, lang = parser.parse(url)
 
-		title, html	= parser.parse(url)
+		extractor	= Extractor(lang)
 		sentences	= extractor.getsentences(html, number)
 
 		article = {
