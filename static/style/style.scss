@@ -1,8 +1,10 @@
 @charset "UTF-8";
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,400,700');
 
-$main: #4caf50;
-$main_dark: #2c8630;
+// Fake main (button and hover color)
+$main_dark: #000000;
+// Real main
+$main: #333333;
 $main_blue: #0085AC;
 
 * {
@@ -51,7 +53,7 @@ body {
 	width: auto;
     height: auto;
     text-align: center;
-	background: $main;
+	background: $main_dark;
     font-size: 16px;
     color: #ffffff;
 	text-decoration: none;
@@ -61,22 +63,22 @@ body {
 	outline: none;
 	padding: 10px 20px;
 	box-sizing: border-box;
-	border: 1px solid $main;
+	border: 1px solid $main_dark;
 	font-family: 'Raleway', sans-serif;
 	transition: all .2s ease-in-out;
 }
 
 .button.outline {
 	background: #ffffff;
-	color: $main;
+	color: $main_dark;
 }
 
 .button:hover,
 .button:active,
 .button.outline:hover,
 .button.outline:active {
-	background: $main_dark;
-	border-color: $main_dark;
+	background: $main;
+	border-color: $main;
 	color: #ffffff;
 }
 
@@ -93,7 +95,7 @@ body {
 	vertical-align: top;
 	width: 100%;
 	height: auto;
-	background: $main_dark;
+	background: $main;
 	color: white;
 	padding: 1vh 0;
 	font-size: 0;
@@ -180,7 +182,7 @@ body {
 			text-align: center;
 			transition: all .2s ease-in-out;
 			cursor: pointer;
-			&:hover, &:active {background: $main;}
+			&:hover, &:active {background: $main_dark;}
 		}
 
 		.menu {
@@ -232,9 +234,9 @@ body {
 			text-align: right;
 			a {
 				color: white;
-				background: $main;
+				background: $main_dark;
 				box-shadow: 0 5px 3px #f2f2f2;
-				&:hover, &:active {background: $main_dark;}
+				&:hover, &:active {background: $main;}
 			}
 		}
 
@@ -276,7 +278,7 @@ body {
 			color: #bbbbbb;
 			&.active {
 				.number {
-					background: $main;
+					background: $main_dark;
 					color: white;
 					font-weight: bold;
 					border: none;
@@ -376,7 +378,7 @@ body {
 		top: 0; left: 0;
 		width: 100%;
 		height: 100%;
-		background-image: linear-gradient(rgba(#005404, .7), rgba(#005404, .7));
+		background-image: linear-gradient(rgba($main, .7), rgba($main, .7));
 		z-index: -1;
 	}
 	.inner {
@@ -560,7 +562,7 @@ body {
 				display: inline-block;
 				vertical-align: top;
 				text-transform: uppercase;
-				color: $main_dark;
+				color: $main;
 				background: transparent;
 				width: auto;
 				height: 30px;
@@ -604,7 +606,7 @@ body {
 				cursor: pointer;
 				transition: all .2s ease-in-out;
 				&:hover, &:active, &.current {
-					background: $main_dark;
+					background: $main;
 					color: white;
 				}
 			}
@@ -820,12 +822,12 @@ body {
 				&:hover, &:active {background: #f4f4f4;}
 
 				&.save {
-					background: $main_dark;
+					background: $main;
 					color: white;
 					margin-right:0;
 					border-color: transparent;
 					&:hover, &:active {
-						background: $main;
+						background: $main_dark;
 					}
 				}
 			}
