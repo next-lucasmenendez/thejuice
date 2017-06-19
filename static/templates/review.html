@@ -1,50 +1,36 @@
 <div class="pills">
 	<form ng-submit="download()">
-		<input type="hidden" name="query" value="{{title}}">
-
 		<div class="wrapper-with-padding">
 			<div class="preview">
 				<!-- Header -->
 				<div class="preview-header">
-					<!--<div class="img ng-hide" ng-show="results.picture" style="background-image: url('{{ results.picture }}')"></div>-->
-					<div class="info"> <!--ng-class="{'with-image': results.picture}">-->
-						<h1>Review the questions about <b>{{ result.title }}</b></h1>
-						<p>We include every single event, but you might find some of them not really relevant. Feel free to edit or remove any of them, or to create any new one :).</p>
+					<div class="info">
+						<h1>Review the information about<br /><b>{{ result.title }}</b></h1>
+						<p>This is an automatic summary, review the sentences and edit or remove them if you want to have a more accurate result. </p>
 					</div>
 				</div>
 
 				<!-- Preview -->
 				<table class="preview-table">
 					<tbody>
-						<tr ng-repeat="(i, question) in result.questions" ng-hide="question.question == ''">
-							<td class="content">
-								{{ question.question }}
-								<div class="answers">
-									<span class="answer" ng-class="{'correct': answer.correct}"
-										  ng-repeat="answer in question.answers">
-										{{ answer.name }}
-									</span>
-								</div>
-							</td>
+						<tr ng-repeat="sentence in result.sentences" ng-hide="sentence == ''">
+							<td class="content">{{ sentence }}</td>
 							<td class="actions">
-								<span class="action" ng-click="edit(question)">
+								<span class="action" ng-click="edit(sentence)">
 									<i class="fa fa-pencil"></i>
 									Edit
 								</span>
-								<span class="action" ng-click="delete(question)">
+								<span class="action" ng-click="delete(sentence)">
 									<i class="fa fa-trash-o"></i>
 									Delete
 								</span>
 							</td>
 						</tr>
-						<tr>
-							<td ng-click="edit()"><i class="fa fa-plus"></i> Add new</td>
-						</tr>
 					</tbody>
 				</table>
 				<div class="footer">
-					<button type="button" class="button" ng-click="download()">
-						Create
+					<button type="button" class="button" ng-click="design()">
+						Design
 						<i class="fa fa-angle-right"></i>
 					</button>
 				</div>
@@ -55,19 +41,7 @@
 	<!-- Edit Hit -->
 	<div class="edit-popup" ng-class="{hidden: !showEdit}">
 		<form class="edit-form" ng-submit="save()">
-			<div class="question">
-				<h3>Question 1st part</h3>
-				<textarea type="text" ng-model="current.first_question" placeholder="Question 1sr part" required></textarea>
-				<h3>Question 2nd part</h3>
-				<textarea type="text" ng-model="current.second_question" placeholder="Question 2nd part" required></textarea>
-			</div>
-			<div class="answers">
-				<div ng-repeat="answer in current.answers|orderBy:'-correct'">
-					<h3>{{answer.correct ? 'Correct answer' : 'Answer'}}</h3>
-					<input type="text" ng-model="answer.name" placeholder="Answer" required>
-				</div>
-			</div>
-
+			<textarea ng-model="current.new" placeholder="Sentence content"></textarea>
 			<button ng-click="closeEdit()" class="cancel">Cancel</button>
 			<button type="submit" class="save">Save</button>
 		</form>

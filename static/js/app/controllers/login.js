@@ -4,7 +4,7 @@
 
 var app = angular.module('app');
 
-app.controller('loginCtrl', function ($window, $rootScope, $scope, $state, service, tracker) {
+app.controller('loginCtrl', function ($window, $rootScope, $scope, $state, requests, tracker) {
 	$scope.submitLoginForm = function() {
 		var config	= {scope: "public_profile, email", return_scopes: !0},
 			attrs	= {fields: 'name, email,picture'};
@@ -18,9 +18,8 @@ app.controller('loginCtrl', function ($window, $rootScope, $scope, $state, servi
 						name: profile.name,
 						accesstoken: response.authResponse.accessToken,
 						picture: profile.picture.data.url
-					}
-
-					service.request('POST', '/login', data, true).then(
+					};
+					requests.call('POST', '/login', data, true).then(
 						function () {
 							tracker.all('auth', 'login', data.email);
 
