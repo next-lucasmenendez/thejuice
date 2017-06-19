@@ -8,6 +8,7 @@ from flask import Flask
 from flask import request
 from flask import make_response
 from flask import render_template
+from flask import redirect
 
 from app.parser import Parser
 from app.extractor import Extractor
@@ -97,6 +98,7 @@ def download():
 		return {"success": False, "message": "Something was wrong creating output."}, 500
 
 	return {"success": False, "message": "Bad request. More data required."}, 400
+
 
 @app.route('/output/<string:query>')
 def output(query):
