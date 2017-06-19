@@ -23,7 +23,8 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, requ
 			function (response) {
 				if (response.success) {
 					DataStorage.set('result', response.result);
-					$state.go('base.review', {article: response.result.title});
+					tracker.all('search', 'review', response.result.title);
+					$state.go('base.review');
 				}
 				$rootScope.$broadcast('hideSpinner');
 			},
