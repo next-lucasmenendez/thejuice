@@ -819,10 +819,10 @@ body {
 				cursor: pointer;
 				&:hover, &:active {background: #f4f4f4;}
 
-				&.cancel {margin-right:0;}
 				&.save {
 					background: $main_dark;
 					color: white;
+					margin-right:0;
 					border-color: transparent;
 					&:hover, &:active {
 						background: $main;
