@@ -21,7 +21,7 @@ var checkAccessToken = function ($q, $state, $timeout) {
 };
 
 app.run(function($rootScope, $location, $window) {
-	$window.ga('create', 'UA-92654268-3', 'auto');
+	$window.ga('create', 'UA-92654268-4', 'auto');
 
 	$rootScope.$on('$stateChangeSuccess', function () {
 		$window.ga('send', 'pageview', $location.path());
@@ -63,43 +63,18 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			templateUrl: '/static/templates/search.html',
 			controller: 'searchCtrl',
 			resolve: {
-				control: checkAccessToken,
-				onEnter: function ($rootScope) {
-					$rootScope.steps = {
-						previous: false,
-						current: {
-							name: "Search",
-							uri: "base.search"
-						},
-						next: {
-							name: "Review",
-							uri: "base.review"
-						}
-					};
-				}
+				control: checkAccessToken
 			}
 		})
 		.state('base.review', {
 			url: 'review/:query',
 			templateUrl: '/static/templates/review.html',
-			controller: 'reviewCtrl',
-				onEnter: function ($rootScope) {
-					$rootScope.step = "review";
-					$rootScope.steps = {
-						previous: {
-							name: "Search",
-							uri: "base.search"
-						},
-						current: {
-							name: "Review",
-							uri: "base.review"
-						},
-						next: {
-							name: "Download",
-							uri: "base.download"
-						}
-					};
-				}
+			controller: 'reviewCtrl'
+		})
+		.state('base.design', {
+			url: 'design/:query',
+			templateUrl: '/static/templates/design.html',
+			controller: 'designCtrl'
 		});
 	$urlRouterProvider.otherwise('/search');
 });
