@@ -1,26 +1,42 @@
+from urllib.request import urlopen
 from nltk.corpus import wordnet as wn
 from textblob import TextBlob
-from textblob.en.parsers import PatternParser
+from sumy.parsers.html import HtmlParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.utils import get_stop_words
+from sumy.summarizers.luhn import LuhnSummarizer as Summarizer
 
 # As pattern has no python 3 support we integrate spaghetti spanish POS tagger
 # Code from https://github.com/alvations/spaghetti-tagger
 from . import spaghetti as sgt
-
+from .sumy_html_parser import SumyHtmlParser
 
 import re
-import wikipedia
 import random
 from itertools import chain
+
+LANGUAGE = 'english'
 
 
 class Article:
     """Retrieves and analyzes wikipedia articles"""
 
-    def __init__(self, title, lang):
-        wikipedia.set_lang(lang)
-        self.page = wikipedia.page(title)
-        self.summary = TextBlob(self.page.summary)
-        #print(self.page.content)
+    def __init__(self, url, lang):
+        self.url = url
+        self.parser = HtmlParser.from_url(url, Tokenizer(LANGUAGE))
+        self.summarizer = Summarizer(Stemmer(LANGUAGE))
+        self.summarizer.stop_words = get_stop_words(LANGUAGE)
+
+        box = ''
+        for sentence in self.summarizer(self.parser.document, 51):
+            box += str(sentence).replace('\n', '') + ' '
+
+        self.summary = TextBlob(box)
+        html = urlopen(url).read().decode('utf8')
+        parser = SumyHtmlParser()
+        parser.feed(html)
+        self.title = parser.title
 
     def generate_trivia_sentences(self, lang):
         sentences = self.summary.sentences
@@ -147,8 +163,8 @@ class Article:
             return None
 
         trivia = {
-            'title': self.page.title,
-            'url': self.page.url,
+            'title': self.title,
+            'url': self.url,
             'answer': ' '.join(replace_nouns),
             'similar_words': similar_words
         }

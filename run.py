@@ -86,7 +86,7 @@ def search():
 	if query:
 		try:
 			# Retrieve the trivia sentences
-			article = Article(title=query, lang=lang)
+			article = Article(url=query, lang=lang)
 			trivia_sentences = article.generate_trivia_sentences(lang=lang)
 
 			if len(trivia_sentences) > 0:
