@@ -17,7 +17,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, requ
 
 	$scope.submitSearchForm = function() {
 		tracker.all('index', 'search', $scope.query);
-		$rootScope.$broadcast('showSpinner', 'Wait a second while we search on Wikipedia...');
+		$rootScope.$broadcast('showSpinner', 'Wait a second while we process the article...');
 		var uri = '/link';
 		requests.call('POST', uri, {url: $scope.query}).then(
 			function (response) {
