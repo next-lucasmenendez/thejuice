@@ -46,6 +46,9 @@
 			ga('send', 'pageview');
 			ga('send', 'event', 'output', 'summary', '{{ title }}');
 		</script>
+
+		<!-- jQuery -->
+		<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	</head>
 	<body>
 		<h1 class="title">{{ title }}</h1>
@@ -56,6 +59,7 @@
 				{% for icon in sentence.icons %}
 				<img class="icon" src="{{ icon }}"/>
 				{% endfor %}
+				<span class="separator"></span>
 			</li>
 			{% endfor %}
 		</ul>

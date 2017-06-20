@@ -65,7 +65,9 @@ body {
       vertical-align: top;
       margin: 10px 1vw;
       font-size: 50px;
-      line-height: 70px; }
+      line-height: 70px;
+      fill: white;
+      max-width: 50px; }
 
 .logo {
   width: 300px;
