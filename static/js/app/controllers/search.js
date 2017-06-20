@@ -17,6 +17,7 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 
 	$scope.lang = "en";
 	$scope.query = "";
+	$scope.showPaidPopup = false;
 	$scope.submitSearchForm = function() {
         $rootScope.$broadcast('showSpinner', 'Wait a second while we take the data out of Wikipedia...');
         tracker.all('index', 'search', $scope.query);
@@ -45,5 +46,19 @@ app.controller('searchCtrl', function ($window, $rootScope, $scope, $state, serv
 	$scope.forceSearchForm = function(query) {
 		$scope.query = query;
 		$scope.submitSearchForm(true);
+	}
+
+	$scope.paidPopup = function() {
+		$scope.showPaidPopup = true;
+	}
+
+	$scope.closePaidPoup = function() {
+		$scope.showPaidPopup = false;
+	}
+
+	$scope.informPaid = function() {
+		var email = sessionStorage.getItem('email');
+		tracker.all('index', 'premiumSearch', email);
+		$scope.closePaidPoup();
 	}
 });
