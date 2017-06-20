@@ -19,7 +19,7 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 
 	$scope.result = DataStorage.get('article');
 
-	$scope.design		= "default";
+	$scope.design		= "simple";
 	$scope.templates	= [
 		{
 			thumbnail: '/static/style/templates/default.jpg',
@@ -63,18 +63,12 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 			tracker.all('design', 'template', $scope.design);
 			tracker.all('design', 'article', $scope.result.title);
 
-			var result = angular.copy($scope.result);
-			console.log({
-					design: $scope.design,
-					title: $scope.result.title,
-					sentences: $scope.result.sentences
-				});
-			requests.call("POST", "/download",
-				{
-					design: $scope.design,
-					title: result.title,
-					sentences: result.sentences
-				}, true).then(
+			var data = {
+				design: $scope.design,
+				title: $scope.result.title,
+				sentences: $scope.result.sentences
+			};
+			requests.call("POST", "/download", data, true).then(
 				function (response) {
 					if (response.success) {
 						$window.location.href = response.result;

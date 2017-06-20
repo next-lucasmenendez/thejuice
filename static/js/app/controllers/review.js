@@ -43,6 +43,7 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 	};
 
 	$scope.design = function() {
+		console.log($scope.result)
 		var query = $stateParams.query || $scope.query;
 		tracker.all('review', 'submited', $scope.result.title);
 		if ($scope.result) {

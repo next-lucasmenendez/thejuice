@@ -4,7 +4,7 @@
 		<meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>{{ title }} - TheJuice</title>
-		<link rel="stylesheet" href="/static/style/templates/simple.css"/>
+		<link rel="stylesheet" href="/static/style/templates/iconic.css"/>
 
         <meta name="description" content="The juice helps teachers translate their knowledge into a language students understand">
 
@@ -48,18 +48,47 @@
 		</script>
 	</head>
 	<body>
-		<h1>{{ title }}</h1>
-		<ul>
+		<h1 class="title">{{ title }}</h1>
+		<ul class="sentences">
 			{% for sentence in sentences %}
-			<li>{{ sentence.content }}</li>
+			<li class="sentence">
+				<span class="content">{{ sentence.content }}</span>
+				{% for icon in sentence.icons %}
+				<img class="icon" src="{{ icon }}"/>
+				{% endfor %}
+			</li>
 			{% endfor %}
 		</ul>
 
-
 		<div class="logo">
 			<span>Automatically generated with</span>
-			<a target="_blank" href="http://takethejuice.com"><img src="/static/img/logo.png"/></a>
+			<a target="_blank" href="http://takethejuice.com"><img src="/static/img/logo-w.svg"/></a>
 			<a target="_blank" href="http://takethejuice.com"><small>http://takethejuice.com</small></a>
 		</div>
+
+		<script>
+			$(function(){
+				jQuery('img.icon').each(function() {
+					var $img = jQuery(this);
+					var imgID = $img.attr('id');
+					var imgClass = $img.attr('class');
+					var imgURL = $img.attr('src');
+					jQuery.get(imgURL, function (data) {
+						var $svg = jQuery(data).find('svg');
+						if (typeof imgID !== 'undefined') {
+							$svg = $svg.attr('id', imgID);
+						}
+						if (typeof imgClass !== 'undefined') {
+							$svg = $svg.attr('class', imgClass + ' replaced-svg');
+						}
+						$svg = $svg.removeAttr('xmlns:a');
+						if (!$svg.attr('viewBox') && $svg.attr('height') && $svg.attr('width')) {
+							$svg.attr('viewBox', '0 0 ' + $svg.attr('height') + ' ' + $svg.attr('width'))
+						}
+						$img.replaceWith($svg);
+					}, 'xml');
+				});
+			});
+		</script>
 	</body>
 </html>

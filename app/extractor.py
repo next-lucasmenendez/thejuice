@@ -54,13 +54,15 @@ class Extractor:
 				if 'emojis' not in sentence.keys():
 					sentence['emojis'] = []
 
-				for keyword in sentence.get('keywords'):
+				keywords = sentence.get('keywords')
+				for keyword in keywords:
 					for alias in emojis:
 						emoji = emojis.get(alias)
-
 						if keyword in emoji.get('keywords'):
 							sentence['emojis'].append(emoji.get('char'))
-				results.append(sentence)
+							break
+
+					results.append(sentence)
 		return sentences
 
 	def __geticons(self, sentences):

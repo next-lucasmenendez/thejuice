@@ -18,10 +18,13 @@ class Parser:
 		return raw
 
 	def __detectlang(self, html):
-		raw = self.__cleanhtml(html)
-		detector = Detector(raw)
+		try:
+			raw = self.__cleanhtml(html)
+			detector = Detector(raw)
 
-		return detector.language.name.lower()
+			return detector.language.name.lower()
+		except:
+			return 'english'
 
 	def parse(self, url):
 		req		= Request(url=url, headers={'User-Agent': 'Mozilla/5.0'})

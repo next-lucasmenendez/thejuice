@@ -4,7 +4,7 @@
 		<meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>{{ title }} - TheJuice</title>
-		<link rel="stylesheet" href="/static/style/templates/simple.css"/>
+		<link rel="stylesheet" href="/static/style/templates/emoji.css"/>
 
         <meta name="description" content="The juice helps teachers translate their knowledge into a language students understand">
 
@@ -48,10 +48,15 @@
 		</script>
 	</head>
 	<body>
-		<h1>{{ title }}</h1>
-		<ul>
+		<h1 class="title">{{ title }}</h1>
+		<ul class="sentences">
 			{% for sentence in sentences %}
-			<li>{{ sentence.content }}</li>
+			<li class="sentence">
+				<span class="content">{{ sentence.content }}</span>
+				{% for emoji in sentence.emojis %}
+				<span class="emoji">{{ emoji }}</span>
+				{% endfor %}
+			</li>
 			{% endfor %}
 		</ul>
 
