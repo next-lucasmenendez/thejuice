@@ -13,8 +13,8 @@
 				<!-- Preview -->
 				<table class="preview-table">
 					<tbody>
-						<tr ng-repeat="sentence in result.sentences" ng-hide="sentence == ''">
-							<td class="content">{{ sentence }}</td>
+						<tr ng-repeat="sentence in result.sentences" ng-hide="sentence.content == ''">
+							<td class="content">{{ sentence.content }}</td>
 							<td class="actions">
 								<span class="action" ng-click="edit(sentence)">
 									<i class="fa fa-pencil"></i>
@@ -41,7 +41,7 @@
 	<!-- Edit Hit -->
 	<div class="edit-popup" ng-class="{hidden: !showEdit}">
 		<form class="edit-form" ng-submit="save()">
-			<textarea ng-model="current.new" placeholder="Sentence content"></textarea>
+			<textarea ng-model="current.content" placeholder="Sentence content"></textarea>
 			<button ng-click="closeEdit()" class="cancel">Cancel</button>
 			<button type="submit" class="save">Save</button>
 		</form>

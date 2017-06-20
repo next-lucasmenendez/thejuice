@@ -19,11 +19,13 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 
 	$scope.showEdit	= false;
 	$scope.result = DataStorage.get('result');
+	console.log($scope.result);
 
 	$scope.edit = function (sentence) {
-		$scope.current = {};
-		$scope.current.old = sentence;
-		$scope.current.new = sentence;
+		// $scope.current = {};
+		$scope.current = sentence;
+		// $scope.current.old = sentence;
+		// $scope.current.new = sentence;
 		$scope.showEdit	= true;
 	};
 
@@ -40,9 +42,6 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 	$scope.save = function () {
 		$window.ga('send', 'event', 'review', 'event edited');
 		tracker.all('review', 'event', 'edited');
-
-		var index = $scope.result.sentences.indexOf($scope.current.old);
-		$scope.result.sentences[index] = $scope.current.new;
 
 		$scope.showEdit	= false;
 	};
