@@ -526,6 +526,54 @@ body {
         .index .search-form .results .item:hover, .index .search-form .results .item:active, .index .search-form .results .item.current, .index .login-form .results .item:hover, .index .login-form .results .item:active, .index .login-form .results .item.current {
           background: #2c8630;
           color: white; }
+  .index .paid-popup {
+    display: inline-block;
+    vertical-align: top;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.5);
+    width: 100%;
+    height: 100%;
+    transition: all .2s ease-in-out; }
+    .index .paid-popup.hidden {
+      opacity: 0;
+      visibility: hidden; }
+    .index .paid-popup .popup-content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 600px;
+      height: auto;
+      max-height: 90%;
+      overflow-y: auto;
+      padding: 6vh 5vw;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-shadow: 0 5px 10px -5px #000;
+      font-size: 0; }
+      .index .paid-popup .popup-content .title {
+        font-family: 'Raleway', sans-serif;
+        font-size: x-large;
+        margin: 0 0 3vh 0;
+        text-align: left; }
+      .index .paid-popup .popup-content .content {
+        font-size: medium;
+        text-align: left; }
+      .index .paid-popup .popup-content .button {
+        text-transform: uppercase;
+        margin: 5vh 0 0 0; }
+      .index .paid-popup .popup-content .close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 30px;
+        height: 30px;
+        font-size: x-large;
+        cursor: pointer; }
 
 /**
 	Pills
