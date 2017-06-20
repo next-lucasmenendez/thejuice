@@ -22,7 +22,7 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 	$scope.design		= "simple";
 	$scope.templates	= [
 		{
-			thumbnail: '/static/style/templates/default.jpg',
+			thumbnail: '/static/style/templates/simple.png',
 			value: 'simple',
 			name: 'Simple',
 			paid: false,
@@ -30,7 +30,7 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 			avalible: true
 		},
 		{
-			thumbnail: '/static/style/templates/bl4ck.jpg',
+			thumbnail: '/static/style/templates/emoji.png',
 			value: 'emoji',
 			name: 'Emoji',
 			paid: false,
@@ -38,7 +38,7 @@ app.controller('designCtrl', function ($window, $rootScope, $scope, $stateParams
 			avalible: true
 		},
 		{
-			thumbnail: '/static/style/templates/chattemplate.jpg',
+			thumbnail: '/static/style/templates/iconic.png',
 			value: 'iconic',
 			name: 'Iconic',
 			paid: false,
