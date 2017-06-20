@@ -19,13 +19,9 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 
 	$scope.showEdit	= false;
 	$scope.result = DataStorage.get('result');
-	console.log($scope.result);
 
 	$scope.edit = function (sentence) {
-		// $scope.current = {};
 		$scope.current = sentence;
-		// $scope.current.old = sentence;
-		// $scope.current.new = sentence;
 		$scope.showEdit	= true;
 	};
 
