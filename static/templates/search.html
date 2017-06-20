@@ -25,4 +25,16 @@
 		</div>
 		-->
 	</form>
+	<p class="paid-version">Or insert any URL in the <a href="" ng-click="paidPopup()">PAID VERSION</a></p>
+
+	<div class="paid-popup" ng-class="{hidden: !showPaidPopup}">
+		<div class="popup-content">
+			<h3 class="title">Our paid version is still under development.</h3>
+			<p class="content">If you want to be on the alpha release, click the button bellow and we'll offer you an special discount once the version is ready.</p>
+			<button class="button" ng-click="informPaid()">Inform me!</button>
+			<span class="close" ng-click="closePaidPoup()">
+				<i class="fa fa-times"></i>
+			</span>
+		</div>
+	</div>
 </div>
