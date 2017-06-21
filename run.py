@@ -61,6 +61,8 @@ def login():
 def search(query):
 	lang = request.args.get('lang') or "en"
 	try:
+		query = str(query).lower()
+
 		juicer	= Juicer(lang=lang)
 		results	= juicer.search(query=query)
 
@@ -79,6 +81,8 @@ def search(query):
 def autosuggest(query):
 	lang = request.args.get('lang') or "en"
 	try:
+		query = str(query).lower()
+
 		juicer	= Juicer(lang=lang)
 		results	= juicer.autosuggest(query=query)
 		status	= 200 if results else 404
