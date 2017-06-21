@@ -91,7 +91,6 @@ class Juicer:
 				blob = Text(content, hint_language_code=self.lang)
 				keywords = []
 				for word, pos in blob.pos_tags:
-					print(word, pos)
 					if pos == "VERB" or pos == "NOUN" or pos == "PROPN":
 						keywords.append(word.lower())
 			hit['keywords'] = keywords
