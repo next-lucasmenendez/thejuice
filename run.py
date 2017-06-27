@@ -93,6 +93,7 @@ def search():
 				questions = {
 					'title': trivia_sentences[0]['title'],
 					'url': trivia_sentences[0]['url'],
+					'image': trivia_sentences[0]['image'],
 					'questions': []
 				}
 				for sentence in trivia_sentences:

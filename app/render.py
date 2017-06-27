@@ -13,11 +13,12 @@ TEMPLATES="{base}/templates/designs"
 
 
 class Render:
-	def __init__(self, url, title, questions, email, design=None):
+	def __init__(self, url, title, questions, email, image, design=None):
 		self.title = title
 		self.url = url
 		self.questions = questions
 		self.email = email
+		self.image = image
 		self.design = design or 'default'
 
 	def save(self):
@@ -37,7 +38,8 @@ class Render:
 			"title": self.title,
 			"teacher_email": self.email,
 			"questions": self.questions,
-			"url": self.url
+			"url": self.url,
+			"image": self.image
 		}
 
 		result = template.render(data).encode('utf-8')

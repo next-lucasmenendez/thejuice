@@ -72,6 +72,7 @@ app.controller('reviewCtrl', function ($window, $rootScope, $scope, $state, $sta
 			tracker.all('review', 'submited', $scope.query);
 			var email = sessionStorage.getItem('email');
 			var result = angular.copy($scope.result);
+			console.log(result);
 
 			service.request("POST", "/download", {
 				result: result,

@@ -20,6 +20,7 @@ class Article:
         wikipedia.set_lang(lang)
         self.page = wikipedia.page(title)
         self.summary = TextBlob(self.page.summary)
+        self.image = self.page.images[0] or 'http://trivia.takethejuice.com/static/img/logo.png'
         #print(self.page.content)
 
     def generate_trivia_sentences(self, lang):
@@ -148,6 +149,7 @@ class Article:
 
         trivia = {
             'title': self.page.title,
+            'image': self.image,
             'url': self.page.url,
             'answer': ' '.join(replace_nouns),
             'similar_words': similar_words
