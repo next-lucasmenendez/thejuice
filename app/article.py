@@ -12,24 +12,46 @@ import wikipedia
 import random
 from itertools import chain
 
+from sumy.parsers.html import HtmlParser
+from sumy.nlp.tokenizers import Tokenizer
+from sumy.summarizers.lsa import LsaSummarizer as Summarizer
+from sumy.nlp.stemmers import Stemmer
+from sumy.utils import get_stop_words
+
 
 class Article:
     """Retrieves and analyzes wikipedia articles"""
 
     def __init__(self, title, lang):
         wikipedia.set_lang(lang)
+        self.lang = lang
+        self._sumylang = "spanish" if lang == "es" else "english"
+
+        self.stemmer = Stemmer(self._sumylang)
+        self.summarizer = Summarizer(self.stemmer)
+        self.summarizer.stop_words = get_stop_words(self._sumylang)
+
         self.page = wikipedia.page(title)
-        self.summary = TextBlob(self.page.summary)
         self.image = self.page.images[0] or 'http://trivia.takethejuice.com/static/img/logo.png'
+
+        raw_summary = self.__getsummary()
+        self.summary = TextBlob(raw_summary)
         #print(self.page.content)
+
+    def __getsummary(self, number=20):
+        sentences = []
+        parser = HtmlParser.from_string(self.page.content, "", Tokenizer(self._sumylang))
+
+        for sentence in self.summarizer(parser.document, number):
+            sentences.append(str(sentence))
+
+        return " ".join(sentences)
 
     def generate_trivia_sentences(self, lang):
         sentences = self.summary.sentences
         if lang == 'es':
-            # Trivial sentence tokenizer
-            raw_sentences = sentences #self.page.summary.split('.')
             # Trivial word tokenizer
-            raw_sentences = [x.split() for x in raw_sentences if len(x)>0]
+            raw_sentences = [x.split() for x in sentences if len(x)>0]
             # Spanish POS tagger
             tagged = sgt.pos_tag_sents(raw_sentences)
 
