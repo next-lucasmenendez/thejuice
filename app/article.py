@@ -1,6 +1,5 @@
 from nltk.corpus import wordnet as wn
 from textblob import TextBlob
-from textblob.en.parsers import PatternParser
 
 # As pattern has no python 3 support we integrate spaghetti spanish POS tagger
 # Code from https://github.com/alvations/spaghetti-tagger
@@ -35,18 +34,19 @@ class Article:
 		raw_summary = self.__getsummary()
 		self.summary = TextBlob(raw_summary)
 
-
-	# print(self.page.content)
-
-	def __getsummary(self, number=20):
+	def __getsummary(self, number=50):
 		sentences = []
-		parser = HtmlParser.from_string(self.page.content, "", Tokenizer(self._sumylang))
+		content = ""
+		for line in self.page.content.split('\n'):
+			if not line.startswith("=="):
+				content += line
+
+		parser = HtmlParser.from_string(content, "", Tokenizer(self._sumylang))
 
 		for sentence in self.summarizer(parser.document, number):
 			sentences.append(str(sentence))
 
 		return " ".join(sentences)
-
 
 	def generate_trivia_sentences(self, lang):
 		sentences = self.summary.sentences
@@ -72,7 +72,6 @@ class Article:
 
 		return trivia_sentences
 
-
 	# Method to detect gender. Required for spanish nouns
 	def detect_gender(self, word, lang):
 		gender = 'm'
@@ -87,10 +86,8 @@ class Article:
 
 		return gender
 
-
 	def get_similar_words(self, word, lang):
 		# In the absence of a better method, take the first synset
-
 		word = word.lower()
 
 		gender = 'm'
@@ -145,7 +142,6 @@ class Article:
 		else:
 			similar_words = random.sample(similar_words, N)
 		return similar_words
-
 
 	def evaluate_sentence(self, sentence, lang):
 		if (sentence.tags[0][1] in ['RB', 'rg'] or len(sentence.words) < 6):
