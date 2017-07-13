@@ -82,6 +82,7 @@ def login():
 def search():
 	query = request.form.get('query') or False
 	lang = request.form.get('lang') or "en"
+	#lang = "es"
 
 	if query:
 		try:

@@ -102,17 +102,7 @@ class Article:
 		if len(synsets) == 0:
 			return []
 
-		# Alternative 1 (old): Get the hyponyms for the first hypernym for the first synset
-		# Return first value
-		synset = synsets[0]
-
-		# Get the hypernym for this synset (again, take the first)
-		# hypernym = synset.hypernyms()[0]#.hypernyms()[0]
-		#
-		# # Get some hyponyms from this hypernym
-		# hyponyms = hypernym.hyponyms()
-
-		# Alternative 2 (new): Get the hyponyms for all the hypernyms for all the synsets
+		# Get the hyponyms for all the hypernyms for all the synsets
 		# First get all the synonyms and lemmas to be removed from distractors
 		synonyms = wn.synsets(word, lang=wnlang, pos='n')
 		lemmas = set(chain.from_iterable([word.lemma_names(wnlang) for word in synonyms]))
@@ -125,7 +115,6 @@ class Article:
 
 		similar_words = []
 
-		# Use alternative 2
 		for hyponym in hyponyms2:
 			my_similar_words = hyponym.lemma_names(wnlang)
 			for similar_word in my_similar_words:
@@ -149,7 +138,6 @@ class Article:
 			# and probably won't be a good fit
 			return None
 
-		tag_map = {word.lower(): tag for word, tag in sentence.tags}
 
 		replace_nouns = []
 		for word, tag in sentence.tags:
