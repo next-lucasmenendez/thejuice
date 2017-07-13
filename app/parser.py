@@ -43,7 +43,10 @@ class Parser:
 					initial += 1
 					break
 				else:
-					initial -= 1
+					if initial > 0:
+						initial -= 1
+					else:
+						break
 
 			while 1:
 				if final < len(self.text):
@@ -56,6 +59,7 @@ class Parser:
 
 			date 	= d["datetime"]
 			format	= d["format"]
+
 			if self.start <= date <= self.end:
 				hit = self.text[initial:final].strip()
 				if max_length > len(hit) > min_length and hit not in hits and hit[0].isupper():

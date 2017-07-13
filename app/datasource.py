@@ -69,24 +69,27 @@ class DataSource:
 					item[key] = result[key]['value']
 
 				suggestions.append(item)
+
 		return suggestions
 
 	def autosuggest(self, query):
 		#Get suggestions based a query
 		db 		= DB()
 		table	= TABLE_PREFIX.format(lang=self.lang)
-		return db.search(table, "name", query)
+		results = db.search(table, "name", query)
+		return
 
 	def get(self, pageid):
 		#Get pageid data from database and wikipedia
-		db		= DB()
-		table	= TABLE_PREFIX.format(lang=self.lang)
-		results = db.search(table, "id", pageid)
+		#db		= DB()
+		#table	= TABLE_PREFIX.format(lang=self.lang)
+		#results = db.search(table, "id", pageid)
 
-		if results:
-			item = results[0]
-		else:
-			item = self.__getdbpedia(pageid=pageid)
+		#if results:
+		#	item = results[0]
+		#else:
+		#	item = self.__getdbpedia(pageid=pageid)
+		item = self.__getdbpedia(pageid=pageid)
 
 		if item:
 			try:
